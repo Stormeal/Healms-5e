@@ -83,7 +83,8 @@ import { AppRoutes } from './app.routing';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule
-  ]
+  ],
+  declarations: []
 })
 export class MaterialModule {}
 
