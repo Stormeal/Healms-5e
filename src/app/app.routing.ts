@@ -18,15 +18,16 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'adventures',
                 loadChildren: './adventures/adventure.module#AdventureModule'
-            },
-            {
-                path: 'components',
-                loadChildren: './components/components.module#ComponentsModule'
             }, {
                 path: 'world',
                 loadChildren: './world/world.module#WorldModule'
-            },
-            {
+            },{
+                path: 'rules',
+                loadChildren: './rules/rules.module#RulesModule'
+            }, {
+                path: 'components',
+                loadChildren: './components/components.module#ComponentsModule'
+            }, {
                 path: 'forms',
                 loadChildren: './forms/forms.module#Forms'
             }, {

@@ -53,6 +53,19 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'cities', title: 'Cities', ab: 'C' },
 
     ]
+},{
+    path: '/rules',
+    title: 'rules',
+    type: 'sub',
+    icontype: 'list',
+    collapse: 'rules',
+    children: [
+        { path: 'character-creation', title: 'Character Creation', ab: 'CC' },
+        { path: 'game', title: 'Playing the Game', ab: 'PG' },
+        { path: 'magic-rules', title: 'The Rules of Magic', ab: 'RM' },
+        { path: 'dmtools', title: 'Dungeon Master\'s Tools ', ab: 'DT' },
+
+    ]
 }, {
     path: '/components',
     title: 'Components',
