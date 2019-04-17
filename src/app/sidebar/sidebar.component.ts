@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
 declare const $: any;
+
 
 // Metadata
 export interface RouteInfo {
@@ -49,6 +53,9 @@ export const ROUTES: RouteInfo[] = [{
     collapse: 'world',
     children: [
         { path: 'overview', title: 'Overview', ab: 'O' },
+        { path: 'religions', title: 'Religions', ab: 'R' },
+        { path: 'cities', title: 'Cities', ab: 'C' },
+
     ]
 },
 {
@@ -125,6 +132,11 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    faCoffee = faCoffee;
+
+    constructor() {
+        library.add(faCoffee);
+    }
 
     isMobileMenu() {
         if ($(window).width() > 991) {

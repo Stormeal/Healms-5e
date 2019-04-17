@@ -6,6 +6,8 @@ import { MaterialModule } from '../app.module';
 
 import { WorldRoutes } from './world.routing';
 import { OverviewComponent } from './overview/overview.component';
+import { ReligionsComponent } from './religions/religions.component';
+import { CitiesComponent } from './cities/cities.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { OverviewComponent } from './overview/overview.component';
     FormsModule,
     MaterialModule
   ],
-  declarations: [OverviewComponent],
+  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent],
 
 })
 export class WorldModule { }
