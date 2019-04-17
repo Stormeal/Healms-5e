@@ -16,6 +16,10 @@ export const AppRoutes: Routes = [
                 path: '',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             }, {
+                path: 'adventures',
+                loadChildren: './adventures/adventure.module#AdventureModule'
+            },
+            {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
             }, {
