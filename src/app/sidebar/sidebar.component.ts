@@ -31,6 +31,29 @@ export const ROUTES: RouteInfo[] = [{
     type: 'link',
     icontype: 'dashboard'
 }, {
+    path: '/adventures',
+    title: 'Adventures',
+    type: 'sub',
+    icontype: 'nature',
+    collapse: 'adventures',
+    children: [
+        { path: 'overview', title: 'Adventure Overview', ab: 'AO' },
+        { path: 'encounters', title: 'Encounters', ab: 'E' },
+    ]
+},
+{
+    path: '/world',
+    title: 'World',
+    type: 'sub',
+    icontype: 'public',
+    collapse: 'world',
+    children: [
+        { path: 'overview', title: 'Overview', ab: 'O' },
+        { path: 'religions', title: 'Religions', ab: 'R' },
+        { path: 'cities', title: 'Cities', ab: 'C' },
+
+    ]
+}, {
     path: '/components',
     title: 'Components',
     type: 'sub',
@@ -44,18 +67,6 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'notifications', title: 'Notifications', ab: 'N' },
         { path: 'icons', title: 'Icons', ab: 'I' },
         { path: 'typography', title: 'Typography', ab: 'T' }
-    ]
-}, {
-    path: '/world',
-    title: 'World',
-    type: 'sub',
-    icontype: 'public',
-    collapse: 'world',
-    children: [
-        { path: 'overview', title: 'Overview', ab: 'O' },
-        { path: 'religions', title: 'Religions', ab: 'R' },
-        { path: 'cities', title: 'Cities', ab: 'C' },
-
     ]
 },
 {
