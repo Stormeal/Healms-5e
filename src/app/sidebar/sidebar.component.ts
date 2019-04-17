@@ -42,6 +42,16 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'typography', title: 'Typography', ab: 'T' }
     ]
 }, {
+    path: '/world',
+    title: 'World',
+    type: 'sub',
+    icontype: 'public',
+    collapse: 'world',
+    children: [
+        { path: 'overview', title: 'Overview', ab: 'O' },
+    ]
+},
+{
     path: '/forms',
     title: 'Forms',
     type: 'sub',
