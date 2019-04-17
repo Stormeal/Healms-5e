@@ -38,8 +38,8 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
 import { AppComponent } from './app.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
@@ -100,13 +100,14 @@ export class MaterialModule {}
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedpluginModule
+        FixedpluginModule,
+        FontAwesomeModule,
     ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        AuthLayoutComponent
+        AuthLayoutComponent,
     ],
-    bootstrap:    [ AppComponent ]
+    bootstrap:    [ AppComponent ],
 })
 export class AppModule { }
