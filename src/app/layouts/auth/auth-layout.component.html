@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-transparent navbar-absolute" color-on-scroll="500">
   <div class="container">
     <div class="navbar-wrapper">
-      <a class="navbar-brand d-none d-sm-none d-md-block" [routerLink]="['/dashboard']">Material Dashboard Pro Angular</a>
-      <a class="navbar-brand d-block d-sm-block d-md-none" [routerLink]="['/dashboard']">MD Pro Angular</a>
+      <a class="navbar-brand d-none d-sm-none d-md-block" [routerLink]="['/dashboard']">Healms 5e</a>
+      <a class="navbar-brand d-block d-sm-block d-md-none" [routerLink]="['/dashboard']">Healms 5e</a>
     </div>
     <button mat-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
       <span class="sr-only">Toggle navigation</span>
@@ -18,18 +18,13 @@
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/pages/register']">
+          <a class="nav-link" [routerLink]="['/authentication/register']">
             <i class="material-icons">person_add</i> Register
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/pages/login']">
+          <a class="nav-link" [routerLink]="['/authentication/login']">
             <i class="material-icons">fingerprint</i> Login
-          </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/pages/lock']">
-            <i class="material-icons">lock_open</i> Lock
           </a>
         </li>
       </ul>

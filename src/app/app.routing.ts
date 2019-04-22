@@ -2,18 +2,29 @@ import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { AuthGuard } from './core/auth.guard';
 
 export const AppRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-    }, {
+        component: AuthLayoutComponent,
+        children: [{
+            path: '',
+            redirectTo: '/authentication/login',
+            pathMatch: 'full',
+        }, {
+            path: '',
+            loadChildren: './authentication/authentication.module#AuthenticationModule'
+        }]
+    },
+    {
         path: '',
         component: AdminLayoutComponent,
+        canActivate: [AuthGuard], // <--- Uncomment this to lock shit behind login wall
+
         children: [
             {
-                path: '',
+                path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             }, {
                 path: 'adventures',
@@ -21,7 +32,7 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'world',
                 loadChildren: './world/world.module#WorldModule'
-            },{
+            }, {
                 path: 'rules',
                 loadChildren: './rules/rules.module#RulesModule'
             }, {
@@ -56,9 +67,18 @@ export const AppRoutes: Routes = [
     }, {
         path: '',
         component: AuthLayoutComponent,
+        canActivate: [AuthGuard], // <--- Uncomment this to lock shit behind login wall
         children: [{
             path: 'pages',
             loadChildren: './pages/pages.module#PagesModule'
+        }]
+    },
+    {
+        path: '',
+        component: AuthLayoutComponent,
+        children: [{
+            path: 'authentication',
+            loadChildren: './authentication/authentication.module#AuthenticationModule'
         }]
     }
 ];
