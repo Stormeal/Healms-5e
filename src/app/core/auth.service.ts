@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ providedIn: 'root' })
 
+
 export class AuthService {
     user$: Observable<User>;
     userId: string = null;
@@ -34,7 +35,7 @@ export class AuthService {
                     return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
                         .pipe(shareReplay(1));
                 } else {
-                    return of(null);
+                    return Observable.of(null);
                 }
             })
         );
@@ -42,10 +43,21 @@ export class AuthService {
 
 
     ///// Login/Signup //////
+    emailLogin(email: string, password: string) {
+        return this.afAuth.auth
+          .signInWithEmailAndPassword(email, password)
+          .then(credential => {
+            this.notify.update('Welcome back!', 'success');
+            return this.updateUserData(credential.user);
+          })
+          .catch(error => this.handleError(error));
+      }
+
     emailSignUp(email: string, password: string) {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
             .then(credential => {
-                return this.setUserDoc(credential.user); // Creates initial user document
+                this.updateUserData(credential.user); // Creates initial user document
+                return console.log('Sign Up Initialized');
             }).catch(error => this.handleError(error));
         // return this.afAuth.auth
         //     .createUserWithEmailAndPassword(email, password)
@@ -85,8 +97,8 @@ export class AuthService {
         const data: User = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
+            displayName: user.displayName || null,
+            photoURL: user.photoURL || 'https://bit.ly/2GJ7wdV',
             roles: {
                 player: true
             },
@@ -101,7 +113,7 @@ export class AuthService {
 
     private setUserDoc(user) {
 
-        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+        const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
         const data: User = {
             uid: user.uid,
@@ -109,7 +121,10 @@ export class AuthService {
             photoURL: 'https://bit.ly/2GJ7wdV',
         };
 
-        return userRef.set(data, { merge: true });
+
+        userRef.set(data, { merge: true });
+        return console.log('Set User Completed');
+
     }
 
 
@@ -158,7 +173,11 @@ export class AuthService {
     private handleError(error: Error) {
         this.toastr.error('Username or password was incorrect', 'Login Failed');
         // console.error(error);
+    }
 
-
+    showSuccess() {
+        this.toastr.success('Welcome to Healms', 'Login Successfull', {
+            closeButton: true
+        });
     }
 }

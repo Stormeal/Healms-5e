@@ -66,6 +66,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   /// Handlers
   signup() {
+    console.log('Email: ', this.email.value);
+    console.log('PW: ', this.password.value);
+    
     return this.auth.emailSignUp(this.email.value, this.password.value);
   }
 
