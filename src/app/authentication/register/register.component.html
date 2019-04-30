@@ -1,6 +1,6 @@
-
 <div class="wrapper wrapper-full-page">
-  <div class="page-header register-page header-filter" filter-color="black" style="background-image: url('./assets/img/register.jpg'); background-size: cover; background-position: top center;">
+  <div class="page-header register-page header-filter" filter-color="black"
+    style="background-image: url('./assets/img/register.png'); background-size: cover; background-position: top center;">
     <div class="container">
       <div class="row">
         <div class="col-md-10 ml-auto mr-auto">
@@ -16,7 +16,8 @@
                     <div class="description">
                       <h4 class="info-title">Orginazation</h4>
                       <p class="description">
-                        Quickly organize your campaign by adding new content, editing old or by simply dragging it to a new location.
+                        Quickly organize your campaign by adding new content, editing old or by simply dragging it to a
+                        new location.
                       </p>
                     </div>
                   </div>
@@ -38,7 +39,7 @@
                     <div class="description">
                       <h4 class="info-title">Compatible</h4>
                       <p class="description">
-                        Don't want to bring your computer to the session? Don't worry - just bring your phone or tablet. 
+                        Don't want to bring your computer to the session? Don't worry - just bring your phone or tablet.
                       </p>
                     </div>
                   </div>
@@ -48,7 +49,8 @@
                     <button mat-raised-button class="btn btn-just-icon btn-round btn-twitter">
                       <i class="fab fa-twitter"></i>
                     </button>
-                    <button mat-raised-button class="btn btn-just-icon btn-round btn-google" (click)="signInWithGoogle()">
+                    <button mat-raised-button class="btn btn-just-icon btn-round btn-google"
+                      (click)="signInWithGoogle()">
                       <i class="fab fa-google"></i>
                     </button>
                     <button mat-raised-button class="btn btn-just-icon btn-round btn-facebook">
@@ -56,51 +58,83 @@
                     </button>
                     <h4 class="mt-3"> or be classical </h4>
                   </div>
-                  <form class="form" method="" action="">
-                    <div class="form-group has-default">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">face</i>
-                          </span>
+
+                  <!-- Register Form -->
+                  <ng-container *ngIf="user.displayName === null else register">
+
+                    <form [formGroup]="detailForm">
+                      <div class="form-group has-default">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">face</i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control" formControlName="_displayName"
+                            placeholder="First Name...">
                         </div>
-                        <input type="text" class="form-control" placeholder="First Name...">
                       </div>
-                    </div>
-                    <div class="form-group has-default">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">mail</i>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" value="dm" checked>
+                          <span class="form-check-sign">
+                            <span class="check"></span>
                           </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Email...">
+                          I am a
+                          <a href="#">Dungeon Master</a>.
+                        </label>
                       </div>
-                    </div>
-                    <div class="form-group has-default">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">lock_outline</i>
+                      <div class="text-center">
+                        <a class="btn btn-primary btn-round mt-4" (click)="setDisplayName()">Get Started</a>
+                      </div>
+                    </form>
+                  </ng-container>
+
+                  <ng-template #register>
+
+                    <form class="form" method="" action="" [formGroup]="registerForm">
+                      <div class="form-group has-default">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">mail</i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Email..." formControlName="_email">
+                        </div>
+                      </div>
+                      <div class="form-group has-default">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">lock_outline</i>
+                            </span>
+                          </div>
+                          <input type="password" placeholder="Password..." class="form-control"
+                            formControlName="_password">
+                        </div>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" value="terms">
+                          <span class="form-check-sign">
+                            <span class="check"></span>
                           </span>
-                        </div>
-                        <input type="password" placeholder="Password..." class="form-control">
+                          I agree to the
+                          <a href="#">terms and conditions</a>.
+                        </label>
                       </div>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value="" checked="">
-                        <span class="form-check-sign">
-                          <span class="check"></span>
-                        </span>
-                        I agree to the
-                        <a href="#something">terms and conditions</a>.
-                      </label>
-                    </div>
-                    <div class="text-center">
-                      <a href="#pablo" class="btn btn-primary btn-round mt-4">Get Started</a>
-                    </div>
-                  </form>
+                      <div class="text-center">
+                        <a class="btn btn-primary btn-round mt-4" (click)="signup()">Get Started</a>
+                      </div>
+                    </form>
+
+                  </ng-template>
+
+
+
+                  <!-- Register Form End -->
+
                 </div>
               </div>
             </div>
@@ -136,7 +170,7 @@
         </nav>
         <div class="copyright pull-right">
           &copy;
-        {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
+          {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
           <a href="#" target="_blank">Stormeal</a> for a better web.
         </div>
       </div>

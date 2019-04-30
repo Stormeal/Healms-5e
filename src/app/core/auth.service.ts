@@ -6,8 +6,10 @@ import { switchMap, startWith, tap, filter, shareReplay } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { User } from './user';
+import { NotifyService } from './notify.service';
 
 import * as firebase from 'firebase/app';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +22,9 @@ export class AuthService {
     constructor(
         private afAuth: AngularFireAuth,
         private afs: AngularFirestore,
-        private router: Router) {
+        private router: Router,
+        private notify: NotifyService,
+        private toastr: ToastrService) {
 
         //// Get auth data, then get firestore user document || null
         this.user$ = this.afAuth.authState.pipe(
@@ -38,6 +42,19 @@ export class AuthService {
 
 
     ///// Login/Signup //////
+    emailSignUp(email: string, password: string) {
+        return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+            .then(credential => {
+                return this.setUserDoc(credential.user); // Creates initial user document
+            }).catch(error => this.handleError(error));
+        // return this.afAuth.auth
+        //     .createUserWithEmailAndPassword(email, password)
+        //     .then(credential => {
+        //         this.notify.update('Welcome new user!', 'success');
+        //         this.router.navigate(['/employees']);
+        //         return this.updateUserData(credential.user); // If using firestore
+        //     }).catch(error => this.handleError(error));
+    }
 
     googleLogin() {
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -71,9 +88,27 @@ export class AuthService {
             displayName: user.displayName,
             photoURL: user.photoURL,
             roles: {
-                subscriber: true
+                player: true
             },
         };
+        return userRef.set(data, { merge: true });
+    }
+
+    // Update properties on the user document
+    updateUser(user: User, data: any) {
+        return this.afs.doc(`users/${user.uid}`).update(data);
+    }
+
+    private setUserDoc(user) {
+
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
+        const data: User = {
+            uid: user.uid,
+            email: user.email || null,
+            photoURL: 'https://bit.ly/2GJ7wdV',
+        };
+
         return userRef.set(data, { merge: true });
     }
 
@@ -114,9 +149,16 @@ export class AuthService {
     // Queries
     getUser() {
         this.user = this.afs.doc(`users/${this.userId}`)
-        .valueChanges().pipe(shareReplay(1));
+            .valueChanges().pipe(shareReplay(1));
         console.log('User: ', this.userId, this.user);
         return this.user;
     }
 
+    // Error Handling
+    private handleError(error: Error) {
+        this.toastr.error('Username or password was incorrect', 'Login Failed');
+        // console.error(error);
+
+
+    }
 }

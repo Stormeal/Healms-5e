@@ -37,10 +37,12 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+  MatFormFieldModule,
 } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AngularFireModule } from '@angular/fire/';
 import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
@@ -89,7 +91,8 @@ import { environment } from 'src/environments/environment';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFormFieldModule
   ],
   declarations: []
 })
@@ -101,6 +104,7 @@ export class MaterialModule {}
         BrowserAnimationsModule,
         FormsModule,
         RouterModule.forRoot(AppRoutes),
+        ToastrModule.forRoot(), // ToastrModule added
         CoreModule,
         BrowserModule,
         HttpClientModule,

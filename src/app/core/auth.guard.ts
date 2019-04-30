@@ -16,25 +16,22 @@ import { NotifyService } from './notify.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private auth: AuthService,
-    private router: Router,
-    private notify: NotifyService
-  ) { }
+  constructor(private auth: AuthService, private router: Router, private notify: NotifyService) { }
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.auth.user$.pipe(
       take(1),
-      map(user => !!user),
-      tap(loggedIn => {
-        if (!loggedIn) {
-          console.log('access denied');
-          this.notify.update('You must be logged in!', 'error');
-          this.router.navigate(['/login']);
-        }
-      })
-    );
+      map(user => !!(user && user.displayName),
+        tap(loggedIn => {
+          if (!loggedIn) {
+            console.log('access denied');
+            this.notify.update('You must be logged in and filled out needed details', 'error');
+            this.router.navigate(['/login']);
+          }
+        })
+      ));
   }
 }

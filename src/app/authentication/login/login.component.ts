@@ -8,7 +8,8 @@ declare var $: any;
 
 @Component({
     selector: 'app-login-cmp',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styles: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
