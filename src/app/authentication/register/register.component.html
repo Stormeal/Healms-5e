@@ -5,27 +5,27 @@
       <div class="row">
         <div class="col-md-10 ml-auto mr-auto">
           <div class="card card-signup">
-            <h2 class="card-title text-center">Register</h2>
+            <h2 class="card-title text-center">Sign the Pact</h2>
             <div class="card-body">
               <div class="row">
                 <div class="col-md-5 ml-auto">
                   <div class="info info-horizontal">
                     <div class="icon icon-rose">
-                      <i class="material-icons">timeline</i>
+                      <i class="fa fa-check-double"></i>
                     </div>
                     <div class="description">
-                      <h4 class="info-title">Marketing</h4>
+                      <h4 class="info-title">Orginazation</h4>
                       <p class="description">
-                        We've created the marketing campaign of the website. It was a very interesting collaboration.
+                        Quickly organize your campaign by adding new content, editing old or by simply dragging it to a new location.
                       </p>
                     </div>
                   </div>
                   <div class="info info-horizontal">
                     <div class="icon icon-primary">
-                      <i class="material-icons">code</i>
+                      <i class="fas fa-check-double"></i>
                     </div>
                     <div class="description">
-                      <h4 class="info-title">Fully Coded in HTML5</h4>
+                      <h4 class="info-title">Progress Tracking</h4>
                       <p class="description">
                         We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
                       </p>
@@ -33,12 +33,12 @@
                   </div>
                   <div class="info info-horizontal">
                     <div class="icon icon-info">
-                      <i class="material-icons">group</i>
+                      <i class="fas fa-check-double"></i>
                     </div>
                     <div class="description">
-                      <h4 class="info-title">Built Audience</h4>
+                      <h4 class="info-title">Compatible</h4>
                       <p class="description">
-                        There is also a Fully Customizable CMS Admin Dashboard for this product.
+                        Don't want to bring your computer to the session? Don't worry - just bring your phone or tablet. 
                       </p>
                     </div>
                   </div>
@@ -46,13 +46,13 @@
                 <div class="col-md-5 mr-auto">
                   <div class="social text-center">
                     <button mat-raised-button class="btn btn-just-icon btn-round btn-twitter">
-                      <i class="fa fa-twitter"></i>
+                      <i class="fab fa-twitter"></i>
                     </button>
-                    <button mat-raised-button class="btn btn-just-icon btn-round btn-dribbble">
-                      <i class="fa fa-dribbble"></i>
+                    <button mat-raised-button class="btn btn-just-icon btn-round btn-google" (click)="signInWithGoogle()">
+                      <i class="fab fa-google"></i>
                     </button>
                     <button mat-raised-button class="btn btn-just-icon btn-round btn-facebook">
-                      <i class="fa fa-facebook"> </i>
+                      <i class="fab fa-facebook"> </i>
                     </button>
                     <h4 class="mt-3"> or be classical </h4>
                   </div>
@@ -113,22 +113,22 @@
         <nav class="pull-left">
           <ul>
             <li>
-              <a href="https://www.creative-tim.com">
-                Creative Tim
+              <a href="#">
+                Stormeal
               </a>
             </li>
             <li>
-              <a href="https://creative-tim.com/about-us">
+              <a href="#">
                 About Us
               </a>
             </li>
             <li>
-              <a href="http://blog.creative-tim.com">
+              <a href="#">
                 Blog
               </a>
             </li>
             <li>
-              <a href="https://www.creative-tim.com/license">
+              <a href="#">
                 Licenses
               </a>
             </li>
@@ -137,7 +137,7 @@
         <div class="copyright pull-right">
           &copy;
         {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+          <a href="#" target="_blank">Stormeal</a> for a better web.
         </div>
       </div>
     </footer>

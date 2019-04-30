@@ -3,6 +3,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { AuthService } from '../core/auth.service';
 
 declare const $: any;
 
@@ -53,7 +54,7 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'cities', title: 'Cities', ab: 'C' },
 
     ]
-},{
+}, {
     path: '/rules',
     title: 'rules',
     type: 'sub',
@@ -106,17 +107,6 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'datatables.net', title: 'Datatables.net', ab: 'DT' }
     ]
 }, {
-    path: '/maps',
-    title: 'Maps',
-    type: 'sub',
-    icontype: 'place',
-    collapse: 'maps',
-    children: [
-        { path: 'google', title: 'Google Maps', ab: 'GM' },
-        { path: 'fullscreen', title: 'Full Screen Map', ab: 'FSM' },
-        { path: 'vector', title: 'Vector Map', ab: 'VM' }
-    ]
-}, {
     path: '/widgets',
     title: 'Widgets',
     type: 'link',
@@ -157,8 +147,9 @@ export const ROUTES: RouteInfo[] = [{
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
     faCoffee = faCoffee;
+    user;
 
-    constructor() {
+    constructor(private auth: AuthService) {
         library.add(faCoffee);
     }
 
@@ -167,15 +158,16 @@ export class SidebarComponent implements OnInit {
             return false;
         }
         return true;
-    };
+    }
 
     ngOnInit() {
+        this.load();
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
     updatePS(): void {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
-            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
+            const ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
         }
     }
     isMac(): boolean {
@@ -184,5 +176,15 @@ export class SidebarComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+
+    load() {
+        this.auth.getUser().subscribe(user => {
+            this.user = user;
+        });
+    }
+
+    logout() {
+        this.auth.signOut();
     }
 }

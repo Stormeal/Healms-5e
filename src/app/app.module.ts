@@ -53,7 +53,7 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedpluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-
+import { CoreModule } from './core/core.module';
 import { AppRoutes } from './app.routing';
 import { environment } from 'src/environments/environment';
 
@@ -101,6 +101,7 @@ export class MaterialModule {}
         BrowserAnimationsModule,
         FormsModule,
         RouterModule.forRoot(AppRoutes),
+        CoreModule,
         BrowserModule,
         HttpClientModule,
         MaterialModule,

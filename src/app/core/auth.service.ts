@@ -15,6 +15,7 @@ import * as firebase from 'firebase/app';
 export class AuthService {
     user$: Observable<User>;
     userId: string = null;
+    user: Observable<any>;
 
     constructor(
         private afAuth: AngularFireAuth,
@@ -26,7 +27,7 @@ export class AuthService {
             switchMap(user => {
                 if (user) {
                     this.userId = user.uid;
-                    return this.afs.doc<User>(`employees/${user.uid}`).valueChanges()
+                    return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
                         .pipe(shareReplay(1));
                 } else {
                     return of(null);
@@ -51,7 +52,14 @@ export class AuthService {
     }
 
     signOut() {
-        this.afAuth.auth.signOut();
+        this.afAuth.auth.signOut().then(() => {
+            this.router.navigate(['/'])
+                .catch(function () {
+                    console.log('Got an error: ' + Error);
+                });
+            console.log('Logged out');
+
+        });
     }
 
     private updateUserData(user) {
@@ -60,9 +68,11 @@ export class AuthService {
         const data: User = {
             uid: user.uid,
             email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
             roles: {
                 subscriber: true
-            }
+            },
         };
         return userRef.set(data, { merge: true });
     }
@@ -87,18 +97,26 @@ export class AuthService {
 
 
 
-  // determines if user has matching role
-  private checkAuthorization(user: User, allowedRoles: string[]): boolean {
-    if (!user) {
-      for (const role of allowedRoles) {
-        if (user.roles[role]) {
-          return true;
+    // determines if user has matching role
+    private checkAuthorization(user: User, allowedRoles: string[]): boolean {
+        if (!user) {
+            for (const role of allowedRoles) {
+                if (user.roles[role]) {
+                    return true;
+                }
+            }
+            return false;
         }
-      }
-      return false;
+
+
     }
 
-
-  }
+    // Queries
+    getUser() {
+        this.user = this.afs.doc(`users/${this.userId}`)
+        .valueChanges().pipe(shareReplay(1));
+        console.log('User: ', this.userId, this.user);
+        return this.user;
+    }
 
 }
