@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -11,8 +12,9 @@ export class AuthLayoutComponent implements OnInit {
   private sidebarVisible: boolean;
   mobile_menu_visible: any = 0;
   private _router: Subscription;
+  user;
 
-  constructor(private router: Router, private element: ElementRef) {
+  constructor(private router: Router, private element: ElementRef, private auth: AuthService) {
       this.sidebarVisible = false;
   }
   ngOnInit(){
@@ -22,6 +24,8 @@ export class AuthLayoutComponent implements OnInit {
     this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
       this.sidebarClose();
     });
+
+    this.load();
   }
   sidebarOpen() {
       const toggleButton = this.toggleButton;
@@ -65,5 +69,12 @@ export class AuthLayoutComponent implements OnInit {
         document.getElementsByClassName("close-layer")[0].remove();
           this.sidebarClose();
       }
+  }
+
+  /// Handler
+  load() {
+    this.auth.getUser().subscribe(user => {
+      this.user = user;
+    })
   }
 }

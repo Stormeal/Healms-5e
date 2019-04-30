@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
-          <form class="form" method="" action="">
+          <form class="form" method="" action="" [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="card card-login card-hidden">
               <div class="card-header card-header-success text-center">
                 <h4 class="card-title">Log in</h4>
@@ -40,7 +40,7 @@
                         <i class="material-icons">email</i>
                       </span>
                     </div>
-                    <input type="email" class="form-control" placeholder="Email...">
+                    <input type="email" class="form-control" placeholder="Email..." formControlName="email">
                   </div>
                 </span>
                 <span class="bmd-form-group">
@@ -50,11 +50,11 @@
                         <i class="material-icons">lock_outline</i>
                       </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password...">
+                    <input type="password" class="form-control" placeholder="Password..." formControlName="password">
                   </div>
                 </span>
               </div>
-              <div class="card-footer justify-content-center">
+              <div class="card-footer justify-content-center" (click)="login()">
                 <a class="btn btn-rose btn-link btn-lg">Lets Go</a>
               </div>
             </div>
