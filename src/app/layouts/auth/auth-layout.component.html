@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/dashboard']">
+          <a class="nav-link" (click)="dashboardNav()">
             <i class="material-icons">dashboard</i> Dashboard
           </a>
         </li>

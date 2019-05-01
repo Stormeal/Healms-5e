@@ -1,11 +1,7 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
+<ng-template #dashboard>
+  <p>Dashboard working</p>
+</ng-template>
 
+<ng-container *ngIf="user.displayName == null else dashboard">
 
-      <p>This is Dashboard</p>
-
-
-    </div>
-  </div>
-</div>
+</ng-container>

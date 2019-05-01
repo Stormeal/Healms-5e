@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
   MatAutocompleteModule,
@@ -43,6 +42,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire/';
 import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
@@ -115,6 +115,8 @@ export class MaterialModule {}
         FooterModule,
         FixedpluginModule,
         FontAwesomeModule,
+        FormsModule,
+        ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase, 'Healms' ), // Imports firebase/app thats needed for everything.
         AngularFirestoreModule, // imports firebase/firestore, only needed for database features
         AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

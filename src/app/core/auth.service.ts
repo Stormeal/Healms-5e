@@ -43,14 +43,26 @@ export class AuthService {
 
 
     ///// Login/Signup //////
-    emailLogin(email: string, password: string) {
+    emailLogin(email, pass) {
+        console.log('Email Login Reached');
+
         return this.afAuth.auth
-          .signInWithEmailAndPassword(email, password)
-          .then(credential => {
-            this.notify.update('Welcome back!', 'success');
-            return this.updateUserData(credential.user);
-          })
-          .catch(error => this.handleError(error));
+            .signInWithEmailAndPassword(email, pass)
+            .then((credential) => {
+                console.log('User Object: ', credential.user);
+                this.notify.update('Welcome back!', 'success');
+                this.router.navigate(['/dashboard']);
+            });
+    }
+
+    emailLogin2(email, pass) {
+        return this.afAuth.auth.signInWithEmailAndPassword(email, pass)
+          .then((credential) => {
+            this.setUserDoc(credential.user);
+            console.log(credential.user);
+            this.userId = credential.user.uid;
+            this.router.navigate(['/jobs']);
+          });
       }
 
     emailSignUp(email: string, password: string) {
@@ -94,12 +106,14 @@ export class AuthService {
     private updateUserData(user) {
         // Sets user data to firestore on login
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
         const data: User = {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName || null,
-            photoURL: user.photoURL || 'https://bit.ly/2GJ7wdV',
+            photoURL: user.photoURL || 'https://bit.ly/2vsQQ5o',
             roles: {
+                dungeonMaster: false,
                 player: true
             },
         };
