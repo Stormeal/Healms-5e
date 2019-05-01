@@ -15,9 +15,9 @@ export class AuthLayoutComponent implements OnInit {
   user;
 
   constructor(private router: Router, private element: ElementRef, private auth: AuthService) {
-      this.sidebarVisible = false;
+    this.sidebarVisible = false;
   }
-  ngOnInit(){
+  ngOnInit() {
     const navbar: HTMLElement = this.element.nativeElement;
 
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -28,53 +28,58 @@ export class AuthLayoutComponent implements OnInit {
     this.load();
   }
   sidebarOpen() {
-      const toggleButton = this.toggleButton;
-      const body = document.getElementsByTagName('body')[0];
-      setTimeout(function(){
-          toggleButton.classList.add('toggled');
-      }, 500);
-      body.classList.add('nav-open');
+    const toggleButton = this.toggleButton;
+    const body = document.getElementsByTagName('body')[0];
+    setTimeout(function () {
+      toggleButton.classList.add('toggled');
+    }, 500);
+    body.classList.add('nav-open');
 
-      this.sidebarVisible = true;
+    this.sidebarVisible = true;
   };
   sidebarClose() {
-      const body = document.getElementsByTagName('body')[0];
-      this.toggleButton.classList.remove('toggled');
-      this.sidebarVisible = false;
-      body.classList.remove('nav-open');
+    const body = document.getElementsByTagName('body')[0];
+    this.toggleButton.classList.remove('toggled');
+    this.sidebarVisible = false;
+    body.classList.remove('nav-open');
   };
   sidebarToggle() {
     const body = document.getElementsByTagName('body')[0];
-      if (this.sidebarVisible === false) {
-          this.sidebarOpen();
-          var $layer = document.createElement('div');
-          $layer.setAttribute('class', 'close-layer');
-          if (body.querySelectorAll('.wrapper-full-page')) {
-              document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
-          }else if (body.classList.contains('off-canvas-sidebar')) {
-              document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
-          }
-          setTimeout(function() {
-              $layer.classList.add('visible');
-          }, 100);
-          $layer.onclick = function() { //asign a function
-            body.classList.remove('nav-open');
-            this.mobile_menu_visible = 0;
-            $layer.classList.remove('visible');
-            this.sidebarClose();
-          }.bind(this);
-
-          body.classList.add('nav-open');
-      } else {
-        document.getElementsByClassName("close-layer")[0].remove();
-          this.sidebarClose();
+    if (this.sidebarVisible === false) {
+      this.sidebarOpen();
+      var $layer = document.createElement('div');
+      $layer.setAttribute('class', 'close-layer');
+      if (body.querySelectorAll('.wrapper-full-page')) {
+        document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
+      } else if (body.classList.contains('off-canvas-sidebar')) {
+        document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
       }
+      setTimeout(function () {
+        $layer.classList.add('visible');
+      }, 100);
+      $layer.onclick = function () { //asign a function
+        body.classList.remove('nav-open');
+        this.mobile_menu_visible = 0;
+        $layer.classList.remove('visible');
+        this.sidebarClose();
+      }.bind(this);
+
+      body.classList.add('nav-open');
+    } else {
+      document.getElementsByClassName("close-layer")[0].remove();
+      this.sidebarClose();
+    }
   }
 
   /// Handler
   load() {
     this.auth.getUser().subscribe(user => {
       this.user = user;
-    })
+    });
+  }
+
+  dashboardNav() {
+    this.router.navigate(['dashboard']);
+    console.log('Button Clicked');
   }
 }

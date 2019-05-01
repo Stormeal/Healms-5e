@@ -21,8 +21,11 @@ export const AppRoutes: Routes = [
         path: '',
         component: AdminLayoutComponent,
         canActivate: [AuthGuard], // <--- Uncomment this to lock shit behind login wall
-
         children: [
+            {
+                path: 'home',
+                loadChildren: './home/home.module#HomeModule',
+            },
             {
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
@@ -61,14 +64,6 @@ export const AppRoutes: Routes = [
                 loadChildren: './timeline/timeline.module#TimelineModule'
             }
         ]
-    }, {
-        path: '',
-        component: AuthLayoutComponent,
-        canActivate: [AuthGuard], // <--- Uncomment this to lock shit behind login wall
-        children: [{
-            path: 'pages',
-            loadChildren: './pages/pages.module#PagesModule'
-        }]
     },
     {
         path: '',

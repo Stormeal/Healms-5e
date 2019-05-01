@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.auth.user$.pipe(
       take(1),
-      map(user => !!(user && user.displayName),
+      map(user => !!(user),
         tap(loggedIn => {
           if (!loggedIn) {
             console.log('access denied');
