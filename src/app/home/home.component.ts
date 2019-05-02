@@ -8,8 +8,11 @@ import {
   FormControl,
   ReactiveFormsModule
 } from '@angular/forms';
+import { LocalDataSource } from 'ng2-smart-table';
+import * as tableData from './smart-data-table';
+
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
+
 
 @Component({
   selector: 'app-home',
@@ -19,8 +22,13 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class HomeComponent implements OnInit {
   user;
   detailForm: FormGroup;
+  source: LocalDataSource;
 
-  constructor(private auth: AuthService, private fb: FormBuilder, private afs: AngularFirestore) { }
+  constructor(private auth: AuthService, private fb: FormBuilder, private afs: AngularFirestore) { 
+    this.source = new LocalDataSource(tableData.data); // create the source
+  }
+  settings = tableData.settings;
+
 
   ngOnInit() {
     this.loader();

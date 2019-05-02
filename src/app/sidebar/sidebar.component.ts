@@ -55,6 +55,12 @@ export const ROUTES: RouteInfo[] = [{
 
     ]
 }, {
+    path: '/players',
+    title: 'Players',
+    type: 'link',
+    icontype: 'person'
+},
+{
     path: '/rules',
     title: 'rules',
     type: 'sub',
