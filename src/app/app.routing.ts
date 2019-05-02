@@ -25,8 +25,7 @@ export const AppRoutes: Routes = [
             {
                 path: 'home',
                 loadChildren: './home/home.module#HomeModule',
-            },
-            {
+            }, {
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             }, {
@@ -38,6 +37,9 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'rules',
                 loadChildren: './rules/rules.module#RulesModule'
+            }, {
+                path: 'players',
+                loadChildren: './players/players.module#PlayersModule'
             }, {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
