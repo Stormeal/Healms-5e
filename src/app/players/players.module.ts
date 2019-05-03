@@ -7,6 +7,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { PlayersComponent } from './players.component';
 import { PlayersRoutes } from './players.routing';
+import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { PlayersRoutes } from './players.routing';
     MaterialModule,
     ReactiveFormsModule,
   ],
-  declarations: [PlayersComponent],
+  declarations: [PlayersComponent, CharacterSheetComponent],
 
 })
 export class PlayersModule { }
