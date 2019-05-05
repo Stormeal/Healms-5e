@@ -7,6 +7,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { HomeComponent } from './home.component';
 import { HomeRoutes } from './home.routing';
+import { DmScreenComponent } from './dm-screen/dm-screen.component';
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import { HomeRoutes } from './home.routing';
         ReactiveFormsModule,
         Ng2SmartTableModule
     ],
-    declarations: [HomeComponent],
+    declarations: [HomeComponent, DmScreenComponent],
 
 })
 export class HomeModule { }
