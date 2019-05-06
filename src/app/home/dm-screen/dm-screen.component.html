@@ -1,100 +1,214 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
+
+
+      <!-- Colloum 1 -->
+      <div class="col-md-4">
+        <!-- Encounter Distances -->
         <div class="card">
-          <div class="card-header">
-            <h4 class="card-title"><i class="fas fa-exclamation-circle"> </i> Conditions</h4>
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-ruler-horizontal fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Encounter Distances</h4>
           </div>
           <div class="card-body">
-            <div id="accordion" role="tablist">
-              <ng-container *ngFor="let c of data.Conditions">
-
-                  <div class="card-collapse">
-                      <div class="card-header" role="tab" id="headingOne">
-                        <h5 class="mb-0">
-                          <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                            class="collapsed">
-                            Collapsible Group Item #1
-                            <i class="material-icons">keyboard_arrow_down</i>
-                          </a>
-                        </h5>
-                      </div>
-                      <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
-                        data-parent="#accordion" style="">
-                        <div class="card-body">
-                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                          wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                          eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                          assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                          sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                          farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                          labore sustainable VHS.
-                        </div>
-                      </div>
-                    </div>
-
-              </ng-container>
-              
-
-
-
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary" style="text-align: center;">
+                  <tr>
+                    <th *ngFor="let cell of encounterDist.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  <tr *ngFor="let row of encounterDist.dataRows">
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card ">
-          <div class="card-header ">
-            <h4 class="card-title">Navigation Pills Icons -
-              <small class="description">Vertical Tabs</small>
-            </h4>
+        <!-- Encounter Distances End -->
+
+        <!-- Damage Severity and Levels -->
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-car-crash fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Damage Severity and Levels</h4>
           </div>
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-lg-4 col-md-6">
-                <!--
-                                color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
-                            -->
-                <ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#link10" role="tablist">
-                      <i class="material-icons">dashboard</i> Home
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#link11" role="tablist">
-                      <i class="material-icons">schedule</i> Settings
-                    </a>
-                  </li>
-                </ul>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <tr>
+                    <th *ngFor="let cell of dmgSev.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of dmgSev.dataRows">
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td class="text-danger">{{row[3]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Damage Severity and Levels End -->
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header card-header-icon card-header-success">
+                <div class="card-icon">
+                  <i class="fas fa-podcast fa-lg"></i>
+                </div>
+                <h4 class="card-title ">Audible Distance</h4>
               </div>
-              <div class="col-md-8">
-                <div class="tab-content">
-                  <div class="tab-pane active" id="link10">
-                    Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate
-                    B2C users after installed base benefits.
-                    <br>
-                    <br> Dramatically visualize customer directed convergence without revolutionary ROI. Collaboratively
-                    administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after
-                    installed base benefits.
-                    <br />
-                    <br /> Dramatically visualize customer directed convergence without revolutionary ROI.
-                    Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate
-                    B2C users after installed base benefits.
-                  </div>
-                  <div class="tab-pane" id="link11">
-                    Efficiently unleash cross-media information without cross-media value. Quickly maximize timely
-                    deliverables for real-time schemas.
-                    <br>
-                    <br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
-                  </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="text-primary" style="text-align: center;">
+                      <tr>
+                        <th *ngFor="let cell of audible.headerRow">{{ cell }}</th>
+                      </tr>
+                    </thead>
+                    <tbody style="text-align: center;">
+                      <tr *ngFor="let row of audible.dataRows">
+                        <td>{{row[0]}}</td>
+                        <td>{{row[1]}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
+
+
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header card-header-icon card-header-success">
+                <div class="card-icon">
+                  <i class="fas fa-binoculars fa-lg"></i>
+                </div>
+                <h4 class="card-title ">Visibility</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="text-primary" style="text-align: center;">
+                      <tr>
+                        <th *ngFor="let cell of visibility.headerRow">{{ cell }}</th>
+                      </tr>
+                    </thead>
+                    <tbody style="text-align: center;">
+                      <tr *ngFor="let row of visibility.dataRows">
+                        <td>{{row[0]}}</td>
+                        <td>{{row[1]}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+      </div>
+      <!-- Colloum 1 End -->
+
+
+      <!-- Adventuring -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-hiking fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Adventuring</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary" style="text-align: center;">
+                  <tr>
+                    <th *ngFor="let cell of adventuring.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  <tr *ngFor="let row of adventuring.dataRows">
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- Adventuring End -->
+
+
+
+      <!-- Conditions -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="material-icons">visibility</i>
+            </div>
+            <h4 class="card-title ">Conditions</h4>
+          </div>
+          <div class="card-body">
+            <div id="accordion" role="tablist">
+              <ng-container *ngFor="let c of data">
+
+                <div class="card-collapse">
+                  <div class="card-header" role="tab" id="{{c.index}}">
+                    <h5 class="mb-0">
+                      <a data-toggle="collapse" href="#collapse{{c.index}}" aria-expanded="true"
+                        aria-controls="collapse" class="collapsed">
+                        {{c.name}}
+                        <i class="material-icons">keyboard_arrow_down</i>
+                      </a>
+                    </h5>
+                  </div>
+                  <div id="collapse{{c.index}}" class="collapse" role="tabpanel" aria-labelledby="headingOne"
+                    data-parent="#accordion" style="">
+                    <div class="card-body">
+                      {{c.desc}}
+                    </div>
+                  </div>
+                </div>
+
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Conditions End -->
+
+
     </div>
+
+
+
+
+
+
+
   </div>
 </div>

@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-4" style="z-index: 1;">
+        <h3>{{monster.name}}</h3>
+        <h6><i>{{monster.meta}}</i></h6>
+
+        <hr>
+
+        <small><b>Armor Class: </b>{{monster.AC}}</small>
+        <br>
+        <small><b>Hit Points: </b>{{monster.HP}}</small>
+        <br>
+        <small><b>Speed: </b>{{monster.Speed}}</small>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-2 statblock" style="text-align: center;">
+                <h6 style="color: #9B1B00;">STR</h6>
+                <small>{{monster.STR}} {{monster.STR_mod}}</small>
+            </div>
+
+            <div class="col-md-2 statblock" style="text-align: center;">
+                <h6 style="color: #9B1B00;">DEX</h6>
+                <small>{{monster.DEX}} {{monster.DEX_mod}}</small>
+            </div>
+
+            <div class="col-md-2 statblock" style="text-align: center;">
+                <h6 style="color: #9B1B00;">CON</h6>
+                <small>{{monster.CON}} {{monster.CON_mod}}</small>
+            </div>
+
+            <div class="col-md-2 statblock" style="text-align: center;">
+                <h6 style="color: #9B1B00;">INT</h6>
+                <small>{{monster.INT}} {{monster.INT_mod}}</small>
+            </div>
+
+            <div class="col-md-2 statblock" style="text-align: center;">
+                <h6 style="color: #9B1B00;">WIS</h6>
+                <small>{{monster.WIS}} {{monster.WIS_mod}}</small>
+            </div>
+
+            <div class="col-md-2 statblock" style="text-align: center;">
+                <h6 style="color: #9B1B00;">CHA</h6>
+                <small>{{monster.CHA}} {{monster.CHA_mod}}</small>
+            </div>
+        </div>
+
+        <hr>
+
+        <small><b>Saving Throws: </b>{{monster.Saves}}</small>
+        <br>
+        <small><b>Skills: </b>{{monster.Skills}}</small>
+        <br>
+        <small><b>Senses: </b>{{monster.Senses}}</small>
+        <br>
+        <small><b>Languages: </b>{{monster.Languages}}</small>
+        <br>
+        <small><b>Challenge Rating: </b>{{monster.Challenge}}</small>
+
+        <hr>
+
+        <div [innerHTML]="monster.Traits"></div>
+
+
+
+
+    </div>
+
+    <div class="col-md-8" style="z-index: 1;">
+
+        <h4>Actions</h4>
+        <hr>
+        <div [innerHTML]="monster.Actions"></div>
+
+        <ng-template #legendary>
+            <br>
+            <h4>Legendary</h4>
+            <hr>
+            <div [innerHTML]="monster.Legendary"></div>
+        </ng-template>
+
+
+        <ng-container *ngIf="monster.Legendary == null else legendary">
+
+
+        </ng-container>
+    </div>
+
+    <div class="card-avatar" style="z-index: 0; position: absolute; right: 250px; ">
+        <a>
+            <img class="img" [src]="monster.img_url" style="height: 500px; width: auto; opacity: 0.3;" />
+        </a>
+    </div>
+</div>

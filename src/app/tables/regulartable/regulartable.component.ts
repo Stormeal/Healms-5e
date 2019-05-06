@@ -13,7 +13,7 @@ export class RegularTableComponent implements OnInit {
 
     ngOnInit() {
         this.tableData1 = {
-            headerRow: [ 'Name', 'Country', 'City', 'Salary'],
+            headerRow: [ 'Character', 'Country', 'City', 'Salary'],
             dataRows: [
                 ['Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
                 ['Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],

@@ -8,6 +8,7 @@ import { WorldRoutes } from './world.routing';
 import { OverviewComponent } from './overview/overview.component';
 import { ReligionsComponent } from './religions/religions.component';
 import { CitiesComponent } from './cities/cities.component';
+import { BeatiaryComponent, SheetDialogComponent } from './beatiary/beatiary.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { CitiesComponent } from './cities/cities.component';
     FormsModule,
     MaterialModule
   ],
-  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent],
+  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent],
+  entryComponents: [SheetDialogComponent]
 
 })
 export class WorldModule { }

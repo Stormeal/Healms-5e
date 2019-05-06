@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { OverviewComponent } from './overview/overview.component';
 import { ReligionsComponent } from './religions/religions.component';
 import { CitiesComponent } from './cities/cities.component';
+import { BeatiaryComponent } from './beatiary/beatiary.component';
 
 export const WorldRoutes: Routes = [
     {
@@ -25,6 +26,13 @@ export const WorldRoutes: Routes = [
             path: 'cities',
             component: CitiesComponent
         }]
-    }
+    },
+    {
+        path: '',
+        children: [{
+            path: 'beastiary',
+            component: BeatiaryComponent
+        }]
+    },
 
 ];
