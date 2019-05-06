@@ -57,7 +57,7 @@ export const ROUTES: RouteInfo[] = [{
         { path: 'overview', title: 'Overview', ab: 'O' },
         { path: 'religions', title: 'Religions', ab: 'R' },
         { path: 'cities', title: 'Cities', ab: 'C' },
-
+        { path: 'beastiary', title: 'Beastiary', ab: 'B' }
     ]
 }, {
     path: '/players',

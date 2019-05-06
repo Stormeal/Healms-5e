@@ -1,0 +1,29 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <ng-container *ngFor="let m of data">
+        <div class="col-md-3" (click)="openDialog(m)">
+          <div class="card card-profile">
+            <div class="card-avatar">
+              <a>
+                <img class="img" [src]="m.img_url" />
+              </a>
+            </div>
+            <div class="card-body">
+              <h6 class="card-category text-gray">{{m.meta}}</h6>
+              <h4 class="card-title">{{m.name}}</h4>
+              <h6 class="card-category text-gray"><i class="fas fa-khanda"> : </i>{{m.Challenge}}</h6>
+
+              <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+
+
+
+    </div>
+  </div>
+</div>
