@@ -16,6 +16,9 @@ export class DmScreenComponent implements OnInit {
   public encounterDist: TableData;
   public audible: TableData;
   public visibility: TableData;
+  public encounterExp: TableData;
+  public basicArmor: TableData;
+  public basicWeapons: TableData;
 
 
   constructor() { }
@@ -84,6 +87,96 @@ export class DmScreenComponent implements OnInit {
         ['Rain', '1 mile'],
         ['Fog', '100 to 300 feet'],
       ]
+    };
+
+    this.encounterExp = {
+      headerRow: ['# of Enemies', 'Party Size & Modifiers'],
+      dataRows: [
+        ['', '1-2', '3-5', '6+'],
+        ['Single Enemy', 'x 1.5', '-', 'x 0.5'],
+        ['Pair', 'x 2', 'x 1.5', '-'],
+        ['Group (3-6)', 'x 2.5', 'x 2', 'x 1.5'],
+        ['Gang (7-10)', 'x 3', 'x 2.5', 'x 2'],
+        ['Mob (11-14)', 'x 4', 'x 3', 'x 2.5'],
+        ['Horde (15+)', 'x 5', 'x 4', 'x 3'],
+      ],
+    };
+
+    this.basicArmor = {
+      headerRow: ['Armor', 'Cost', 'AC', 'Weight'],
+      dataRows: [
+        ['Light Armor'],
+        ['Padded²', '5gp', '11', '8 lb.'],
+        ['Leather', '10gp', '11', '10 lb.'],
+        ['Studded', '45gp', '12', '13 lb.'],
+        [''],
+        ['Medium Armor'],
+        ['Hide', '10gp', '12', '12 lb.'],
+        ['Chain shirt', '50gp', '13', '20 lb.'],
+        ['Scale Mail²', '50gp', '14', '45 lb.'],
+        ['Breast Plate', '400gp', '14', '20 lb.'],
+        ['Half Plate²', '750gp', '15', '40 lb.'],
+        [''],
+        ['Heavy Armor'],
+        ['Ring Mail²', '30gp', '14', '40 lb.'],
+        ['Chain Mail²', '75gp', '16', '50 lb.'],
+        ['Splint²', '200gp', '17', '60 lb.'],
+        ['Plate²', '1,500gp', '18', '65 lb.'],
+        [''],
+        ['Shield'],
+        ['Shield', '10gp', '+2', '6 lb.'],
+      ],
+    };
+
+    this.basicWeapons = {
+      headerRow: ['Name', 'Cost', 'DMG', 'Weight', 'Properties*'],
+      dataRows: [
+        ['Simple Melee Weapons'],
+        ['Club', '1sp', '1d4 B', '2 lb.', 'Li'],
+        ['Dagger', '2gp', '1d4 P', '1 lb.', 'F, Li Th Rg(20/60)'],
+        ['Greatclub', '2gp', '1d8 B', '10 lb.', '2H'],
+        ['Handaxe', '5gp', '1d6 S', '2 lb.', 'Li Th Rg(20/60)'],
+        ['Javelin', '5sp', '1d6 P', '2 lb.', 'Th Rg(30/120)'],
+        ['Light Hammer', '2gp', '1d4 B', '2 lb.', 'Li Th Rg(20/60)'],
+        ['Mace', '5gp', '1d6 B', '4 lb.', '-'],
+        ['Quarterstaff', '2sp', '1d6 B', '4 lb.', 'V(1d10)'],
+        ['Sickle', '1gp', '1d4 S', '2 lb.', 'Li'],
+        ['Spear', '1gp', '1d6 P', '3 lb.', 'Th Rg(20/60), V(1d8)'],
+        ['Unarmed Strike', '-', '1 B', '-', '-'],
+        [],
+        ['Simple Ranged Weapons'],
+        ['Crossbow, Light', '25gp', '1d8 P', '5 lb.', 'A Rg(80/320), Ld, 2H'],
+        ['Dart', '5cp', '1d4 P', '1/4 lb.', 'F Th Rg(20/60)'],
+        ['Shortbow', '25gp', '1d6 P', '2 lb.', 'A Rg(80/320), Ld, 2H'],
+        ['Sling', '1sp', '1d4 B', '-', 'A Rg(320)'],
+        [''],
+        ['Martial Melee Weapons'],
+        ['Battleaxe', '10gp', '1d8 S', '4 lb.', 'V(1d10)'],
+        ['Flail', '10gp', '1d8 B', '2 lb.', '-'],
+        ['Glaive', '20gp', '1d10 S', '6 lb.', 'H, Re, 2H'],
+        ['Greataxe', '30gp', '1d12 S', '7 lb.', 'H, 2H'],
+        ['Greatsword', '50gp', '2d6 S', '6 lb.', 'H, 2H'],
+        ['Halberd', '20gp', '1d10 S', '6 lb.', 'H, Re, 2H'],
+        ['Lance', '10gp', '1d12 P', '6 lb.', 'R, Sp'],
+        ['Longsword', '15gp', '1d8 S', '3 lb.', 'V(1d10)'],
+        ['Maul', '10gp', '2d6 B', '10 lb.', 'H, 2H'],
+        ['Morningstar', '15gp', '1d8 P', '4 lb.', '-'],
+        ['Pike', '5gp', '1d10 P', '18 lb.', 'H, Re. 2H'],
+        ['Rapier', '25gp', '1d8 P', '2 lb.', 'F'],
+        ['Scimitar', '25gp', '1d6 S', '3 lb.', 'F, Li'],
+        ['Shortsword', '10gp', '1d6 P', '2 lb.', 'F, Li'],
+        ['Trident', '5gp', '1d6 P', '4 lb.', 'Th Rg(20/60), V(1d8)'],
+        ['War Pick', '5gp', '1d8 P', '2 lb.', '-'],
+        ['Warhammer', '15gp', '1d8 B', '2 lb.', 'V(1d10)'],
+        ['Whip', '2gp', '1d4 S', '3 lb.', 'F, Re'],
+        [''],
+        ['Martial Ranged Weapons'],
+        ['Blowgun', '10gp', '1 P', '1 lb.', 'A Rg(25/100), Ld'],
+        ['Crossbow, Hand', '75gp', '1d6 P', '3 lb.', 'A Rg(30/120), Li, Ld'],
+        ['Crossbow, Heavy', '50gp', '1d10 P', '18 lb.', 'A Rg(100/400), H, Ld, 2H'],
+        ['Longbow', '50gp', '1d8 P', '2 lb.', 'A Rg(150,600), H, 2H'],
+        ['Net', '1gp', '-', '3 lb.', 'Sp, Th Rg(5/15)'],
+      ],
     };
   }
 
