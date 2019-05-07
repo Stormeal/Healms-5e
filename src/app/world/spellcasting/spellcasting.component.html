@@ -19,6 +19,11 @@
 
       <div class="col-md-4">
 
+      </div>
+
+
+      <div class="col-md-4">
+
         <div class="card">
           <div class="card-header card-header-icon card-header-success">
             <div class="card-icon">
@@ -28,27 +33,29 @@
           </div>
           <div class="card-body">
             <div id="accordion" role="tablist">
-              <ng-container *ngFor="let c of spellList.Bard.Cantrips">
 
-                <div class="card-collapse">
-                  <div class="card-header" role="tab" id="bard">
-                    <h5 class="mb-0">
-                      <a data-toggle="collapse" href="#collapseBard" aria-expanded="true" aria-controls="collapse"
-                        class="collapsed">
-                        Bard
-                        <i class="material-icons">keyboard_arrow_down</i>
-                      </a>
-                    </h5>
-                  </div>
-                  <div id="collapseBard" class="collapse" role="tabpanel" aria-labelledby="headingOne"
-                    data-parent="#accordion" style="">
-                    <div class="card-body">
-                      {{c}}
-                    </div>
+              <div class="card-collapse">
+                <div class="card-header" role="tab" id="bard">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" href="#collapseBard" aria-expanded="true" aria-controls="collapse"
+                      class="collapsed">
+                      Bard
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseBard" class="collapse" role="tabpanel" aria-labelledby="headingOne"
+                  data-parent="#accordion" style="">
+                  <div class="card-body">
+                    <h4>Cantrips</h4>
+                    <ng-container *ngFor="let cantrip of this.spellList.Bard.Cantrips">
+                      <li>{{cantrip}}</li>
+                    </ng-container>
+
                   </div>
                 </div>
+              </div>
 
-              </ng-container>
             </div>
           </div>
         </div>
