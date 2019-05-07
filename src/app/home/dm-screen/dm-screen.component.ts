@@ -19,6 +19,11 @@ export class DmScreenComponent implements OnInit {
   public encounterExp: TableData;
   public basicArmor: TableData;
   public basicWeapons: TableData;
+  public lifestyleExpense: TableData;
+  public currency: TableData;
+  public combatActions: TableData;
+  public exhaustion: TableData;
+  public difficulty: TableData;
 
 
   constructor() { }
@@ -177,6 +182,76 @@ export class DmScreenComponent implements OnInit {
         ['Longbow', '50gp', '1d8 P', '2 lb.', 'A Rg(150,600), H, 2H'],
         ['Net', '1gp', '-', '3 lb.', 'Sp, Th Rg(5/15)'],
       ],
+    };
+
+    this.lifestyleExpense = {
+      headerRow: ['Lifestyle', 'Price / Day'],
+      dataRows: [
+        ['Wretched', '-'],
+        ['Squalid', '1sp'],
+        ['Poor', '2sp'],
+        ['Modest', '1gp'],
+        ['Comfortable', '2gp'],
+        ['Wealthy', '4gp'],
+        ['Aristocratic', '10gp Minimum'],
+      ],
+    };
+
+    this.currency = {
+      headerRow: ['Coin', 'CP', 'SP', 'EP', 'GP', 'PP'],
+      dataRows: [
+        ['Copper', '1', '1/10', '1/50', '1/100', '1/1000'],
+        ['Silver', '10', '1', '1/5', '1/10', '1/100'],
+        ['Electrum', '50', '5', '1', '1/2', '1/20'],
+        ['Gold', '100', '10', '2', '1', '/10'],
+        ['Platinum', '1000', '100', '50', '10', '1'],
+      ],
+    };
+
+    this.combatActions = {
+      headerRow: ['Action', 'Description'],
+      dataRows: [
+        ['Attack', 'Make one¹ melee or ranged attack, a grapple, or a shove.'],
+        ['Cast a Spell', 'Casts a spell with a casting time of 1 action.'],
+        ['Dash', 'Gain extra movement equal to your speed for this turn, applying any modifiers.'],
+        ['Disengage', 'Your movement doesn\'t provoke opportunity attacks for the rest of the turn.'],
+        ['Dodge', 'Until the start of your next turn, any attacks against you are made with disadvantage provided you can see the attacker, and you have advantage on DEX saves. You lose this benefit if you are INCAPACITATED or your speed drops to 0.'],
+        ['Help', 'Creature you help gains advantage on next ability check to perform the task you are assisting with, or help with attack roll if enemy is within 5 feet of you.'],
+        ['Hide', 'You make a stealth check. Details here.'],
+        ['Ready', 'Prepare to do something when a specific trigger occurs. Details here.'],
+        ['Search', 'Make either a perception or investigation check in an attempt to locate something.'],
+        ['Use an Object', 'Interacting with a second object on your turn (the first is free), or a more complicated object.'],
+        ['Climb onto a Bigger Creature²', 'Athletics or Acrobatics check opposed by creature\'s Acrobatics check. Details here.'],
+        ['Disarm²', 'Use an attack to make attack roll opposed by target\'s Athletics or Acrobatics check. Target has advantage if holding the item with 2 or more hands.'],
+        ['Mark²', 'When you make a melee attack and hit, you can mark them. Your opportunity attacks against the creature have advantage and don\'t expend your reaction, however you may only make 1 attack in this manner.'],
+        ['Overrun²', 'As an action or bonus action make Athletics check opposed by hostile\'s Athletics. If you win, you can move through the hostile\'s space once this turn.'],
+        ['Shove Aside²', 'Use shove to push target to the side rather than away. Details here.'],
+        ['Tumble²', 'As an action or bonus action make Acrobatics check opposed by hostile\'s Acrobatics. If you win, you can move through the hostile\'s space once this turn.'],
+      ]
+    };
+
+    this.exhaustion = {
+      headerRow: ['Level', 'Effect'],
+      dataRows: [
+        ['1', 'Disadvantage on ability checks.'],
+        ['2', 'Speed Halved'],
+        ['3', 'Disadvantage on attack rolls and saving throws'],
+        ['4', 'Hit point maximum halved'],
+        ['5', 'Speed reduced to 0'],
+        ['6', 'Death'],
+      ]
+    };
+
+    this.difficulty = {
+      headerRow: ['Task Difficulty', 'DC'],
+      dataRows: [
+        ['Trivial', '5'],
+        ['Easy', '10'],
+        ['Moderate', '15'],
+        ['Hard', '20'],
+        ['Very Hard', '25'],
+        ['Nearly Impossible', '30'],
+      ]
     };
   }
 
