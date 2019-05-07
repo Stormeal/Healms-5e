@@ -9,6 +9,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { ReligionsComponent } from './religions/religions.component';
 import { CitiesComponent } from './cities/cities.component';
 import { BeatiaryComponent, SheetDialogComponent } from './beatiary/beatiary.component';
+import { SpellcastingComponent } from './spellcasting/spellcasting.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { BeatiaryComponent, SheetDialogComponent } from './beatiary/beatiary.com
     FormsModule,
     MaterialModule
   ],
-  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent],
+  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent, SpellcastingComponent],
   entryComponents: [SheetDialogComponent]
 
 })
