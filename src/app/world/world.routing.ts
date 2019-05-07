@@ -4,6 +4,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { ReligionsComponent } from './religions/religions.component';
 import { CitiesComponent } from './cities/cities.component';
 import { BeatiaryComponent } from './beatiary/beatiary.component';
+import { SpellcastingComponent } from './spellcasting/spellcasting.component';
 
 export const WorldRoutes: Routes = [
     {
@@ -12,26 +13,29 @@ export const WorldRoutes: Routes = [
             path: 'overview',
             component: OverviewComponent
         }]
-    },
-    {
+    }, {
         path: '',
         children: [{
             path: 'religions',
             component: ReligionsComponent
         }]
-    },
-    {
+    }, {
         path: '',
         children: [{
             path: 'cities',
             component: CitiesComponent
         }]
-    },
-    {
+    }, {
         path: '',
         children: [{
             path: 'beastiary',
             component: BeatiaryComponent
+        }]
+    }, {
+        path: '',
+        children: [{
+            path: 'spellcasting',
+            component: SpellcastingComponent
         }]
     },
 

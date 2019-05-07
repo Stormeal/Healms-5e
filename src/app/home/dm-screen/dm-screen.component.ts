@@ -24,6 +24,8 @@ export class DmScreenComponent implements OnInit {
   public combatActions: TableData;
   public exhaustion: TableData;
   public difficulty: TableData;
+  public abilityCheck: TableData;
+
 
 
   constructor() { }
@@ -251,6 +253,18 @@ export class DmScreenComponent implements OnInit {
         ['Hard', '20'],
         ['Very Hard', '25'],
         ['Nearly Impossible', '30'],
+      ]
+    };
+
+    this.abilityCheck = {
+      headerRow: ['Ability Score', 'Associated Skill'],
+      dataRows: [
+        ['Strength', 'Athletics'],
+        ['Dexterity', 'Acrobatics, Sleight of Hand, Stealth'],
+        ['Constitution', '-'],
+        ['Intelligence', 'Arcana, History, Investigation, Nature, Religion'],
+        ['Wisdom', 'Animal Handling, Insight, Medicine, Perception, Survival'],
+        ['Charisma', 'Deception, Intimidation, Performance, Persuasion'],
       ]
     };
   }
