@@ -15,7 +15,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table table-striped">
                 <thead class="text-primary" style="text-align: center;">
                   <tr>
                     <th *ngFor="let cell of encounterDist.headerRow">{{ cell }}</th>
@@ -43,7 +43,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table table-striped">
                 <thead class="text-primary">
                   <tr>
                     <th *ngFor="let cell of dmgSev.headerRow">{{ cell }}</th>
@@ -93,7 +93,6 @@
             </div>
           </div>
 
-
           <div class="col-md-6">
             <div class="card">
               <div class="card-header card-header-icon card-header-success">
@@ -123,9 +122,6 @@
           </div>
 
         </div>
-
-
-
       </div>
       <!-- Colloum 1 End -->
 
@@ -141,7 +137,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table">
+              <table class="table table-striped">
                 <thead class="text-primary" style="text-align: center;">
                   <tr>
                     <th *ngFor="let cell of adventuring.headerRow">{{ cell }}</th>
@@ -206,8 +202,9 @@
 
     <div class="row">
 
-      <!-- Basic Armor -->
       <div class="col-md-3">
+
+        <!-- Basic Armor -->
         <div class="card">
           <div class="card-header card-header-icon card-header-success">
             <div class="card-icon">
@@ -236,8 +233,64 @@
             </div>
           </div>
         </div>
+        <!-- Basic Armor End -->
+
+        <!-- Exhaustion -->
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-bolt fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Exhaustion</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="text-primary">
+                  <tr>
+                    <th *ngFor="let cell of exhaustion.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of exhaustion.dataRows">
+                    <td style="text-align: center;">{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Exhaustion End -->
+
+        <!-- Difficulty -->
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-pray fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Difficulty Classes</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="text-primary">
+                  <tr>
+                    <th *ngFor="let cell of difficulty.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of difficulty.dataRows">
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Difficulty End -->
       </div>
-      <!-- Basic Armor End -->
 
       <!-- Basic Weapons -->
       <div class="col-md-5">
@@ -266,16 +319,16 @@
                   </tr>
                 </tbody>
               </table>
-              <p> 2H = Two Handed | 
-                A = Ammunition | 
-                F = Finesse Weapon | 
-                H = Heavy Weapon | 
-                Ld = Loading | 
-                Li = Light Weapon | 
-                Re = Reach | 
-                Rg = Range | 
-                Sp = Special | 
-                Th = Thrown | 
+              <p> 2H = Two Handed |
+                A = Ammunition |
+                F = Finesse Weapon |
+                H = Heavy Weapon |
+                Ld = Loading |
+                Li = Light Weapon |
+                Re = Reach |
+                Rg = Range |
+                Sp = Special |
+                Th = Thrown |
                 V = Versatile | </p>
             </div>
           </div>
@@ -283,6 +336,101 @@
       </div>
       <!-- Basic Weapons End -->
 
+      <div class="col-md-4">
+
+        <!-- Lifestyle Expenses -->
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-utensils fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Lifestyle Expenses</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="text-primary" style="text-align: center;">
+                  <tr>
+                    <th *ngFor="let cell of lifestyleExpense.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  <tr *ngFor="let row of lifestyleExpense.dataRows">
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+        <!-- Lifestyle Expenses End -->
+
+
+        <!-- Currency -->
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-coins fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Currency Exchange Rates</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="text-primary" style="text-align: center;">
+                  <tr>
+                    <th *ngFor="let cell of currency.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  <tr *ngFor="let row of currency.dataRows">
+                    <td><b>{{row[0]}}</b></td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+        <!-- Currency End -->
+
+        <!-- Actions in Combat -->
+        <div class="card">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-chess fa-lg"></i>
+            </div>
+            <h4 class="card-title ">Actions in Combat</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="text-primary" style="text-align: center;">
+                  <tr>
+                    <th *ngFor="let cell of combatActions.headerRow">{{ cell }}</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  <tr *ngFor="let row of combatActions.dataRows">
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>¹ Certain features allow you to make more than one attack, grapple, or shove.
+                <br>² These actions are optional and can be found on pages 271-272 of the DMG.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Actions in Comb End -->
+      </div>
 
     </div>
 
