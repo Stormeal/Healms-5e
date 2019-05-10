@@ -10,13 +10,15 @@ import { ReligionsComponent } from './religions/religions.component';
 import { CitiesComponent } from './cities/cities.component';
 import { BeatiaryComponent, SheetDialogComponent } from './beatiary/beatiary.component';
 import { SpellcastingComponent } from './spellcasting/spellcasting.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(WorldRoutes),
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule
   ],
   declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent, SpellcastingComponent],
   entryComponents: [SheetDialogComponent]

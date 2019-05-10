@@ -38,6 +38,7 @@ import {
   MatStepperModule,
   MatFormFieldModule,
 } from '@angular/material';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -116,6 +117,7 @@ export class MaterialModule {}
         FixedpluginModule,
         FontAwesomeModule,
         FormsModule,
+        NgbModule,
         ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase, 'Healms' ), // Imports firebase/app thats needed for everything.
         AngularFirestoreModule, // imports firebase/firestore, only needed for database features
