@@ -18,18 +18,54 @@
       </div>
 
       <div class="col-md-4">
-        <a [ngbPopover]="hover" triggers="mouseenter:mouseleave" popoverTitle="Pop title">
-          Hover over me!
-        </a>
 
-        <ng-template #hover>
-          <p>You see, I show up on hover!</p>
-        </ng-template>
 
       </div>
 
 
       <div class="col-md-4">
+
+        <ng-template #spell>
+
+          <div class="row">
+            <div class="col-md-4">
+              <h6>LEVEL:</h6>
+              <small>{{this.bardCantripsDescription.level[0]}}</small>
+            </div>
+
+            <div class="col-md-4">
+              <h6>CASTING TIME:</h6>
+              <small>{{this.bardCantripsDescription.time[0]}}</small>
+            </div>
+
+            <div class="col-md-4">
+              <h6>RANGE / AREA:</h6>
+              <small>{{this.bardCantripsDescription.range[0]}}</small>
+            </div>
+
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <h6>COMPONENTS:</h6>
+              <small>{{this.bardCantripsDescription.components[0]}}</small>
+            </div>
+
+            <div class="col-md-4">
+              <h6>DURATION:</h6>
+              <small>{{this.bardCantripsDescription.duration[0]}}</small>
+            </div>
+
+            <div class="col-md-4">
+              <h6>School:</h6>
+              <small>{{this.bardCantripsDescription.school[0]}}</small>
+            </div>
+          </div>
+
+          <hr>
+
+          <small>{{this.bardCantripsDescription.text[0]}}</small>
+        </ng-template>
 
         <div class="card">
           <div class="card-header card-header-icon card-header-success">
@@ -59,66 +95,11 @@
                     <h6>Cantrips</h6>
                     <div class="row">
                       <ng-container *ngFor="let cantrip of this.bardCantrips">
-                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" [popoverTitle]="title"
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrip}}"
                           (mouseenter)="mouseEnter(cantrip)" popoverClass="spellPopup">
                           {{cantrip}}&nbsp;&nbsp;&nbsp;
-
                         </li>
-
-
-
                       </ng-container>
-
-                      <ng-template #title>
-
-                      </ng-template>
-                      <ng-template #spell>
-
-                        <div class="row">
-                          <div class="col-md-4">
-                            <h6>LEVEL:</h6>
-                            <small>Cantrip</small>
-                          </div>
-
-                          <div class="col-md-4">
-                            <h6>CASTING TIME:</h6>
-                            <small>{{this.bardCantripsDescription.time[0]}}</small>
-                          </div>
-
-                          <div class="col-md-4">
-                            <h6>RANGE / AREA:</h6>
-                            <small>{{this.bardCantripsDescription.range[0]}}</small>
-                          </div>
-
-                        </div>
-                        <br>
-                        <div class="row">
-                          <div class="col-md-4">
-                            <h6>COMPONENTS:</h6>
-                            <small>{{this.bardCantripsDescription.components[0]}}</small>
-                          </div>
-
-                          <div class="col-md-4">
-                            <h6>DURATION:</h6>
-                            <small>{{this.bardCantripsDescription.duration[0]}}</small>
-                          </div>
-
-                          <div class="col-md-4">
-                            <h6>School:</h6>
-                            <small>{{this.bardCantripsDescription.school[0]}}</small>
-                          </div>
-                        </div>
-
-                        <hr>
-
-                        <small>{{this.bardCantripsDescription.text[0]}}</small>
-
-
-
-
-
-                      </ng-template>
-
                     </div>
 
 
@@ -127,7 +108,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Bard.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -136,7 +120,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Bard.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -145,7 +132,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Bard.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -154,7 +144,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Bard.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fourth}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -163,7 +156,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Bard.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -172,7 +168,10 @@
                     <h6>6th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let sixth of this.spellList.Bard.Sixth">
-                        <li>{{sixth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{sixth}}"
+                          (mouseenter)="mouseEnter(sixth)" popoverClass="spellPopup">
+                          {{sixth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -181,7 +180,10 @@
                     <h6>7th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let seventh of this.spellList.Bard.Seventh">
-                        <li>{{seventh}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{seventh}}"
+                          (mouseenter)="mouseEnter(seventh)" popoverClass="spellPopup">
+                          {{seventh}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -190,7 +192,10 @@
                     <h6>8th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let eighted of this.spellList.Bard.Eighted">
-                        <li>{{eighted}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{eighted}}"
+                          (mouseenter)="mouseEnter(eighted)" popoverClass="spellPopup">
+                          {{eighted}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -199,10 +204,12 @@
                     <h6>9th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let ninth of this.spellList.Bard.Ninth">
-                        <li>{{ninth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{ninth}}"
+                          (mouseenter)="mouseEnter(ninth)" popoverClass="spellPopup">
+                          {{ninth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -225,7 +232,10 @@
                     <h6>Cantrips</h6>
                     <div class="row">
                       <ng-container *ngFor="let cantrip of this.spellList.Cleric.Cantrips">
-                        <li>{{cantrip}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrip}}"
+                          (mouseenter)="mouseEnter(cantrip)" popoverClass="spellPopup">
+                          {{cantrip}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -235,7 +245,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Cleric.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -244,7 +257,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Cleric.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -253,7 +269,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Cleric.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -262,7 +281,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Cleric.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fourth}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -271,7 +293,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Cleric.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -280,7 +305,10 @@
                     <h6>6th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let sixth of this.spellList.Cleric.Sixth">
-                        <li>{{sixth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{sixth}}"
+                          (mouseenter)="mouseEnter(sixth)" popoverClass="spellPopup">
+                          {{sixth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -289,7 +317,10 @@
                     <h6>7th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let seventh of this.spellList.Cleric.Seventh">
-                        <li>{{seventh}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{seventh}}"
+                          (mouseenter)="mouseEnter(seventh)" popoverClass="spellPopup">
+                          {{seventh}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -298,7 +329,10 @@
                     <h6>8th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let eighted of this.spellList.Cleric.Eighted">
-                        <li>{{eighted}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{eighted}}"
+                          (mouseenter)="mouseEnter(eighted)" popoverClass="spellPopup">
+                          {{eighted}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -307,7 +341,10 @@
                     <h6>9th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let ninth of this.spellList.Cleric.Ninth">
-                        <li>{{ninth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{ninth}}"
+                          (mouseenter)="mouseEnter(ninth)" popoverClass="spellPopup">
+                          {{ninth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -333,7 +370,10 @@
                     <h6>Cantrips</h6>
                     <div class="row">
                       <ng-container *ngFor="let cantrip of this.spellList.Druid.Cantrips">
-                        <li>{{cantrip}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrip}}"
+                          (mouseenter)="mouseEnter(cantrip)" popoverClass="spellPopup">
+                          {{cantrip}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -343,7 +383,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Druid.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -352,7 +395,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Druid.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -361,7 +407,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Druid.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -370,7 +419,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Druid.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fourth}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -379,7 +431,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Druid.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -388,7 +443,10 @@
                     <h6>6th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let sixth of this.spellList.Druid.Sixth">
-                        <li>{{sixth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{sixth}}"
+                          (mouseenter)="mouseEnter(sixth)" popoverClass="spellPopup">
+                          {{sixth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -397,7 +455,10 @@
                     <h6>7th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let seventh of this.spellList.Druid.Seventh">
-                        <li>{{seventh}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{seventh}}"
+                          (mouseenter)="mouseEnter(seventh)" popoverClass="spellPopup">
+                          {{seventh}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -406,7 +467,10 @@
                     <h6>8th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let eighted of this.spellList.Druid.Eighted">
-                        <li>{{eighted}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{eighted}}"
+                          (mouseenter)="mouseEnter(eighted)" popoverClass="spellPopup">
+                          {{eighted}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -415,7 +479,10 @@
                     <h6>9th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let ninth of this.spellList.Druid.Ninth">
-                        <li>{{ninth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{ninth}}"
+                          (mouseenter)="mouseEnter(ninth)" popoverClass="spellPopup">
+                          {{ninth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -442,7 +509,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Paladin.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -451,7 +521,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Paladin.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -460,7 +533,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Paladin.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -469,7 +545,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Paladin.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrfourthip}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -478,7 +557,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Paladin.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -506,7 +588,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Ranger.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -515,7 +600,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Ranger.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -524,7 +612,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Ranger.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -533,7 +624,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Ranger.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fourth}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -542,7 +636,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Ranger.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -569,7 +666,10 @@
                     <h6>Cantrips</h6>
                     <div class="row">
                       <ng-container *ngFor="let cantrip of this.spellList.Sorcerer.Cantrips">
-                        <li>{{cantrip}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrip}}"
+                          (mouseenter)="mouseEnter(cantrip)" popoverClass="spellPopup">
+                          {{cantrip}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -579,7 +679,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Sorcerer.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -588,7 +691,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Sorcerer.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -597,7 +703,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Sorcerer.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -606,7 +715,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Sorcerer.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fourth}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -615,7 +727,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Sorcerer.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -624,7 +739,10 @@
                     <h6>6th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let sixth of this.spellList.Sorcerer.Sixth">
-                        <li>{{sixth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{sixth}}"
+                          (mouseenter)="mouseEnter(sixth)" popoverClass="spellPopup">
+                          {{sixth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -633,7 +751,10 @@
                     <h6>7th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let seventh of this.spellList.Sorcerer.Seventh">
-                        <li>{{seventh}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{seventh}}"
+                          (mouseenter)="mouseEnter(seventh)" popoverClass="spellPopup">
+                          {{seventh}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -642,7 +763,10 @@
                     <h6>8th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let eighted of this.spellList.Sorcerer.Eighted">
-                        <li>{{eighted}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{eighted}}"
+                          (mouseenter)="mouseEnter(eighted)" popoverClass="spellPopup">
+                          {{eighted}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -651,7 +775,10 @@
                     <h6>9th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let ninth of this.spellList.Sorcerer.Ninth">
-                        <li>{{ninth}}&nbsp;&nbsp;&nbsp;</li>
+                        <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{ninth}}"
+                          (mouseenter)="mouseEnter(ninth)" popoverClass="spellPopup">
+                          {{ninth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -677,7 +804,10 @@
                     <h6>Cantrips</h6>
                     <div class="row">
                       <ng-container *ngFor="let cantrip of this.spellList.Warlock.Cantrips">
-                        <li>{{cantrip}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrip}}"
+                          (mouseenter)="mouseEnter(cantrip)" popoverClass="spellPopup">
+                          {{cantrip}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -687,7 +817,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Warlock.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -696,7 +829,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Warlock.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -705,7 +841,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Warlock.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -714,7 +853,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Warlock.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fourth}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -723,7 +865,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Warlock.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -732,7 +877,10 @@
                     <h6>6th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let sixth of this.spellList.Warlock.Sixth">
-                        <li>{{sixth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{sixth}}"
+                          (mouseenter)="mouseEnter(sixth)" popoverClass="spellPopup">
+                          {{sixth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -741,7 +889,10 @@
                     <h6>7th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let seventh of this.spellList.Warlock.Seventh">
-                        <li>{{seventh}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{seventh}}"
+                          (mouseenter)="mouseEnter(seventh)" popoverClass="spellPopup">
+                          {{seventh}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -750,7 +901,10 @@
                     <h6>8th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let eighted of this.spellList.Warlock.Eighted">
-                        <li>{{eighted}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{eighted}}"
+                          (mouseenter)="mouseEnter(eighted)" popoverClass="spellPopup">
+                          {{eighted}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -759,7 +913,10 @@
                     <h6>9th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let ninth of this.spellList.Warlock.Ninth">
-                        <li>{{ninth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{ninth}}"
+                          (mouseenter)="mouseEnter(ninth)" popoverClass="spellPopup">
+                          {{ninth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -785,7 +942,10 @@
                     <h6>Cantrips</h6>
                     <div class="row">
                       <ng-container *ngFor="let cantrip of this.spellList.Wizard.Cantrips">
-                        <li>{{cantrip}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrip}}"
+                          (mouseenter)="mouseEnter(cantrip)" popoverClass="spellPopup">
+                          {{cantrip}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -795,7 +955,10 @@
                     <h6>1st Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let first of this.spellList.Wizard.First">
-                        <li>{{first}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{first}}"
+                          (mouseenter)="mouseEnter(first)" popoverClass="spellPopup">
+                          {{first}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -804,7 +967,10 @@
                     <h6>2nd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let second of this.spellList.Wizard.Second">
-                        <li>{{second}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{second}}"
+                          (mouseenter)="mouseEnter(second)" popoverClass="spellPopup">
+                          {{second}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -813,7 +979,10 @@
                     <h6>3rd Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let third of this.spellList.Wizard.Third">
-                        <li>{{third}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{third}}"
+                          (mouseenter)="mouseEnter(third)" popoverClass="spellPopup">
+                          {{third}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -822,7 +991,10 @@
                     <h6>4th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fourth of this.spellList.Wizard.Fourth">
-                        <li>{{fourth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fourth}}"
+                          (mouseenter)="mouseEnter(fourth)" popoverClass="spellPopup">
+                          {{fourth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -831,7 +1003,10 @@
                     <h6>5th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let fifth of this.spellList.Wizard.Fifth">
-                        <li>{{fifth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{fifth}}"
+                          (mouseenter)="mouseEnter(fifth)" popoverClass="spellPopup">
+                          {{fifth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -840,7 +1015,10 @@
                     <h6>6th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let sixth of this.spellList.Wizard.Sixth">
-                        <li>{{sixth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{sixth}}"
+                          (mouseenter)="mouseEnter(sixth)" popoverClass="spellPopup">
+                          {{sixth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -849,7 +1027,10 @@
                     <h6>7th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let seventh of this.spellList.Wizard.Seventh">
-                        <li>{{seventh}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{seventh}}"
+                          (mouseenter)="mouseEnter(seventh)" popoverClass="spellPopup">
+                          {{seventh}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -858,7 +1039,10 @@
                     <h6>8th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let eighted of this.spellList.Wizard.Eighted">
-                        <li>{{eighted}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{eighted}}"
+                          (mouseenter)="mouseEnter(eighted)" popoverClass="spellPopup">
+                          {{eighted}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
@@ -867,7 +1051,10 @@
                     <h6>9th Levels Spells</h6>
                     <div class="row">
                       <ng-container *ngFor="let ninth of this.spellList.Wizard.Ninth">
-                        <li>{{ninth}}&nbsp;&nbsp;&nbsp;</li>
+                          <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{ninth}}"
+                          (mouseenter)="mouseEnter(ninth)" popoverClass="spellPopup">
+                          {{ninth}}&nbsp;&nbsp;&nbsp;
+                        </li>
                       </ng-container>
                     </div>
 
