@@ -19,6 +19,15 @@ export class SpellcastingComponent implements OnInit {
 
   bardCantrips: Observable<any>;
   bardCantripsDescription;
+  bard1st: Observable<any>;
+  bard2nd: Observable<any>;
+  bard3rd: Observable<any>;
+  bard4th: Observable<any>;
+  bard5th: Observable<any>;
+  bard6th: Observable<any>;
+  bard7th: Observable<any>;
+  bard8th: Observable<any>;
+  bard9th: Observable<any>;
 
 
   constructor(public dialog: MatDialog) { }
