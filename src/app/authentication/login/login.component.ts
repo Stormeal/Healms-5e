@@ -137,7 +137,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         // Do after login stuff here, such router redirects, toast messages, etc.
         console.log('Redirect Begun');
 
-        return this.router.navigate(['/home']);
+        return this.router.navigate(['/home/dashboard']);
     }
 
     // Updates validation state on form changes.
