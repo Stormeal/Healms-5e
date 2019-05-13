@@ -4,6 +4,8 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { AuthService } from '../core/auth.service';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 declare const $: any;
 
@@ -163,8 +165,10 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
     faCoffee = faCoffee;
     user;
+    campaign: any;
+    campaignId: any;
 
-    constructor(private auth: AuthService) {
+    constructor(private auth: AuthService, private afs: AngularFirestore) {
         library.add(faCoffee);
     }
 
@@ -196,7 +200,18 @@ export class SidebarComponent implements OnInit {
     load() {
         this.auth.getUser().subscribe(user => {
             this.user = user;
+            this.campaignId = this.user.campaigns.campaignId;
+            // console.log('CampaignId', this.campaignId);
+
+            this.afs.doc(`campaigns/${this.campaignId}`).valueChanges().subscribe(campaign => {
+                this.campaign = campaign;
+                const campId = this.campaign.uid;
+
+                console.log('Campaign: ', campId, this.campaign);
+            });
+
         });
+
     }
 
     logout() {

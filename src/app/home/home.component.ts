@@ -45,8 +45,7 @@ export class HomeComponent implements OnInit {
     this.tasks();
 
     this.detailForm = this.fb.group({
-      _displayName: ['Test', [Validators.required]],
-      dm: ['']
+      displayName: ['', [Validators.required]],
     });
   }
 
@@ -57,25 +56,17 @@ export class HomeComponent implements OnInit {
   }
 
   /// Getters 
-  get displayName() { return this.detailForm.get('_displayName'); }
+  get displayName() { return this.detailForm.get('displayName'); }
   get dm() { return this.detailForm.get('dm'); }
 
   /// Handler
   setDetails(user) {
     console.log('User: ', user.uid);
     console.log('Value: ', this.displayName.value);
-    if (this.dm.value === true) {
-      this.afs.collection('users').doc(this.user.uid).update(
-        {
-          displayName: this.displayName.value,
-          roles: {
-            player: false,
-            dungeonMaster: true
-          },
-          photoUrl: 'https://bit.ly/2GIBKO8'
-        }
-      )
-    } else { this.auth.updateUser(user, { displayName: this.displayName.value }); }
+
+    this.auth.updateUser(user, {
+      displayName: this.displayName.value
+    });
   }
 
   tasks() {
