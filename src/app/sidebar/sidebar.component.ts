@@ -149,9 +149,6 @@ export const ROUTES: RouteInfo[] = [{
     collapse: 'pages',
     children: [
         { path: 'pricing', title: 'Pricing', ab: 'P' },
-        { path: 'timeline', title: 'Timeline Page', ab: 'TP' },
-        { path: 'login', title: 'Login Page', ab: 'LP' },
-        { path: 'register', title: 'Register Page', ab: 'RP' },
         { path: 'lock', title: 'Lock Screen Page', ab: 'LSP' },
         { path: 'user', title: 'User Page', ab: 'UP' }
     ]
