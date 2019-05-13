@@ -59,6 +59,83 @@ export let settings = {
     cancelButtonContent: '<i class="fas fa-thumbs-down ml-auto"></i>'
   }
 };
+
+export let enemies = [
+  {
+    id: 9,
+    init: 12,
+    name: 'Bandit',
+    AC: 13,
+    conditions: '-',
+    kills: '-'
+  },
+  {
+    id: 1,
+    init: 21,
+    name: 'Idun Nordulf',
+    AC: 15,
+    conditions: '-',
+    kills: 17
+  },
+  {
+    id: 2,
+    init: 15,
+    name: 'Saga',
+    AC: 14,
+    conditions: '-',
+    kills: 6
+  },
+  {
+    id: 3,
+    init: 13,
+    name: 'Eldrun',
+    AC: 15,
+    conditions: '-',
+    kills: 9
+  },
+  {
+    id: 4,
+    init: 4,
+    name: 'Akatosh',
+    AC: 20,
+    conditions: '-',
+    kills: 8
+  },
+  {
+    id: 5,
+    init: 10,
+    name: 'Knud',
+    AC: 16,
+    conditions: '-',
+    kills: 4
+  },
+  {
+    id: 6,
+    init: 11,
+    name: 'Tiffany',
+    AC: 17,
+    conditions: '-',
+    kills: 14
+  },
+  {
+    id: 7,
+    init: 3,
+    name: 'Tyrun',
+    AC: 15,
+    conditions: '-',
+    kills: 3
+  },
+  {
+    id: 8,
+    init: 5,
+    name: 'Harl Toldasson',
+    AC: 17,
+    conditions: '-',
+    kills: 2
+  },
+]
+
+
 export let data = [
   {
     id: 1,

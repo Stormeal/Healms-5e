@@ -13,6 +13,10 @@ import * as tableData from './smart-data-table';
 
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 
+declare interface Task {
+  title: string;
+  checked: boolean;
+}
 
 @Component({
   selector: 'app-home',
@@ -23,15 +27,22 @@ export class HomeComponent implements OnInit {
   user;
   detailForm: FormGroup;
   source: LocalDataSource;
+  fullSource: LocalDataSource;
 
-  constructor(private auth: AuthService, private fb: FormBuilder, private afs: AngularFirestore) { 
+  public tasks1: Task[];
+  public tasks2: Task[];
+  public tasks3: Task[];
+
+  constructor(private auth: AuthService, private fb: FormBuilder, private afs: AngularFirestore) {
     this.source = new LocalDataSource(tableData.data); // create the source
+    this.fullSource = new LocalDataSource(tableData.enemies);
   }
   settings = tableData.settings;
 
 
   ngOnInit() {
     this.loader();
+    this.tasks();
 
     this.detailForm = this.fb.group({
       _displayName: ['Test', [Validators.required]],
@@ -65,5 +76,35 @@ export class HomeComponent implements OnInit {
         }
       )
     } else { this.auth.updateUser(user, { displayName: this.displayName.value }); }
+  }
+
+  tasks() {
+    this.tasks1 = [
+      { title: 'Sign contract for \'What are conference organizers afraid of?\'', checked: false },
+      { title: 'Lines From Great Russian Literature? Or E-mails From My Boss?', checked: true },
+      {
+        title: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
+        checked: true
+      },
+      { title: 'Create 4 Invisible User Experiences you Never Knew About', checked: false }
+    ];
+    this.tasks2 = [
+      {
+        title: `Flooded: One year later, assessing what was lost and
+            what was found when a ravaging rain swept through metro Detroit`,
+        checked: true
+      },
+
+      { title: 'Sign contract for \'What are conference organizers afraid of?\'', checked: false },
+    ];
+    this.tasks3 = [
+
+      { title: 'Lines From Great Russian Literature? Or E-mails From My Boss?', checked: false },
+      {
+        title: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
+        checked: true
+      },
+      { title: 'Sign contract for \'What are conference organizers afraid of?\'', checked: false }
+    ];
   }
 }
