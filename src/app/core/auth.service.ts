@@ -10,6 +10,7 @@ import { NotifyService } from './notify.service';
 
 import * as firebase from 'firebase/app';
 import { ToastrService } from 'ngx-toastr';
+import * as faker from 'faker';
 
 
 @Injectable({ providedIn: 'root' })
@@ -19,6 +20,8 @@ export class AuthService {
     user$: Observable<User>;
     userId: string = null;
     user: Observable<any>;
+    campaign: Observable<any>;
+    campaignId: string = null;
 
     constructor(
         private afAuth: AngularFireAuth,
@@ -57,13 +60,13 @@ export class AuthService {
 
     emailLogin2(email, pass) {
         return this.afAuth.auth.signInWithEmailAndPassword(email, pass)
-          .then((credential) => {
-            this.setUserDoc(credential.user);
-            console.log(credential.user);
-            this.userId = credential.user.uid;
-            this.router.navigate(['/jobs']);
-          });
-      }
+            .then((credential) => {
+                this.setUserDoc(credential.user);
+                console.log(credential.user);
+                this.userId = credential.user.uid;
+                this.router.navigate(['/jobs']);
+            });
+    }
 
     emailSignUp(email: string, password: string) {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -106,6 +109,7 @@ export class AuthService {
     private updateUserData(user) {
         // Sets user data to firestore on login
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+        // const campaignRef: AngularFirestoreDocument<any> = this.afs.doc(`campaigns/${user.campaigns.uid}`);
 
         const data: User = {
             uid: user.uid,
@@ -116,8 +120,17 @@ export class AuthService {
                 dungeonMaster: false,
                 player: true
             },
+            campaigns: {
+                campaignId: faker.random.alphaNumeric(16)
+            }
         };
+
+        // const campaign = {
+        //     owner: user.uid,
+        //     uid: user.campaigns.uid
+        // }
         return userRef.set(data, { merge: true });
+        // return campaignRef.set(campaign, { merge: true })
     }
 
     // Update properties on the user document
@@ -179,8 +192,22 @@ export class AuthService {
     getUser() {
         this.user = this.afs.doc(`users/${this.userId}`)
             .valueChanges().pipe(shareReplay(1));
+
+
+
+
         console.log('User: ', this.userId, this.user);
+
         return this.user;
+    }
+
+    currentCampaign() {
+        this.campaign = this.afs.collection('campaigns', ref => ref.where('owner', '==', this.userId)).doc(`${this.campaignId}`)
+        .valueChanges().pipe(shareReplay(1));
+
+        console.log('Campaigns: ', this.campaignId, this.campaign);
+
+        return this.campaign;
     }
 
     // Error Handling

@@ -52,6 +52,7 @@
     "datatables": "1.10.18",
     "datatables.net-bs": "1.10.19",
     "datatables.net-responsive": "2.1.1",
+    "faker": "^4.1.0",
     "firebase": "^5.10.0",
     "fullcalendar": "3.4.0",
     "googleapis": "19.0.0",
