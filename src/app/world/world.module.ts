@@ -18,7 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule.forChild(WorldRoutes),
     FormsModule,
     MaterialModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent, SpellcastingComponent],
   entryComponents: [SheetDialogComponent]
