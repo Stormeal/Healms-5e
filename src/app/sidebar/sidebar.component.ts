@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { AuthService } from '../core/auth.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { UserModel } from '../core/user';
 
 declare const $: any;
 
@@ -164,9 +165,10 @@ export const ROUTES: RouteInfo[] = [{
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
     faCoffee = faCoffee;
-    user;
+    user: UserModel;
     campaign: any;
     campaignId: any;
+    photoURL: string;
 
     constructor(private auth: AuthService, private afs: AngularFirestore) {
         library.add(faCoffee);
@@ -200,15 +202,16 @@ export class SidebarComponent implements OnInit {
     load() {
         this.auth.getUser().subscribe(user => {
             this.user = user;
-            this.campaignId = this.user.campaigns.campaignId;
-            // console.log('CampaignId', this.campaignId);
+            this.photoURL = this.user.photoURL;
+            // this.campaignId = this.user.campaigns.campaignId;
+            // // console.log('CampaignId', this.campaignId);
 
-            this.afs.doc(`campaigns/${this.campaignId}`).valueChanges().subscribe(campaign => {
-                this.campaign = campaign;
-                const campId = this.campaign.uid;
+            // this.afs.doc(`campaigns/${this.campaignId}`).valueChanges().subscribe(campaign => {
+            //     this.campaign = campaign;
+            //     const campId = this.campaign.uid;
 
-                console.log('Campaign: ', campId, this.campaign);
-            });
+            //     console.log('Campaign: ', campId, this.campaign);
+            // });
 
         });
 
