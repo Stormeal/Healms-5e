@@ -8,7 +8,7 @@ export interface Campaign {
     campaignId?: any;
 }
 
-export interface User {
+export interface UserModel {
     uid: string;
     email: string;
     roles?: Roles;

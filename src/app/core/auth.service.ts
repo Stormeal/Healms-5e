@@ -5,7 +5,7 @@ import { switchMap, startWith, tap, filter, shareReplay } from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { User } from './user';
+import { UserModel } from './user';
 import { NotifyService } from './notify.service';
 
 import * as firebase from 'firebase/app';
@@ -17,11 +17,11 @@ import * as faker from 'faker';
 
 
 export class AuthService {
-    user$: Observable<User>;
+    user$: Observable<UserModel>;
     userId: string = null;
-    user: Observable<any>;
-    campaign: Observable<any>;
-    campaignId: string = null;
+    user;
+    campaign;
+    campaignId: any;
 
     constructor(
         private afAuth: AngularFireAuth,
@@ -35,7 +35,7 @@ export class AuthService {
             switchMap(user => {
                 if (user) {
                     this.userId = user.uid;
-                    return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+                    return this.afs.doc<UserModel>(`users/${user.uid}`).valueChanges()
                         .pipe(shareReplay(1));
                 } else {
                     return Observable.of(null);
@@ -111,7 +111,7 @@ export class AuthService {
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
         // const campaignRef: AngularFirestoreDocument<any> = this.afs.doc(`campaigns/${user.campaigns.uid}`);
 
-        const data: User = {
+        const data: UserModel = {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName || null,
@@ -134,15 +134,15 @@ export class AuthService {
     }
 
     // Update properties on the user document
-    updateUser(user: User, data: any) {
+    updateUser(user: UserModel, data: any) {
         return this.afs.doc(`users/${user.uid}`).update(data);
     }
 
     private setUserDoc(user) {
 
-        const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+        const userRef: AngularFirestoreDocument<UserModel> = this.afs.doc(`users/${user.uid}`);
 
-        const data: User = {
+        const data: UserModel = {
             uid: user.uid,
             email: user.email || null,
             photoURL: 'https://bit.ly/2GJ7wdV',
@@ -157,17 +157,17 @@ export class AuthService {
 
     ///// Role-based Authorization //////
 
-    canRead(user: User): boolean {
+    canRead(user: UserModel): boolean {
         const allowed = ['admin', 'editor', 'subscriber'];
         return this.checkAuthorization(user, allowed);
     }
 
-    canEdit(user: User): boolean {
+    canEdit(user: UserModel): boolean {
         const allowed = ['admin', 'editor'];
         return this.checkAuthorization(user, allowed);
     }
 
-    canDelete(user: User): boolean {
+    canDelete(user: UserModel): boolean {
         const allowed = ['admin'];
         return this.checkAuthorization(user, allowed);
     }
@@ -175,7 +175,7 @@ export class AuthService {
 
 
     // determines if user has matching role
-    private checkAuthorization(user: User, allowedRoles: string[]): boolean {
+    private checkAuthorization(user: UserModel, allowedRoles: string[]): boolean {
         if (!user) {
             for (const role of allowedRoles) {
                 if (user.roles[role]) {
@@ -193,17 +193,36 @@ export class AuthService {
         this.user = this.afs.doc(`users/${this.userId}`)
             .valueChanges().pipe(shareReplay(1));
 
-
-
-
         console.log('User: ', this.userId, this.user);
 
         return this.user;
     }
 
+    getUserCampaign() {
+        this.afs.doc(`users/${this.userId}`)
+            .valueChanges()
+            .pipe(shareReplay(1))
+            .subscribe(user => {
+                this.user = user;
+                this.campaignId = this.user.campaigns.campaignId;
+
+                this.campaign = this.afs.doc(`campaigns/${this.campaignId}`)
+                    .valueChanges()
+                    .pipe(shareReplay(1))
+                    .subscribe(campaign => {
+                        this.campaign = campaign;
+                        const campId = this.campaign.uid;
+                        console.log('Campaign: ', campId, this.campaign);
+
+                        return this.campaign;
+
+                    });
+            });
+    }
+
     currentCampaign() {
         this.campaign = this.afs.collection('campaigns', ref => ref.where('owner', '==', this.userId)).doc(`${this.campaignId}`)
-        .valueChanges().pipe(shareReplay(1));
+            .valueChanges().pipe(shareReplay(1));
 
         console.log('Campaigns: ', this.campaignId, this.campaign);
 
