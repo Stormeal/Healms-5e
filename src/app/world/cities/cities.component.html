@@ -37,8 +37,17 @@
                   <h4 class="card-title">
                     <a href="#pablo">{{c.cityName}}</a>
                   </h4>
-                  <div class="card-description">
-                    <small>{{c.cityDesc}}</small>
+
+
+
+                  <div class="card-description" style="height: 65px;">
+                    <ng-container *ngIf="c.cityDesc.length > 100 else fine">
+                      <small>{{c.cityDesc | slice: 0 : 100}}...</small>
+                    </ng-container>
+
+                    <ng-template #fine>
+                      <small>{{c.cityDesc}}</small>
+                    </ng-template>
                   </div>
                 </div>
                 <div class="card-footer">
