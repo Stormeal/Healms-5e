@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {
   AngularFirestore,
@@ -15,18 +15,35 @@ import { CustomValidators } from 'ng2-validation';
 import { AuthService } from 'src/app/core/auth.service';
 import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
 import * as faker from 'faker';
+import { Upload } from 'src/app/core/upload';
+import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cities',
   templateUrl: './cities.component.html'
 })
 export class CitiesComponent implements OnInit {
+  @Input() file: File;
+
+  task: AngularFireUploadTask;
+  percentage: Observable<number>;
+  snapshot: Observable<any>;
+  downloadURL: string;
   cityForm: FormGroup;
+  cities: any;
   user;
   campaign: any;
   campaignId: any;
+  selectedFiles: FileList;
+  currentUpload: Upload;
 
-  constructor(private afs: AngularFirestore, private fb: FormBuilder, private auth: AuthService) { }
+  constructor(
+    private afs: AngularFirestore,
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private storage: AngularFireStorage) { }
 
   ngOnInit() {
     this.cityForm = this.fb.group({
@@ -40,6 +57,11 @@ export class CitiesComponent implements OnInit {
 
   }
 
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
+
+  }
+
   // Getters<3
   get name() { return this.cityForm.get('name'); }
   get country() { return this.cityForm.get('country'); }
@@ -49,13 +71,6 @@ export class CitiesComponent implements OnInit {
 
   // Controller
   newCity() {
-    console.log(
-      'Name: ',
-      this.cityForm.value['name'],
-      'Country; ',
-      this.cityForm.value['country']
-    );
-
     /* Campaign Getter */
     this.auth.getUser().subscribe(user => {
       this.user = user;
@@ -74,13 +89,48 @@ export class CitiesComponent implements OnInit {
           country: this.cityForm.value['country'],
           cityPop: this.cityForm.value['population'],
           cityLeader: this.cityForm.value['lord'],
-          cityDesc: this.cityForm.value['description']
-        }
+          cityDesc: this.cityForm.value['description'],
+          photoURL: null
+        };
 
-        return this.afs.collection(`campaigns/${campId}/cities`).doc(cityId.uid).set(city);
+        if (this.selectedFiles) {
+          const file = this.selectedFiles.item(0)
+          this.currentUpload = new Upload(file);
+
+          // The storage path
+          const path = `campaigns/${campId}/${Date.now()}_${file.name}`;
+
+          // Reference to storage bucket
+          const ref = this.storage.ref(path);
+
+          // The main task
+          this.task = this.storage.upload(path, file);
+          console.log('You got this far!');
+
+          this.task.snapshotChanges().pipe(
+            finalize(() => {
+              ref.getDownloadURL().subscribe(url => {
+                console.log('URL: ', url); // <-- do what ever you want with the url..
+                const cityPhoto = {
+                  uid: cityId.uid,
+                  cityName: this.cityForm.value['name'],
+                  country: this.cityForm.value['country'],
+                  cityPop: this.cityForm.value['population'],
+                  cityLeader: this.cityForm.value['lord'],
+                  cityDesc: this.cityForm.value['description'],
+                  photoURL: url
+                };
+                this.afs.collection(`campaigns/${campId}/cities`).doc(cityId.uid).set(cityPhoto);
+                return this.cityForm.reset();
+
+              });
+            })
+          ).subscribe();
+        } else {
+          return this.afs.collection(`campaigns/${campId}/cities`).doc(cityId.uid).set(city);
+        }
       });
     });
-
   }
 
   load() {
@@ -96,6 +146,13 @@ export class CitiesComponent implements OnInit {
         const campId = this.campaign.uid;
 
         console.log('Campaign: ', campId, this.campaign);
+        this.afs.collection(`campaigns/${this.campaignId}/cities`)
+          .valueChanges()
+          .subscribe(cities => {
+            this.cities = cities;
+            console.log('Cities: ', this.cities);
+
+          })
       });
 
     });
