@@ -5,7 +5,58 @@
       <div class="col-md-8">
         <div class="row">
 
-          <div class="col-md-4">
+          <ng-container *ngFor="let c of cities">
+            <div class="col-md-4">
+              <div class="card card-product">
+                <div class="card-header card-header-image" data-header-animation="true">
+                  <a href="#pablo">
+                    <img class="img" [src]="c.photoURL">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <div class="card-actions text-center">
+                    <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                      <i class="material-icons">build</i> Image Loading!
+                    </button>
+                    <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="View"
+                      [matTooltipPosition]="'below'">
+                      <i class="material-icons">art_track</i>
+                    </button>
+                    <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit"
+                      [matTooltipPosition]="'below'">
+                      <i class="material-icons">edit</i>
+                    </button>
+                    <button mat-raised-button type="button" class="btn btn-warning btn-link" matTooltip="Go Live"
+                      [matTooltipPosition]="'below'">
+                      <i class="fab fa-d-and-d"></i>
+                    </button>
+                    <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove"
+                      [matTooltipPosition]="'below'">
+                      <i class="material-icons">close</i>
+                    </button>
+                  </div>
+                  <h4 class="card-title">
+                    <a href="#pablo">{{c.cityName}}</a>
+                  </h4>
+                  <div class="card-description">
+                    <small>{{c.cityDesc}}</small>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="stats mr-auto">
+                    <p class="card-category"><i class="fas fa-crown">&nbsp;</i>{{c.cityLeader}}</p>
+                  </div>
+
+                  <div class="stats ml-auto">
+                    <p class="card-category"><i class="material-icons">place</i>{{c.country}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+
+          <!-- <div class="col-md-4">
             <div class="card card-product">
               <div class="card-header card-header-image" data-header-animation="true">
                 <a href="#pablo">
@@ -24,6 +75,10 @@
                   <button mat-raised-button type="button" class="btn btn-success btn-link" matTooltip="Edit"
                     [matTooltipPosition]="'below'">
                     <i class="material-icons">edit</i>
+                  </button>
+                  <button mat-raised-button type="button" class="btn btn-warning btn-link" matTooltip="Go Live"
+                    [matTooltipPosition]="'below'">
+                    <i class="fab fa-d-and-d"></i>
                   </button>
                   <button mat-raised-button type="button" class="btn btn-danger btn-link" matTooltip="Remove"
                     [matTooltipPosition]="'below'">
@@ -184,7 +239,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -257,7 +312,7 @@
                       <span class="btn btn-round btn-success btn-file">
                         <span class="fileinput-new">Add Photo</span>
                         <span class="fileinput-exists">Change</span>
-                        <input type="file" name="..." />
+                        <input type="file" name="..." (change)="detectFiles($event)" />
                       </span>
                       <br />
                       <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i
