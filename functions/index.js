@@ -25,6 +25,5 @@ exports.aggregate = functions.region('europe-west1').firestore
 
         // Aggregate New Data
         return aggRef.set(campaign);
-       
-    });
 
+    });
