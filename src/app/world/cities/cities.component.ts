@@ -62,7 +62,8 @@ export class CitiesComponent implements OnInit {
 
   }
 
-  // Getters<3
+  // This is blot a test
+  // Getters<3 
   get name() { return this.cityForm.get('name'); }
   get country() { return this.cityForm.get('country'); }
   get population() { return this.cityForm.get('population'); }

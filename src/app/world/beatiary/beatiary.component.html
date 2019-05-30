@@ -1,7 +1,23 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
 
+    <div class="row">
+      <button mat-raised-button class="btn btn-success btn-round">
+        Create a new monster
+      </button>
+    </div>
+
+    <h4>Personal Monsters</h4>
+    <div class="row">
+      <ng-container>
+      </ng-container>
+      <br>
+    </div>
+
+
+    <h4>SRD Beastiary</h4>
+    <br>
+    <div class="row">
       <ng-container *ngFor="let m of data">
         <div class="col-md-3" (click)="openDialog(m)">
           <div class="card card-profile">
@@ -20,10 +36,7 @@
           </div>
         </div>
       </ng-container>
-
-
-
-
     </div>
+
   </div>
 </div>
