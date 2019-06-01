@@ -33,12 +33,18 @@ export class BeatiaryComponent implements OnInit {
     dialogRef.componentInstance.dialogConfig = dialogConfig;
   }
 
+  openNewMonsterDialog(dialogConfig: MatDialogConfig): void {
+    const dialogRef = this.dialog.open(NewMonsterDialog, {});
+    dialogRef.componentInstance.dialogConfig = dialogConfig;
+  }
+
 }
 
 @Component({
   selector: 'app-sheet',
   templateUrl: 'sheet-dialog.html',
 })
+
 export class SheetDialogComponent {
   dialogConfig: MatDialogConfig;
   constructor(
@@ -49,4 +55,20 @@ export class SheetDialogComponent {
     this.dialogRef.close();
   }
 
+}
+
+@Component({
+  selector: 'app-new-monster',
+  templateUrl: 'newMonster.html'
+})
+
+export class NewMonsterDialog {
+  dialogConfig: MatDialogConfig;
+  constructor(
+    public dialogRef: MatDialogRef<NewMonsterDialog>,
+    @Inject(MAT_DIALOG_DATA) public monster: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

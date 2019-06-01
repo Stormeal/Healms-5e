@@ -8,7 +8,7 @@ import { WorldRoutes } from './world.routing';
 import { OverviewComponent } from './overview/overview.component';
 import { ReligionsComponent } from './religions/religions.component';
 import { CitiesComponent } from './cities/cities.component';
-import { BeatiaryComponent, SheetDialogComponent } from './beatiary/beatiary.component';
+import { BeatiaryComponent, SheetDialogComponent, NewMonsterDialog } from './beatiary/beatiary.component';
 import { SpellcastingComponent } from './spellcasting/spellcasting.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,8 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     ReactiveFormsModule
   ],
-  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent, SpellcastingComponent],
-  entryComponents: [SheetDialogComponent]
+  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent, NewMonsterDialog, SpellcastingComponent],
+  entryComponents: [SheetDialogComponent, NewMonsterDialog]
 
 })
 export class WorldModule { }
