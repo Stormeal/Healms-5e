@@ -22,7 +22,6 @@ export class BeatiaryComponent implements OnInit {
   onSelect(monster: any) {
     console.log('Selected item: ', monster);
     console.log(monster.name);
-
   }
 
   openDialog(monster: any, dialogConfig: MatDialogConfig): void {
