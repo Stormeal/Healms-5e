@@ -6,7 +6,6 @@ import { switchMap, startWith, tap, filter, shareReplay } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { UserModel } from './user';
-import { NotifyService } from './notify.service';
 
 import * as firebase from 'firebase/app';
 import { ToastrService } from 'ngx-toastr';
@@ -27,7 +26,6 @@ export class AuthService {
         private afAuth: AngularFireAuth,
         private afs: AngularFirestore,
         private router: Router,
-        private notify: NotifyService,
         private toastr: ToastrService) {
 
         //// Get auth data, then get firestore user document || null
@@ -38,7 +36,7 @@ export class AuthService {
                     return this.afs.doc<UserModel>(`users/${user.uid}`).valueChanges()
                         .pipe(shareReplay(1));
                 } else {
-                    return Observable.of(null);
+                    return null;
                 }
             })
         );
@@ -53,7 +51,6 @@ export class AuthService {
             .signInWithEmailAndPassword(email, pass)
             .then((credential) => {
                 console.log('User Object: ', credential.user);
-                this.notify.update('Welcome back!', 'success');
                 this.router.navigate(['/dashboard']);
             });
     }

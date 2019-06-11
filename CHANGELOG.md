@@ -1,3 +1,19 @@
+## [2.3.0] - 2019-06-10
+### Updates
+- update to Angular 8
+- update all dependencies to match Angular 8 version
+- added useHash
+### Bug Fixing
+- fixed the datatables actions buttons(edit/remove/like)
+- changes the scss code to fix the hide sidebar feature
+- fixed the auth layout errors on mobile screens
+- added the css and js files for datatable.net(BS4 version)
+- fixed PerfectScrollbar issue
+- fixed the Wizard issue for resizing the screen
+- fixed getTitle function to match the useHash change
+- fixed issue #307 for header-filter
+- fixed issue #324 (form validation)
+
 ## [2.2.0] - 2018-11-13
 ### Changes
 - update to Angular 7

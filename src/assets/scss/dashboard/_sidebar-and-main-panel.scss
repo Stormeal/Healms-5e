@@ -576,26 +576,28 @@
         }
     }
 }
-.hide-sidebar{
-    .sidebar{
-        @extend .animation-transition-general;
+@media screen and (min-width: 991px){
+  .hide-sidebar{
+      .sidebar{
+          @include transition-all($general-transition-time, $transition-linear);
 
-        @include transform-translate-x(-260px);
+          @include transform-translate-x(-260px);
+      }
+
+      .main-panel{
+          width: 100%;
+      }
+
+      &.sidebar-mini{
+
+          .sidebar{
+            @include transition-all($general-transition-time, $transition-linear);
+
+              @include transform-translate-x(-80px);
+          }
+      }
+  }
+  .animation{
+      @include transition-all($general-transition-time, $transition-linear);
     }
-
-    .main-panel{
-        width: 100%;
-    }
-
-    &.sidebar-mini{
-
-        .sidebar{
-            @extend .animation-transition-general;
-
-            @include transform-translate-x(-80px);
-        }
-    }
-}
-.animation{
-    @extend .animation-transition-general;
 }

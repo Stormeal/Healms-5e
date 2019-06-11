@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
     private _router: Subscription;
 
-    @ViewChild('app-navbar-cmp') button: any;
+    @ViewChild('app-navbar-cmp', {static: false}) button: any;
 
     constructor(location: Location, private renderer: Renderer, private element: ElementRef, private router: Router,) {
         this.location = location;
@@ -188,13 +188,18 @@ export class NavbarComponent implements OnInit {
     }
 
     getTitle() {
-        let titlee: any = this.location.prepareExternalUrl(this.location.path());
+      var titlee = this.location.prepareExternalUrl(this.location.path());
+      if(titlee.charAt(0) === '#'){
+          titlee = titlee.slice( 1 );
+      }
         for (let i = 0; i < this.listTitles.length; i++) {
             if (this.listTitles[i].type === "link" && this.listTitles[i].path === titlee) {
                 return this.listTitles[i].title;
             } else if (this.listTitles[i].type === "sub") {
                 for (let j = 0; j < this.listTitles[i].children.length; j++) {
                     let subtitle = this.listTitles[i].path + '/' + this.listTitles[i].children[j].path;
+                    // console.log(subtitle)
+                    // console.log(titlee)
                     if (subtitle === titlee) {
                         return this.listTitles[i].children[j].title;
                     }
