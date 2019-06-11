@@ -59,6 +59,8 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     };
   }
     ngOnInit() {
+      const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
+
       this.type = this.formBuilder.group({
         // To add a validator, we must first convert the string value into an array. The first item in the array is the default value if any, then the next item in the array is the validator. Here we are adding a required validator meaning that the firstName attribute must have a value in it.
         firstName: [null, Validators.required],
@@ -175,7 +177,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
             onTabShow: function(tab: any, navigation: any, index: any) {
                 let $total = navigation.find('li').length;
                 let $current = index + 1;
-
+                elemMainPanel.scrollTop = 0;
                 const $wizard = navigation.closest('.card-wizard');
 
                 // If it's the last tab then hide the last button and show the finish instead
@@ -303,7 +305,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     ngAfterViewInit() {
 
         $( window ).resize( () => { $('.card-wizard').each(function(){
-
+          setTimeout(() => {
             const $wizard = $(this);
             const index = $wizard.bootstrapWizard('currentIndex');
             let $total = $wizard.find('.nav li').length;
@@ -315,7 +317,6 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
             let vertical_level = 0;
 
             let mobile_device = $(document).width() < 600 && $total > 3;
-
             if(mobile_device){
                 move_distance = $wizard.width() / 2;
                 index_temp = index % 2;
@@ -350,7 +351,10 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
             $('.moving-tab').css({
                 'transition': 'transform 0s'
             });
-            });
+          },500)
+
         });
-    }
+    });
+
+  }
 }

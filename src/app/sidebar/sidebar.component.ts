@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { AuthService } from '../core/auth.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -164,14 +162,12 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
-    faCoffee = faCoffee;
     user: UserModel;
     campaign: any;
     campaignId: any;
     photoURL: string;
 
     constructor(private auth: AuthService, private afs: AngularFirestore) {
-        library.add(faCoffee);
     }
 
     isMobileMenu() {

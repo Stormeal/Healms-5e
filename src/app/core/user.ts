@@ -9,8 +9,8 @@ export interface Campaign {
 }
 
 export interface UserModel {
-    uid: string;
-    email: string;
+    uid?: string;
+    email?: string;
     roles?: Roles;
     campaigns?: Campaign;
     displayName?: string;

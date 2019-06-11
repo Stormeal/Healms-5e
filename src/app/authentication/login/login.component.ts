@@ -108,6 +108,8 @@ export class LoginComponent implements OnInit, OnDestroy {
      * Login Method
      */
     async login() {
+        console.log('Got here');
+
         await this.auth.emailLogin(this.loginForm.value['email'], this.loginForm.value['password']);
         console.log('Login Initialized');
 

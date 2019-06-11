@@ -88,8 +88,12 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
       // Edit record
       table.on('click', '.edit', function(e) {
-        const $tr = $(this).closest('tr');
-        const data = table.row($tr).data();
+        let $tr = $(this).closest('tr');
+        if ($($tr).hasClass('child')) {
+          $tr = $tr.prev('.parent');
+        }
+
+        var data = table.row($tr).data();
         alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
         e.preventDefault();
       });
