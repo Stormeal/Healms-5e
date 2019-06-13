@@ -1,28 +1,27 @@
 <div class="main-content">
   <div class="container-fluid">
-
-    <div class="row">
-
-    </div>
+    <div class="row"></div>
 
     <h4>Personal Monsters</h4>
     <div class="row">
-      <button mat-raised-button class="btn btn-success btn-round" (click)="openNewMonsterDialog()">
+      <a
+        mat-raised-button
+        class="btn btn-success btn-round"
+        [routerLink]="['/world/beastiary/create']"
+      >
         Create a new monster
-      </button>
-      <ng-container>
-      </ng-container>
+      </a>
+      <ng-container> </ng-container>
 
       <ng-template #noMob>
         <p>Currently you haven't created any enemies, try creating one.</p>
       </ng-template>
 
-      <br><br>
+      <br /><br />
     </div>
 
-
     <h4>SRD Beastiary</h4>
-    <br>
+    <br />
     <div class="row">
       <ng-container *ngFor="let m of data">
         <div class="col-md-3" (click)="openDialog(m)">
@@ -33,16 +32,19 @@
               </a>
             </div>
             <div class="card-body">
-              <h6 class="card-category text-gray">{{m.meta}}</h6>
-              <h4 class="card-title">{{m.name}}</h4>
-              <h6 class="card-category text-gray"><i class="fas fa-khanda"> : </i>{{m.Challenge}}</h6>
+              <h6 class="card-category text-gray">{{ m.meta }}</h6>
+              <h4 class="card-title">{{ m.name }}</h4>
+              <h6 class="card-category text-gray">
+                <i class="fas fa-khanda"> : </i>{{ m.Challenge }}
+              </h6>
 
-              <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a>
+              <a mat-raised-button class="btn btn-success btn-round"
+                >Add to Campaign</a
+              >
             </div>
           </div>
         </div>
       </ng-container>
     </div>
-
   </div>
 </div>

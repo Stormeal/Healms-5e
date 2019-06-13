@@ -1,4 +1,13 @@
 import { Component, OnInit } from "@angular/core";
+import {
+  FormGroup,
+  FormArray,
+  FormControl,
+  FormBuilder,
+  Validators
+} from "@angular/forms";
+import { AuthService } from "src/app/core/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-create-monster",
@@ -99,7 +108,30 @@ export class CreateMonsterComponent implements OnInit {
   ];
   public dmgDicesSelect = this.dmgDices[2].viewValue;
 
-  constructor() {}
+  creatureForm: FormGroup;
 
-  ngOnInit() {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.creatureForm = this.fb.group({
+      trait: this.fb.array([this.addOtherTraitFormGroup()])
+    });
+  }
+
+  addOtherTraitFormGroup() {
+    return this.fb.group({
+      traitName: ["", [Validators.required]],
+      traitDescription: ["", [Validators.required]]
+    });
+  }
+
+  traitButtonClick(): void {
+    (<FormArray>this.creatureForm.get("trait")).push(
+      this.addOtherTraitFormGroup()
+    );
+  }
 }
