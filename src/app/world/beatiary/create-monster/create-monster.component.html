@@ -23,12 +23,15 @@
                 <label class="col-sm-2 col-form-label">Select Size</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select placeholder="Single City" name="city">
+                    <mat-select
+                      name="creatireSize"
+                      [(value)]="creatureSizeSelect"
+                    >
                       <mat-option
-                        *ngFor="let city of cities"
-                        [value]="city.value"
+                        *ngFor="let size of creatureSize"
+                        [value]="size.value"
                       >
-                        {{ city.viewValue }}
+                        {{ size.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -36,12 +39,12 @@
                 <label class="col-sm-2 col-form-label">Select Race</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select placeholder="Single City" name="city">
+                    <mat-select name="races" [(value)]="creatureRacesSelect">
                       <mat-option
-                        *ngFor="let city of cities"
-                        [value]="city.value"
+                        *ngFor="let races of creatureRaces"
+                        [value]="races.value"
                       >
-                        {{ city.viewValue }}
+                        {{ races.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -49,12 +52,12 @@
                 <label class="col-sm-2 col-form-label">Select Alignment</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select placeholder="Single City" name="city">
+                    <mat-select name="alignments" [(value)]="alignmentsSelect">
                       <mat-option
-                        *ngFor="let city of cities"
-                        [value]="city.value"
+                        *ngFor="let alignment of alignments"
+                        [value]="alignment.value"
                       >
-                        {{ city.viewValue }}
+                        {{ alignment.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -191,12 +194,12 @@
                     <mat-hint align="start"
                       ><strong>Dice Select</strong>
                     </mat-hint>
-                    <mat-select placeholder="d4" name="city">
+                    <mat-select name="dices" [(value)]="dicesSelect">
                       <mat-option
-                        *ngFor="let city of cities"
-                        [value]="city.value"
+                        *ngFor="let dice of dices"
+                        [value]="dice.value"
                       >
-                        {{ city.viewValue }}
+                        {{ dice.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -296,14 +299,14 @@
                 <div class="col-sm-3">
                   <mat-form-field class="example-full-width">
                     <mat-select
-                      placeholder="Choose Challenge Rating"
-                      name="city"
+                      name="challengeRating"
+                      [(value)]="challengeRatingSelect"
                     >
                       <mat-option
-                        *ngFor="let city of cities"
-                        [value]="city.value"
+                        *ngFor="let cr of challengeRating"
+                        [value]="cr.value"
                       >
-                        {{ city.viewValue }}
+                        {{ cr.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -439,12 +442,12 @@
                     <mat-hint align="start"
                       ><strong>Dice Select</strong>
                     </mat-hint>
-                    <mat-select placeholder="d4" name="city">
+                    <mat-select name="dmgDice" [(value)]="dmgDicesSelect">
                       <mat-option
-                        *ngFor="let city of cities"
-                        [value]="city.value"
+                        *ngFor="let dmg of dmgDices"
+                        [value]="dmg.value"
                       >
-                        {{ city.viewValue }}
+                        {{ dmg.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
