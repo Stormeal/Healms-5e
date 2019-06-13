@@ -1,0 +1,437 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-profile">
+            <div class="card-avatar">
+              <a href="#pablo">
+                <img
+                  class="img"
+                  src="./assets/img/dm-default-avatar.png"
+                  matTooltip="Click here to upload a picture"
+                  [matTooltipPosition]="'above'"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div class="card-body ">
+            <form method="get" action="/" class="form-horizontal">
+              <!-- SIZE / RACE / ALIGNMENT -->
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Select Size</label>
+                <div class="col-lg-2 col-md-2 col-sm-1">
+                  <mat-form-field>
+                    <mat-select placeholder="Single City" name="city">
+                      <mat-option
+                        *ngFor="let city of cities"
+                        [value]="city.value"
+                      >
+                        {{ city.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-2 col-form-label">Select Race</label>
+                <div class="col-lg-2 col-md-2 col-sm-1">
+                  <mat-form-field>
+                    <mat-select placeholder="Single City" name="city">
+                      <mat-option
+                        *ngFor="let city of cities"
+                        [value]="city.value"
+                      >
+                        {{ city.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-2 col-form-label">Select Alignment</label>
+                <div class="col-lg-2 col-md-2 col-sm-1">
+                  <mat-form-field>
+                    <mat-select placeholder="Single City" name="city">
+                      <mat-option
+                        *ngFor="let city of cities"
+                        [value]="city.value"
+                      >
+                        {{ city.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- SIZE / RACE / ALIGNMENT END -->
+
+              <hr />
+
+              <!-- SKILL POINTS -->
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-form-label"></div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
+                  style="text-align: center"
+                >
+                  <h6>STR</h6>
+                  <mat-form-field class="example-full-width">
+                    <span matSuffix>+0 &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
+                  style="text-align: center"
+                >
+                  <h6>DEX</h6>
+                  <mat-form-field class="example-full-width">
+                    <span matSuffix>+0 &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
+                  style="text-align: center"
+                >
+                  <h6>CON</h6>
+                  <mat-form-field class="example-full-width">
+                    <span matSuffix>+0 &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
+                  style="text-align: center"
+                >
+                  <h6>INT</h6>
+                  <mat-form-field class="example-full-width">
+                    <span matSuffix>+0 &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
+                  style="text-align: center"
+                >
+                  <h6>WIS</h6>
+                  <mat-form-field class="example-full-width">
+                    <span matSuffix>+0 &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div
+                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
+                  style="text-align: center"
+                >
+                  <h6>CHA</h6>
+                  <mat-form-field class="example-full-width">
+                    <span matSuffix>+0 &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-form-label"></div>
+              </div>
+              <!-- SKILL POINTS END -->
+
+              <hr />
+
+              <!-- AC / HP / SPEED -->
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Armor Class: </label>
+                <div class="col-sm-2">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>16 (natural armor)</strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">Hit Points: </label>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"><strong>HP Value</strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Dice Select</strong>
+                    </mat-hint>
+                    <mat-select placeholder="d4" name="city">
+                      <mat-option
+                        *ngFor="let city of cities"
+                        [value]="city.value"
+                      >
+                        {{ city.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>HP Modifier</strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">Speed: </label>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <span matSuffix>ft &nbsp;</span>
+                    <mat-hint align="start"><strong>30 ft</strong> </mat-hint>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- AC / HP / SPEED END -->
+
+              <hr />
+
+              <!-- Skills -->
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Saving Throws: </label>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Str +7, Con +4</strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-2 col-form-label">Skills: </label>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Perception +4, Insight +3</strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-sm-2 col-form-label"
+                  >Damage Resistances:
+                </label>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong
+                        >Bludgeoning, Piercing & Slashing
+                      </strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-2 col-form-label"
+                  >Damage Immunities:
+                </label>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong
+                        >Bludgeoning, Piercing & Slashing from non-magical
+                        weapons
+                      </strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Languages: </label>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong
+                        >any one language (usually Common)
+                      </strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-2 col-form-label">Senses: </label>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>
+                        Dark Vision 60ft, passive Perception 14
+                      </strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-sm-2 col-form-label"
+                  >Challenge Rating:
+                </label>
+                <div class="col-sm-3">
+                  <mat-form-field class="example-full-width">
+                    <mat-select
+                      placeholder="Choose Challenge Rating"
+                      name="city"
+                    >
+                      <mat-option
+                        *ngFor="let city of cities"
+                        [value]="city.value"
+                      >
+                        {{ city.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Skills END -->
+
+              <hr />
+
+              <!-- TRAITS -->
+              <div class="row">
+                <div class="col-sm-2">
+                  <button mat-raised-button class="btn btn-success btn-sm">
+                    <i class="material-icons">add</i> New Trait
+                  </button>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                      />
+                      Magical Creature?
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                      />
+                      Legendary Creature?
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-1"></div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Trait: </label>
+                <div class="col-sm-2">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Trait Name</strong>
+                    </mat-hint>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Trait Description</strong>
+                    </mat-hint>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1" style="padding: 2px">
+                  <button mat-raised-button class="btn btn-danger btn-sm">
+                    <i class="material-icons">clear</i> Clear
+                  </button>
+                </div>
+              </div>
+              <!-- TRAITS END -->
+
+              <hr />
+              <h4 style="text-align: center"><b>ACTIONS</b></h4>
+              <hr />
+              <!-- ACTIONS -->
+              <div class="row">
+                <div class="col-sm-1">
+                  <button mat-raised-button class="btn btn-success btn-sm">
+                    <i class="material-icons">add</i> New Action
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-sm-1 col-form-label">Action: </label>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Action Name</strong>
+                    </mat-hint>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Action Description</strong>
+                    </mat-hint>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Hit Modifier</strong>
+                    </mat-hint>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"><strong>Reach</strong> </mat-hint>
+                    <span matSuffix>ft &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Action Damage</strong>
+                    </mat-hint>
+                    <input matInput type="text" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Dice Select</strong>
+                    </mat-hint>
+                    <mat-select placeholder="d4" name="city">
+                      <mat-option
+                        *ngFor="let city of cities"
+                        [value]="city.value"
+                      >
+                        {{ city.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Damage Modifier</strong>
+                    </mat-hint>
+                    <input matInput type="number" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-1" style="padding: 2px">
+                  <button mat-raised-button class="btn btn-danger btn-sm">
+                    <i class="material-icons">clear</i> Clear
+                  </button>
+                </div>
+              </div>
+              <!-- ACTIONS END -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

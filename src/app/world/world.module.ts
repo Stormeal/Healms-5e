@@ -11,6 +11,7 @@ import { CitiesComponent } from './cities/cities.component';
 import { BeatiaryComponent, SheetDialogComponent, NewMonsterDialog } from './beatiary/beatiary.component';
 import { SpellcastingComponent } from './spellcasting/spellcasting.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateMonsterComponent } from './beatiary/create-monster/create-monster.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     ReactiveFormsModule
   ],
-  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent, NewMonsterDialog, SpellcastingComponent],
+  declarations: [OverviewComponent, ReligionsComponent, CitiesComponent, BeatiaryComponent, SheetDialogComponent, NewMonsterDialog, SpellcastingComponent, CreateMonsterComponent],
   entryComponents: [SheetDialogComponent, NewMonsterDialog]
 
 })
