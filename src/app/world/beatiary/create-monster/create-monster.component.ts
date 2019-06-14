@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { AuthService } from "src/app/core/auth.service";
 import { Router } from "@angular/router";
+import { NotificationsComponent } from "../../../components/notifications/notifications.component";
 
 @Component({
   selector: "app-create-monster",
@@ -111,6 +112,7 @@ export class CreateMonsterComponent implements OnInit {
   creatureForm: FormGroup;
   traitList: FormArray;
   actionList: FormArray;
+  isTrue = true; // Set this to false when live. True is for testing purposes.
 
   get traitFormGroup() {
     return this.creatureForm.get("traits") as FormArray;
@@ -168,5 +170,18 @@ export class CreateMonsterComponent implements OnInit {
 
   removeAction(index) {
     this.actionList.removeAt(index);
+  }
+
+  test(e): boolean {
+    if (e.target.checked) {
+      return this.returnsTrue();
+    } else {
+      return (this.isTrue = false);
+    }
+  }
+
+  returnsTrue(): boolean {
+    console.log("Returns true");
+    return (this.isTrue = true);
   }
 }
