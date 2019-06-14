@@ -393,44 +393,49 @@
               </div>
 
               <div formArrayName="traits">
-                <div *ngFor="let trait of traitFormGroup.controls; let i = index;">
+                <div
+                  *ngFor="let trait of traitFormGroup.controls; let i = index"
+                >
                   <div class="row" [formGroupName]="i">
-                      <label class="col-sm-2 col-form-label">Trait: </label>
-                      <div class="col-sm-2">
-                        <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Trait Name</strong>
-                          </mat-hint>
-                          <input
-                            matInput
-                            type="text"
-                            autocomplete="off"
-                            formControlName="traitName"
-                          />
-                        </mat-form-field>
-                      </div>
-                      <div class="col-sm-7">
-                        <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Trait Description</strong>
-                          </mat-hint>
-                          <input
-                            matInput
-                            type="text"
-                            autocomplete="off"
-                            formControlName="traitDescription"
-                          />
-                        </mat-form-field>
-                      </div>
-                      <div class="col-sm-1" style="padding: 2px">
-                        <button mat-raised-button class="btn btn-danger btn-sm" (click)="removeTrait(i)">
-                          <i class="material-icons">clear</i> Clear
-                        </button>
-                      </div>
+                    <label class="col-sm-2 col-form-label">Trait: </label>
+                    <div class="col-sm-2">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Trait Name</strong>
+                        </mat-hint>
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="traitName"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-7">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Trait Description</strong>
+                        </mat-hint>
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="traitDescription"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-1" style="padding: 2px">
+                      <button
+                        mat-raised-button
+                        class="btn btn-danger btn-sm"
+                        (click)="removeTrait(i)"
+                      >
+                        <i class="material-icons">clear</i> Clear
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-
 
               <!-- TRAITS END -->
 
@@ -440,81 +445,120 @@
               <!-- ACTIONS -->
               <div class="row">
                 <div class="col-sm-1">
-                  <button mat-raised-button class="btn btn-success btn-sm">
+                  <button mat-raised-button class="btn btn-success btn-sm" (click)="addAction()">
                     <i class="material-icons">add</i> New Action
                   </button>
                 </div>
               </div>
-              <div class="row">
-                <label class="col-sm-1 col-form-label">Action: </label>
-                <div class="col-sm-1">
-                  <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Action Name</strong>
-                    </mat-hint>
-                    <input matInput type="text" autocomplete="off" />
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-4">
-                  <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Action Description</strong>
-                    </mat-hint>
-                    <input matInput type="text" autocomplete="off" />
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-1">
-                  <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Hit Modifier</strong>
-                    </mat-hint>
-                    <input matInput type="text" autocomplete="off" />
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-1">
-                  <mat-form-field class="example-full-width">
-                    <mat-hint align="start"><strong>Reach</strong> </mat-hint>
-                    <span matSuffix>ft &nbsp;</span>
-                    <input matInput type="text" autocomplete="off" />
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-1">
-                  <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Action Damage</strong>
-                    </mat-hint>
-                    <input matInput type="text" autocomplete="off" />
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-1">
-                  <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Dice Select</strong>
-                    </mat-hint>
-                    <mat-select name="dmgDice" [(value)]="dmgDicesSelect">
-                      <mat-option
-                        *ngFor="let dmg of dmgDices"
-                        [value]="dmg.value"
-                      >
-                        {{ dmg.viewValue }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-1">
-                  <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Damage Modifier</strong>
-                    </mat-hint>
-                    <input matInput type="number" autocomplete="off" />
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-1" style="padding: 2px">
-                  <button mat-raised-button class="btn btn-danger btn-sm">
-                    <i class="material-icons">clear</i> Clear
-                  </button>
+
+              <div formArrayName="actions">
+                <div
+                  *ngFor="let action of actionFormGroup.controls; let i = index"
+                >
+                  <div class="row" [formGroupName]="i">
+                    <label class="col-sm-1 col-form-label">Action: </label>
+                    <div class="col-sm-1">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Action Name</strong>
+                        </mat-hint>
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="actionName"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Action Description</strong>
+                        </mat-hint>
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="actionDescription"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-1">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Hit Modifier</strong>
+                        </mat-hint>
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="actionHitMod"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-1">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Reach</strong>
+                        </mat-hint>
+                        <span matSuffix>ft &nbsp;</span>
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="actionDmg"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-1">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Action Damage</strong>
+                        </mat-hint>
+                        <input matInput type="text" autocomplete="off" />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-1">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Dice Select</strong>
+                        </mat-hint>
+                        <mat-select
+                          name="dmgDice"
+                          [(value)]="dmgDicesSelect"
+                          formControlName="actionDice"
+                        >
+                          <mat-option
+                            *ngFor="let dmg of dmgDices"
+                            [value]="dmg.value"
+                          >
+                            {{ dmg.viewValue }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-1">
+                      <mat-form-field class="example-full-width">
+                        <mat-hint align="start"
+                          ><strong>Damage Modifier</strong>
+                        </mat-hint>
+                        <input
+                          matInput
+                          type="number"
+                          autocomplete="off"
+                          formControlName="actionDmgMod"
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-1" style="padding: 2px">
+                      <button mat-raised-button class="btn btn-danger btn-sm" (click)="removeAction(i)">
+                        <i class="material-icons">clear</i> Clear
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
+
               <!-- ACTIONS END -->
             </form>
           </div>
