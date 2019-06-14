@@ -110,9 +110,14 @@ export class CreateMonsterComponent implements OnInit {
 
   creatureForm: FormGroup;
   traitList: FormArray;
+  actionList: FormArray;
 
   get traitFormGroup() {
     return this.creatureForm.get("traits") as FormArray;
+  }
+
+  get actionFormGroup() {
+    return this.creatureForm.get("actions") as FormArray;
   }
 
   constructor(
@@ -124,9 +129,11 @@ export class CreateMonsterComponent implements OnInit {
   ngOnInit() {
     this.creatureForm = this.fb.group({
       creatureName: "",
-      traits: this.fb.array([this.createTrait()])
+      traits: this.fb.array([this.createTrait()]),
+      actions: this.fb.array([this.createAction()])
     });
     this.traitList = this.creatureForm.get("traits") as FormArray;
+    this.actionList = this.creatureForm.get("actions") as FormArray;
   }
 
   createTrait(): FormGroup {
@@ -142,5 +149,24 @@ export class CreateMonsterComponent implements OnInit {
 
   removeTrait(index) {
     this.traitList.removeAt(index);
+  }
+
+  createAction(): FormGroup {
+    return this.fb.group({
+      actionName: ["", Validators.compose([Validators.required])],
+      actionDescription: ["", Validators.compose([Validators.required])],
+      actionHitMod: ["", Validators.compose([Validators.required])],
+      actionDmg: ["", Validators.compose([Validators.required])],
+      actionDice: ["", Validators.compose([Validators.required])],
+      actionDmgMod: ["", Validators.compose([Validators.required])]
+    });
+  }
+
+  addAction() {
+    this.actionList.push(this.createAction());
+  }
+
+  removeAction(index) {
+    this.actionList.removeAt(index);
   }
 }
