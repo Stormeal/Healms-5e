@@ -109,6 +109,11 @@ export class CreateMonsterComponent implements OnInit {
   public dmgDicesSelect = this.dmgDices[2].viewValue;
 
   creatureForm: FormGroup;
+  traitList: FormArray;
+
+  get traitFormGroup() {
+    return this.creatureForm.get("traits") as FormArray;
+  }
 
   constructor(
     private auth: AuthService,
@@ -118,20 +123,24 @@ export class CreateMonsterComponent implements OnInit {
 
   ngOnInit() {
     this.creatureForm = this.fb.group({
-      trait: this.fb.array([this.addOtherTraitFormGroup()])
+      creatureName: "",
+      traits: this.fb.array([this.createTrait()])
     });
+    this.traitList = this.creatureForm.get("traits") as FormArray;
   }
 
-  addOtherTraitFormGroup() {
+  createTrait(): FormGroup {
     return this.fb.group({
-      traitName: ["", [Validators.required]],
-      traitDescription: ["", [Validators.required]]
+      traitName: ["", Validators.compose([Validators.required])],
+      traitDescription: ["", Validators.compose([Validators.required])]
     });
   }
 
-  traitButtonClick(): void {
-    (<FormArray>this.creatureForm.get("trait")).push(
-      this.addOtherTraitFormGroup()
-    );
+  addTrait() {
+    this.traitList.push(this.createTrait());
+  }
+
+  removeTrait(index) {
+    this.traitList.removeAt(index);
   }
 }

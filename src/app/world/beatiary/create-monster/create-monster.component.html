@@ -23,6 +23,22 @@
               class="form-horizontal"
               [formGroup]="creatureForm"
             >
+              <div class="row">
+                <label class="col-sm-4 col-form-label">Creature Name: </label>
+                <div class="col-sm-5">
+                  <mat-form-field class="example-full-width">
+                    <mat-hint align="start"
+                      ><strong>Specify Creature Name</strong>
+                    </mat-hint>
+                    <input
+                      matInput
+                      type="text"
+                      autocomplete="off"
+                      formControlName="creatureName"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
               <!-- SIZE / RACE / ALIGNMENT -->
               <div class="row">
                 <label class="col-sm-2 col-form-label">Select Size</label>
@@ -332,7 +348,11 @@
               <!-- TRAITS -->
               <div class="row">
                 <div class="col-sm-2">
-                  <button mat-raised-button class="btn btn-success btn-sm">
+                  <button
+                    mat-raised-button
+                    class="btn btn-success btn-sm"
+                    (click)="addTrait()"
+                  >
                     <i class="material-icons">add</i> New Trait
                   </button>
                 </div>
@@ -372,48 +392,45 @@
                 <div class="col-sm-1"></div>
               </div>
 
-              <div
-                formArrayName="trait"
-                *ngFor="
-                  let trait of creatureForm.get('other').controls;
-                  let i = index
-                "
-              >
-                <div class="row" formArrayName="trait" [formGroupName]="i">
-                  <label class="col-sm-2 col-form-label">Trait: </label>
-                  <div class="col-sm-2">
-                    <mat-form-field class="example-full-width">
-                      <mat-hint align="start"
-                        ><strong>Trait Name</strong>
-                      </mat-hint>
-                      <input
-                        matInput
-                        type="text"
-                        autocomplete="off"
-                        formControlName="traitName"
-                      />
-                    </mat-form-field>
-                  </div>
-                  <div class="col-sm-7">
-                    <mat-form-field class="example-full-width">
-                      <mat-hint align="start"
-                        ><strong>Trait Description</strong>
-                      </mat-hint>
-                      <input
-                        matInput
-                        type="text"
-                        autocomplete="off"
-                        formControlName="traitDescription"
-                      />
-                    </mat-form-field>
-                  </div>
-                  <div class="col-sm-1" style="padding: 2px">
-                    <button mat-raised-button class="btn btn-danger btn-sm">
-                      <i class="material-icons">clear</i> Clear
-                    </button>
+              <div formArrayName="traits">
+                <div *ngFor="let trait of traitFormGroup.controls; let i = index;">
+                  <div class="row" [formGroupName]="i">
+                      <label class="col-sm-2 col-form-label">Trait: </label>
+                      <div class="col-sm-2">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"
+                            ><strong>Trait Name</strong>
+                          </mat-hint>
+                          <input
+                            matInput
+                            type="text"
+                            autocomplete="off"
+                            formControlName="traitName"
+                          />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-7">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"
+                            ><strong>Trait Description</strong>
+                          </mat-hint>
+                          <input
+                            matInput
+                            type="text"
+                            autocomplete="off"
+                            formControlName="traitDescription"
+                          />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1" style="padding: 2px">
+                        <button mat-raised-button class="btn btn-danger btn-sm" (click)="removeTrait(i)">
+                          <i class="material-icons">clear</i> Clear
+                        </button>
+                      </div>
                   </div>
                 </div>
               </div>
+
 
               <!-- TRAITS END -->
 
