@@ -442,23 +442,104 @@
 
               <ng-container *ngIf="isTrue">
                 <div class="row">
-                  <label class="col-sm-2 col-form-label"
-                    >Spellcasting Ability:
-                  </label>
+                  <label class="col-sm-2 col-form-label">Spellcasting: </label>
                   <div class="col-sm-1">
                     <mat-form-field class="example-full-width">
-                        <mat-select
-                        name="spellAbility"
-                        [(value)]="dmgDicesSelect"
-                        formControlName="actionDice"
+                      <span matPrefix>DC &nbsp;</span>
+                      <input matInput type="number" autocomplete="off" />
+                      <mat-hint align="start"
+                        ><strong>Spell Save</strong>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-1">
+                    <mat-form-field class="example-full-width">
+                      <span matPrefix>+ &nbsp;</span>
+                      <input matInput type="number" autocomplete="off" />
+                      <mat-hint align="start"
+                        ><strong>Spell Att. Mod</strong>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field class="example-full-width">
+                      <mat-select
+                        name="spellcastingAbility"
+                        [(value)]="spellcastingAbilitySelect"
+                        formControlName="spellcastingAbility"
                       >
                         <mat-option
-                          *ngFor="let dmg of dmgDices"
-                          [value]="dmg.value"
+                          *ngFor="let sa of spellcastingAbility"
+                          [value]="sa.value"
                         >
-                          {{ dmg.viewValue }}
+                          {{ sa.viewValue }}
                         </mat-option>
                       </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Spellcasting Ability</strong>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-1">
+                    <mat-form-field class="example-full-width">
+                      <mat-select
+                        name="spellClass"
+                        [(value)]="spellClassSelect"
+                        formControlName="spellClass"
+                      >
+                        <mat-option
+                          *ngFor="let class of spellClass"
+                          [value]="class.value"
+                        >
+                          {{ class.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Spell Class</strong>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-1">
+                    <mat-form-field class="example-full-width">
+                      <mat-select
+                        name="spellLevel"
+                        [(value)]="wizardLevelSelect"
+                        formControlName="spellLevel"
+                      >
+                        <mat-option
+                          *ngFor="let lvl of wizardLevelTable"
+                          [value]="lvl.value"
+                        >
+                          {{ lvl.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Class Level</strong>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">Cantrips: </label>
+                  <div class="col-sm-1">
+                    <mat-form-field class="example-full-width">
+                      <mat-select
+                        name="canSplots"
+                        [(value)]="spellslotsSelect"
+                        
+                      >
+                        <mat-option
+                          *ngFor="let cantrip of spellslots"
+                          [value]="cantrip.value"
+                        >
+                          {{ cantrip.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Spellslots</strong>
+                      </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -548,7 +629,12 @@
                         <mat-hint align="start"
                           ><strong>Action Damage</strong>
                         </mat-hint>
-                        <input matInput type="text" autocomplete="off" />
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="actionDmg"
+                        />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1">
