@@ -12,6 +12,9 @@ import { ClassService } from "src/app/core/class.service";
 import { Router } from "@angular/router";
 import { NotificationsComponent } from "../../../components/notifications/notifications.component";
 import { Classes } from "src/assets/ts/classes";
+import { WIZARD } from "src/assets/ts/wizardLevelTable";
+
+declare var require: any;
 
 @Component({
   selector: "app-create-monster",
@@ -128,18 +131,6 @@ export class CreateMonsterComponent implements OnInit {
     { value: "At will", viewValue: "At will" }
   ];
   public spellslotsSelect = this.spellslots[0].viewValue;
-
-  public spellClass = [
-    { value: "Bard", viewValue: "Bard" },
-    { value: "Cleric", viewValue: "Cleric" },
-    { value: "Druid", viewValue: "Druid" },
-    { value: "Paladin", viewValue: "Paladin" },
-    { value: "Ranger", viewValue: "Ranger" },
-    { value: "Sorcerer", viewValue: "Sorcerer" },
-    { value: "Warlock", viewValue: "Warlock" },
-    { value: "Wizard", viewValue: "Wizard" }
-  ];
-  public spellClassSelect = this.spellClass[0].viewValue;
 
   public spellLevel = [
     { value: 1, viewValue: "1st" },
@@ -447,14 +438,29 @@ export class CreateMonsterComponent implements OnInit {
       nineth: 1
     }
   ];
-  public wizardLevelSelect = this.wizardLevelTable[0].viewValue;
+  // public wizardLevelSelect = this.wizardLevelTable[0].viewValue;
 
   creatureForm: FormGroup;
   traitList: FormArray;
   actionList: FormArray;
-  wizard: Classes[];
+  wizard = WIZARD;
   selectedWizard: Classes;
   isTrue = true; // Set this to false when live. True is for testing purposes.
+
+  spellList = require("src/assets/srd/spells2.json");
+
+  public wizardLevelSelect = this.wizard[0].viewValue;
+  public spellClass = [
+    { value: "Bard", viewValue: "Bard" },
+    { value: "Cleric", viewValue: "Cleric" },
+    { value: "Druid", viewValue: "Druid" },
+    { value: "Paladin", viewValue: "Paladin" },
+    { value: "Ranger", viewValue: "Ranger" },
+    { value: "Sorcerer", viewValue: "Sorcerer" },
+    { value: "Warlock", viewValue: "Warlock" },
+    { value: this.wizard, viewValue: "Wizard" }
+  ];
+  public spellClassSelect = this.spellClass[7].value;
 
   get traitFormGroup() {
     return this.creatureForm.get("traits") as FormArray;
@@ -475,20 +481,19 @@ export class CreateMonsterComponent implements OnInit {
     this.creatureForm = this.fb.group({
       creatureName: "",
       spellClass: "",
+      spellLevel: "",
+      spellcastingAbility: "",
       traits: this.fb.array([this.createTrait()]),
       actions: this.fb.array([this.createAction()])
     });
     this.traitList = this.creatureForm.get("traits") as FormArray;
     this.actionList = this.creatureForm.get("actions") as FormArray;
 
-    // this.getWizard();
+    this.getWizard();
   }
 
   getWizard(): void {
-    // this.cs.getWizard().then(wizard => {
-    //   this.wizard = wizard;
-    //   this.selectedWizard = this.wizard[0];
-    // });
+    // console.log(this.spellClass[7].value);
   }
 
   onSelect(wiz: Classes): void {
