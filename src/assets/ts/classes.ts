@@ -1,5 +1,7 @@
 export class Classes {
   value: number;
+  sorceryPoints?: number;
+  spellsKnown?: number;
   viewValue: string;
   cantrips?: number;
   first?: number;

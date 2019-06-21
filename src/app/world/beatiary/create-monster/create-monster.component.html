@@ -520,25 +520,19 @@
                   </div>
                 </div>
 
-
                 <div class="row">
                   <label class="col-sm-2 col-form-label">Cantrips: </label>
                   <div class="col-sm-1">
                     <mat-form-field class="example-full-width">
-                      <mat-select
-                        name="canSplots"
-                        [(value)]="spellslotsSelect"
-                        
-                      >
+                      <mat-select name="canSplots" [(value)]="this.spellList.spell.name">
                         <mat-option
-                          *ngFor="let cantrip of spellslots"
-                          [value]="cantrip.value"
+                          *ngFor="let cantrip of this.spellList.spell"
                         >
-                          {{ cantrip.viewValue }}
+                          {{ cantrip.name }}
                         </mat-option>
                       </mat-select>
                       <mat-hint align="start"
-                        ><strong>Spellslots</strong>
+                        ><strong>Cantrip #1</strong>
                       </mat-hint>
                     </mat-form-field>
                   </div>
