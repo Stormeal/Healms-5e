@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import {
   FormGroup,
   FormArray,
@@ -6,6 +7,13 @@ import {
   FormBuilder,
   Validators
 } from "@angular/forms";
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocomplete
+} from "@angular/material/autocomplete";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
 
 import { AuthService } from "src/app/core/auth.service";
 import { ClassService } from "src/app/core/class.service";
@@ -155,6 +163,30 @@ export class CreateMonsterComponent implements OnInit {
     { value: 20, viewValue: "20th" }
   ];
   public spellLevelSelect = this.spellLevel[0].viewValue;
+
+  public allCantrips = [
+    "Dancing Lights",
+    "Light",
+    "Mage Hand",
+    "Mending",
+    "Message",
+    "Minor Illusion",
+    "Prestidigitation",
+    "True Strike",
+    "Guidance",
+    "Resistance",
+    "Sacred Flame",
+    "Thaumaturgy",
+    "Produce Flame",
+    "Shillelagh",
+    "Acid Splash",
+    "Chill Touch",
+    "Light",
+    "Ray of Frost",
+    "Shocking Grasp"
+  ];
+
+  public cantrips = ["Dancing Light"];
 
   public wizardLevelTable = [
     {
@@ -440,6 +472,11 @@ export class CreateMonsterComponent implements OnInit {
   ];
   // public wizardLevelSelect = this.wizardLevelTable[0].viewValue;
 
+  spellList = require("src/assets/srd/spells2.json");
+  public spellListSelect = this.spellList[0].name;
+
+  // cantrips = require("src/assets/srd/cantrips/cantrips.json");
+
   creatureForm: FormGroup;
   traitList: FormArray;
   actionList: FormArray;
@@ -447,7 +484,20 @@ export class CreateMonsterComponent implements OnInit {
   selectedWizard: Classes;
   isTrue = true; // Set this to false when live. True is for testing purposes.
 
-  spellList = require("src/assets/srd/spells2.json");
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  spellCtrl = new FormControl();
+  filteredSpells: Observable<string[]>;
+  // spells: string[] = [this.cantrips.find(spell => spell[0])];
+  // allSpells: string[] = [this.allCantrips];
+
+  @ViewChild("spellInput", { static: false }) spellInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("auto", { static: false }) MatAutocomplete: MatAutocomplete;
 
   public wizardLevelSelect = this.wizard[0].viewValue;
   public spellClass = [
@@ -475,7 +525,15 @@ export class CreateMonsterComponent implements OnInit {
     // private cs: ClassService,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.filteredSpells = this.spellCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((spell: string | null) =>
+        spell ? this._filter(spell) : this.allCantrips.slice()
+      )
+    );
+  }
 
   ngOnInit() {
     this.creatureForm = this.fb.group({
@@ -483,6 +541,7 @@ export class CreateMonsterComponent implements OnInit {
       spellClass: "",
       spellLevel: "",
       spellcastingAbility: "",
+      cantrip: "",
       traits: this.fb.array([this.createTrait()]),
       actions: this.fb.array([this.createAction()])
     });
@@ -492,8 +551,52 @@ export class CreateMonsterComponent implements OnInit {
     this.getWizard();
   }
 
+  /* Everything related to the spellchips */
+  private _filter(name: string) {
+    return this.allCantrips.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  add(event: MatChipInputEvent): void {
+    // Add spells only when MatAutocomplete is not open
+    // To make sure this does not conflic with OptionsSelected Event
+
+    if (!this.MatAutocomplete.isOpen) {
+      const input = event.input;
+      const value = event.value;
+
+      // Add our spells
+      if ((value || "").trim()) {
+        this.cantrips.push(value.trim());
+      }
+
+      // Resets the input value
+      if (input) {
+        input.value = "";
+      }
+
+      this.spellCtrl.setValue(null);
+    }
+  }
+
+  remove(spell: string): void {
+    const index = this.cantrips.indexOf(spell);
+
+    if (index >= 0) {
+      this.cantrips.splice(index, 1);
+    }
+  }
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.cantrips.push(event.option.viewValue);
+    this.spellInput.nativeElement.value = "";
+    this.spellCtrl.setValue(null);
+  }
+
+  /* End of Spell chips */
+
   getWizard(): void {
-    // console.log(this.spellClass[7].value);
+    console.log(this.allCantrips);
   }
 
   onSelect(wiz: Classes): void {
