@@ -1,6 +1,6 @@
 import { Classes } from "./classes";
 
-export const WIZARD: Classes[] = [
+export const CLERIC: Classes[] = [
   {
     value: 1,
     viewValue: "1st",

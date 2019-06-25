@@ -332,7 +332,7 @@
                       [(value)]="challengeRatingSelect"
                     >
                       <mat-option
-                        *ngFor="let cr of challengeRating"
+                        *ngFor="let cr of challengeRatings"
                         [value]="cr.value"
                       >
                         {{ cr.viewValue }}
@@ -522,35 +522,46 @@
 
                 <div class="row">
                   <label class="col-sm-2 col-form-label">Cantrips: </label>
-                  <div class="col-sm-10">
-                      <mat-form-field>
-                          <mat-chip-list #chipList aria-label="Cantrip selection">
-                            <mat-chip
-                              *ngFor="let cantrip of cantrips"
-                              [selectable]="selectable"
-                              [removable]="removable"
-                              (removed)="remove(cantrip)">
-                              {{cantrip}}
-                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                            </mat-chip>
-                            <input
-                              #spellInput
-                              [formControl]="spellCtrl"
-                              [matAutocomplete]="auto"
-                              [matChipInputFor]="chipList"
-                              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                              [matChipInputAddOnBlur]="addOnBlur"
-                              (matChipInputTokenEnd)="add($event)">
-                          </mat-chip-list>
-                          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                            <mat-option *ngFor="let spell of filteredSpells | async" [value]="spell">
-                              {{spell}}
-                            </mat-option>
-                          </mat-autocomplete>
-                          <mat-hint align="start"
-                          ><strong>Cantrips</strong>
-                        </mat-hint>
-                        </mat-form-field>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #chipListCantrip aria-label="Cantrip selection">
+                        <mat-chip
+                          *ngFor="let cantrip of cantrips"
+                          [selectable]="selectable"
+                          [removable]="removable"
+                          (removed)="removeCantrip(cantrip)"
+                          [color]="success"
+                        >
+                          {{ cantrip }}
+                          <mat-icon matChipRemove *ngIf="removable"
+                            >cancel</mat-icon
+                          >
+                        </mat-chip>
+                        <input
+                          #spellInput
+                          [formControl]="cantripCtrl"
+                          [matAutocomplete]="autoCantrip"
+                          [matChipInputFor]="chipListCantrip"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="addCantrip($event)"
+                        />
+                      </mat-chip-list>
+                      <mat-autocomplete
+                        #autoCantrip="matAutocomplete"
+                        (optionSelected)="selectedCantrip($event)"
+                      >
+                        <mat-option
+                          *ngFor="let cantrip of filteredCantrips | async"
+                          [value]="cantrip"
+                        >
+                          {{ cantrip }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"
+                        ><strong>Cantrips</strong>
+                      </mat-hint>
+                    </mat-form-field>
 
                     <!-- <mat-form-field class="example-full-width">
                       <mat-select
@@ -568,6 +579,98 @@
                         ><strong>Cantrip #1</strong>
                       </mat-hint>
                     </mat-form-field> -->
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">1st Level: </label>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #firstChipList aria-label="First level spell selection">
+                        <mat-chip
+                          *ngFor="let first of firsts"
+                          [selectable]="selectable"
+                          [removable]="removable"
+                          (removed)="removeFirst(first)"
+                          [color]="success"
+                        >
+                          {{ first }}
+                          <mat-icon matChipRemove *ngIf="removable"
+                            >cancel</mat-icon
+                          >
+                        </mat-chip>
+                        <input
+                          #spellInput
+                          [formControl]="firstCtrl"
+                          [matAutocomplete]="autoFirst"
+                          [matChipInputFor]="firstChipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="addFirst($event)"
+                        />
+                      </mat-chip-list>
+                      <mat-autocomplete
+                        #autoFirst="matAutocomplete"
+                        (optionSelected)="selectedFirst($event)"
+                      >
+                        <mat-option
+                          *ngFor="let first of filteredFirsts | async"
+                          [value]="first"
+                        >
+                          {{ first }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"
+                        ><strong>1st Level Spells</strong>
+                      </mat-hint>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">2nd Level: </label>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #secondChipList aria-label="Second level spell selection">
+                        <mat-chip
+                          *ngFor="let second of seconds"
+                          [selectable]="selectable"
+                          [removable]="removable"
+                          (removed)="removeSecond(second)"
+                          [color]="success"
+                        >
+                          {{ second }}
+                          <mat-icon matChipRemove *ngIf="removable"
+                            >cancel</mat-icon
+                          >
+                        </mat-chip>
+                        <input
+                          #spellInput
+                          [formControl]="secondCtrl"
+                          [matAutocomplete]="autosecond"
+                          [matChipInputFor]="secondChipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="addsecond($event)"
+                        />
+                      </mat-chip-list>
+                      <mat-autocomplete
+                        #autosecond="matAutocomplete"
+                        (optionSelected)="selectedSecond($event)"
+                      >
+                        <mat-option
+                          *ngFor="let second of filteredSeconds | async"
+                          [value]="second"
+                        >
+                          {{ second }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"
+                        ><strong>2nd Level Spells</strong>
+                      </mat-hint>
+                    </mat-form-field>
+
                   </div>
                 </div>
               </ng-container>
