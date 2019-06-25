@@ -4,7 +4,6 @@ export const Cantrips = [
   "Dancing Lights",
   "Guidance",
   "Light",
-  "Light",
   "Mage Hand",
   "Mending",
   "Message",

@@ -22,6 +22,9 @@ import { NotificationsComponent } from "../../../components/notifications/notifi
 
 import { Classes } from "src/assets/ts/Tables/classes";
 import { WIZARD } from "src/assets/ts/Tables/wizardLevelTable";
+import { BARD } from "src/assets/ts/Tables/bardLevelTable";
+import { SORCERER } from "src/assets/ts/Tables/sorcererLevelTable";
+import { CLERIC } from "src/assets/ts/Tables/clericLevelTable";
 import { CreatureRaces } from "src/assets/ts/creatureRaces";
 import { CreatureSizes } from "src/assets/ts/creatureSizes";
 import { Alignments } from "src/assets/ts/alignments";
@@ -65,299 +68,19 @@ export class CreateMonsterComponent implements OnInit {
   public allCantrips = Cantrips;
   public cantrips = ["Dancing Light"];
 
-  public wizardLevelTable = [
-    {
-      value: 1,
-      viewValue: "1st",
-      cantrips: 3,
-      first: 2,
-      second: null,
-      third: null,
-      fourth: null,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 2,
-      viewValue: "2nd",
-      cantrips: 3,
-      first: 3,
-      second: null,
-      third: null,
-      fourth: null,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 3,
-      viewValue: "3rd",
-      cantrips: 3,
-      first: 4,
-      second: 2,
-      third: null,
-      fourth: null,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 4,
-      viewValue: "4th",
-      cantrips: 4,
-      first: 4,
-      second: 3,
-      third: null,
-      fourth: null,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 5,
-      viewValue: "5th",
-      cantrips: 4,
-      first: 4,
-      second: 3,
-      third: 2,
-      fourth: null,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 6,
-      viewValue: "6th",
-      cantrips: 4,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: null,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 7,
-      viewValue: "7th",
-      cantrips: 4,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 1,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 8,
-      viewValue: "8th",
-      cantrips: 4,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 2,
-      fifth: null,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 9,
-      viewValue: "9th",
-      cantrips: 4,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 1,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 10,
-      viewValue: "10th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: null,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 11,
-      viewValue: "11th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: 1,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 12,
-      viewValue: "12th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: 1,
-      seventh: null,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 13,
-      viewValue: "13th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: 1,
-      seventh: 1,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 14,
-      viewValue: "14th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: 1,
-      seventh: 1,
-      eigth: null,
-      nineth: null
-    },
-    {
-      value: 15,
-      viewValue: "15th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: 1,
-      seventh: 1,
-      eigth: 1,
-      nineth: null
-    },
-    {
-      value: 16,
-      viewValue: "16th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: 1,
-      seventh: 1,
-      eigth: 1,
-      nineth: null
-    },
-    {
-      value: 17,
-      viewValue: "17th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 2,
-      sixth: 1,
-      seventh: 1,
-      eigth: 1,
-      nineth: 1
-    },
-    {
-      value: 18,
-      viewValue: "18th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 3,
-      sixth: 1,
-      seventh: 1,
-      eigth: 1,
-      nineth: 1
-    },
-    {
-      value: 19,
-      viewValue: "19th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 3,
-      sixth: 2,
-      seventh: 1,
-      eigth: 1,
-      nineth: 1
-    },
-    {
-      value: 20,
-      viewValue: "20th",
-      cantrips: 5,
-      first: 4,
-      second: 3,
-      third: 3,
-      fourth: 3,
-      fifth: 3,
-      sixth: 2,
-      seventh: 2,
-      eigth: 1,
-      nineth: 1
-    }
-  ];
-  // public wizardLevelSelect = this.wizardLevelTable[0].viewValue;
+  public allFirst = First;
+  public firsts = ["Alarm"];
 
-  spellList = require("src/assets/srd/spells2.json");
-  public spellListSelect = this.spellList[0].name;
-
-  // cantrips = require("src/assets/srd/cantrips/cantrips.json");
+  public allSecond = Second;
+  public seconds = [Second[0]];
 
   creatureForm: FormGroup;
   traitList: FormArray;
   actionList: FormArray;
   wizard = WIZARD;
+  bard = BARD;
+  cleric = CLERIC;
+  sorcerer = SORCERER;
   selectedWizard: Classes;
   isTrue = true; // Set this to false when live. True is for testing purposes.
 
@@ -377,24 +100,31 @@ export class CreateMonsterComponent implements OnInit {
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  spellCtrl = new FormControl();
-  filteredSpells: Observable<string[]>;
-  // spells: string[] = [this.cantrips.find(spell => spell[0])];
-  // allSpells: string[] = [this.allCantrips];
+  cantripCtrl = new FormControl();
+  filteredCantrips: Observable<string[]>;
+  firstCtrl = new FormControl();
+  filteredFirsts: Observable<string[]>;
+  secondCtrl = new FormControl();
+  filteredSeconds: Observable<string[]>;
 
-  @ViewChild("spellInput", { static: false }) spellInput: ElementRef<
+  @ViewChild("cantripInput", { static: false }) cantripInput: ElementRef<
     HTMLInputElement
   >;
-  @ViewChild("auto", { static: false }) MatAutocomplete: MatAutocomplete;
+  @ViewChild("firstInput", { static: false }) firstInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("secondInput", { static: false }) secondInput: ElementRef<
+    HTMLInputElement
+  >;
 
   public wizardLevelSelect = this.wizard[0].viewValue;
   public spellClass = [
-    { value: "Bard", viewValue: "Bard" },
-    { value: "Cleric", viewValue: "Cleric" },
+    { value: this.bard, viewValue: "Bard" },
+    { value: this.cleric, viewValue: "Cleric" },
     { value: "Druid", viewValue: "Druid" },
     { value: "Paladin", viewValue: "Paladin" },
     { value: "Ranger", viewValue: "Ranger" },
-    { value: "Sorcerer", viewValue: "Sorcerer" },
+    { value: this.sorcerer, viewValue: "Sorcerer" },
     { value: "Warlock", viewValue: "Warlock" },
     { value: this.wizard, viewValue: "Wizard" }
   ];
@@ -414,11 +144,25 @@ export class CreateMonsterComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) {
-    this.filteredSpells = this.spellCtrl.valueChanges.pipe(
+    this.filteredCantrips = this.cantripCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
-      map((spell: string | null) =>
-        spell ? this._filter(spell) : this.allCantrips.slice()
+      map((cantrip: string | null) =>
+        cantrip ? this._filter(cantrip) : this.allCantrips.slice()
+      )
+    );
+    this.filteredFirsts = this.firstCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((first: string | null) =>
+        first ? this._firstFilter(first) : this.allFirst.slice()
+      )
+    );
+    this.filteredSeconds = this.secondCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((second: string | null) =>
+        second ? this._secondFilter(second) : this.allSecond.slice()
       )
     );
   }
@@ -440,45 +184,120 @@ export class CreateMonsterComponent implements OnInit {
   }
 
   /* Everything related to the spellchips */
-  private _filter(name: string) {
+  private _filter(cantrip: string) {
     return this.allCantrips.filter(
+      spell => spell.toLowerCase().indexOf(cantrip.toLowerCase()) === 0
+    );
+  }
+
+  private _firstFilter(name: string) {
+    return this.allFirst.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
 
-  add(event: MatChipInputEvent): void {
+  private _secondFilter(name: string) {
+    return this.allSecond.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  addCantrip(event: MatChipInputEvent): void {
     // Add spells only when MatAutocomplete is not open
     // To make sure this does not conflic with OptionsSelected Event
 
-    if (!this.MatAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
+    console.log("Cantrip ere");
 
-      // Add our spells
-      if ((value || "").trim()) {
-        this.cantrips.push(value.trim());
-      }
+    const input = event.input;
+    const value = event.value;
 
-      // Resets the input value
-      if (input) {
-        input.value = "";
-      }
-
-      this.spellCtrl.setValue(null);
+    // Add our spells
+    if ((value || "").trim()) {
+      this.cantrips.push(value.trim());
     }
+
+    // Resets the input value
+    if (input) {
+      input.value = "";
+    }
+
+    this.cantripCtrl.setValue(null);
   }
 
-  remove(spell: string): void {
+  addFirst(event: MatChipInputEvent): void {
+    // Add spells only when MatAutocomplete is not open
+    // To make sure this does not conflic with OptionsSelected Event
+
+    console.log("First ere'");
+
+    const input = event.input;
+    const value = event.value;
+
+    // Add our spells
+    if ((value || "").trim()) {
+      this.firsts.push(value.trim());
+    }
+
+    // Resets the input value
+    if (input) {
+      input.value = "";
+    }
+
+    this.firstCtrl.setValue(null);
+  }
+
+  addSecond(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.seconds.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.secondCtrl.setValidators(null);
+  }
+
+  removeCantrip(spell: string): void {
     const index = this.cantrips.indexOf(spell);
 
     if (index >= 0) {
       this.cantrips.splice(index, 1);
     }
   }
-  selected(event: MatAutocompleteSelectedEvent): void {
+
+  removeFirst(spell: string): void {
+    const index = this.firsts.indexOf(spell);
+
+    if (index >= 0) {
+      this.firsts.splice(index, 1);
+    }
+  }
+
+  removeSecond(spell: string): void {
+    const index = this.seconds.indexOf(spell);
+
+    if (index >= 0) {
+      this.seconds.splice(index, 1);
+    }
+  }
+
+  selectedCantrip(event: MatAutocompleteSelectedEvent): void {
     this.cantrips.push(event.option.viewValue);
-    this.spellInput.nativeElement.value = "";
-    this.spellCtrl.setValue(null);
+    this.cantripInput.nativeElement.value = "";
+    this.cantripCtrl.setValue(null);
+  }
+  selectedFirst(event: MatAutocompleteSelectedEvent): void {
+    this.firsts.push(event.option.viewValue);
+    this.firstInput.nativeElement.value = "";
+    this.firstCtrl.setValue(null);
+  }
+  selectedSecond(event: MatAutocompleteSelectedEvent): void {
+    this.seconds.push(event.option.viewValue);
+    this.secondInput.nativeElement.value = "";
+    this.secondCtrl.setValue(null);
   }
 
   /* End of Spell chips */
