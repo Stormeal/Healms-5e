@@ -49,7 +49,7 @@
                       [(value)]="creatureSizeSelect"
                     >
                       <mat-option
-                        *ngFor="let size of creatureSize"
+                        *ngFor="let size of creatureSizes"
                         [value]="size.value"
                       >
                         {{ size.viewValue }}
@@ -469,7 +469,7 @@
                         formControlName="spellcastingAbility"
                       >
                         <mat-option
-                          *ngFor="let sa of spellcastingAbility"
+                          *ngFor="let sa of spellCastingAbility"
                           [value]="sa.value"
                         >
                           {{ sa.viewValue }}
