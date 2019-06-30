@@ -25,6 +25,8 @@ import { WIZARD } from "src/assets/ts/Tables/wizardLevelTable";
 import { BARD } from "src/assets/ts/Tables/bardLevelTable";
 import { SORCERER } from "src/assets/ts/Tables/sorcererLevelTable";
 import { CLERIC } from "src/assets/ts/Tables/clericLevelTable";
+import { DRUID } from "src/assets/ts/Tables/druidLevelTabel";
+
 import { CreatureRaces } from "src/assets/ts/creatureRaces";
 import { CreatureSizes } from "src/assets/ts/creatureSizes";
 import { Alignments } from "src/assets/ts/alignments";
@@ -77,10 +79,13 @@ export class CreateMonsterComponent implements OnInit {
   creatureForm: FormGroup;
   traitList: FormArray;
   actionList: FormArray;
-  wizard = WIZARD;
+
   bard = BARD;
   cleric = CLERIC;
+  druid = DRUID;
   sorcerer = SORCERER;
+  wizard = WIZARD;
+
   selectedWizard: Classes;
   isTrue = true; // Set this to false when live. True is for testing purposes.
 
@@ -121,7 +126,7 @@ export class CreateMonsterComponent implements OnInit {
   public spellClass = [
     { value: this.bard, viewValue: "Bard" },
     { value: this.cleric, viewValue: "Cleric" },
-    { value: "Druid", viewValue: "Druid" },
+    { value: this.druid, viewValue: "Druid" },
     { value: "Paladin", viewValue: "Paladin" },
     { value: "Ranger", viewValue: "Ranger" },
     { value: this.sorcerer, viewValue: "Sorcerer" },
