@@ -4,11 +4,7 @@
 
     <h4>Personal Monsters</h4>
     <div class="row">
-      <a
-        mat-raised-button
-        class="btn btn-success btn-round"
-        [routerLink]="['/world/beastiary/create']"
-      >
+      <a mat-raised-button class="btn btn-success btn-round" [routerLink]="['/world/beastiary/create']">
         Create a new monster
       </a>
       <ng-container> </ng-container>
@@ -24,13 +20,13 @@
     <br />
     <div class="row">
       <ng-container *ngFor="let m of data">
-        <div class="col-md-3" (click)="openDialog(m)">
+        <div class="col-md-2" (click)="openDialog(m)">
           <div class="card card-profile">
-            <div class="card-avatar">
+            <!-- <div class="card-avatar">
               <a>
                 <img class="img" [src]="m.img_url" />
               </a>
-            </div>
+            </div> -->
             <div class="card-body">
               <h6 class="card-category text-gray">{{ m.meta }}</h6>
               <h4 class="card-title">{{ m.name }}</h4>
@@ -38,9 +34,7 @@
                 <i class="fas fa-khanda"> : </i>{{ m.Challenge }}
               </h6>
 
-              <a mat-raised-button class="btn btn-success btn-round"
-                >Add to Campaign</a
-              >
+              <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a>
             </div>
           </div>
         </div>

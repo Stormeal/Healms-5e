@@ -32,6 +32,7 @@ import { CreatureSizes } from "src/assets/ts/creatureSizes";
 import { Alignments } from "src/assets/ts/alignments";
 import { ChallengeRatings } from "src/assets/ts/challengeRatings";
 import { dmgDices, Dices } from "src/assets/ts/dices";
+import { STR } from "src/assets/ts/skillPoints";
 import {
   SpellCastingAbility,
   SpellLevel,
@@ -67,6 +68,9 @@ export class CreateMonsterComponent implements OnInit {
   public spellslotsSelect = SpellSlots[0].viewValue;
   public spellLevelSelect = SpellLevel[0].viewValue;
 
+  public strSelect = STR[2].viewValue;
+  public strSufSelect = STR[2].suffix;
+
   public allCantrips = Cantrips;
   public cantrips = ["Dancing Light"];
 
@@ -75,6 +79,9 @@ export class CreateMonsterComponent implements OnInit {
 
   public allSecond = Second;
   public seconds = [Second[0]];
+
+  public allThird = Third;
+  public thirds = [Third[0]];
 
   creatureForm: FormGroup;
   traitList: FormArray;
@@ -99,6 +106,8 @@ export class CreateMonsterComponent implements OnInit {
   spellSlots = SpellSlots;
   spellLevels = SpellLevel;
 
+  str = STR;
+
   visible = true;
   selectable = true;
   removable = true;
@@ -111,6 +120,8 @@ export class CreateMonsterComponent implements OnInit {
   filteredFirsts: Observable<string[]>;
   secondCtrl = new FormControl();
   filteredSeconds: Observable<string[]>;
+  thirdCtrl = new FormControl();
+  filteredThirds: Observable<string[]>;
 
   @ViewChild("cantripInput", { static: false }) cantripInput: ElementRef<
     HTMLInputElement
@@ -119,6 +130,9 @@ export class CreateMonsterComponent implements OnInit {
     HTMLInputElement
   >;
   @ViewChild("secondInput", { static: false }) secondInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("thirdInput", { static: false }) thirdInput: ElementRef<
     HTMLInputElement
   >;
 
@@ -170,6 +184,13 @@ export class CreateMonsterComponent implements OnInit {
         second ? this._secondFilter(second) : this.allSecond.slice()
       )
     );
+    this.filteredThirds = this.thirdCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((third: string | null) =>
+        third ? this._thirdFilter(third) : this.allThird.slice()
+      )
+    );
   }
 
   ngOnInit() {
@@ -203,6 +224,12 @@ export class CreateMonsterComponent implements OnInit {
 
   private _secondFilter(name: string) {
     return this.allSecond.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  private _thirdFilter(name: string) {
+    return this.allThird.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
@@ -265,6 +292,20 @@ export class CreateMonsterComponent implements OnInit {
     this.secondCtrl.setValidators(null);
   }
 
+  addThird(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.thirds.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.thirdCtrl.setValidators(null);
+  }
+
   removeCantrip(spell: string): void {
     const index = this.cantrips.indexOf(spell);
 
@@ -289,6 +330,14 @@ export class CreateMonsterComponent implements OnInit {
     }
   }
 
+  removeThird(spell: string): void {
+    const index = this.thirds.indexOf(spell);
+
+    if (index >= 0) {
+      this.thirds.splice(index, 1);
+    }
+  }
+
   selectedCantrip(event: MatAutocompleteSelectedEvent): void {
     this.cantrips.push(event.option.viewValue);
     this.cantripInput.nativeElement.value = "";
@@ -303,6 +352,11 @@ export class CreateMonsterComponent implements OnInit {
     this.seconds.push(event.option.viewValue);
     this.secondInput.nativeElement.value = "";
     this.secondCtrl.setValue(null);
+  }
+  selectedThird(event: MatAutocompleteSelectedEvent): void {
+    this.thirds.push(event.option.viewValue);
+    this.thirdInput.nativeElement.value = "";
+    this.thirdCtrl.setValue(null);
   }
 
   /* End of Spell chips */
