@@ -73,15 +73,16 @@ export class CreateMonsterComponent implements OnInit {
 
   public allCantrips = Cantrips;
   public cantrips = ["Dancing Light"];
-
   public allFirst = First;
   public firsts = ["Alarm"];
-
   public allSecond = Second;
   public seconds = [Second[0]];
-
   public allThird = Third;
   public thirds = [Third[0]];
+  public allFourth = Fourth;
+  public fourths = [Fourth[0]];
+  public allFifth = Fifth;
+  public fifths = [Fifth[0]];
 
   creatureForm: FormGroup;
   traitList: FormArray;
@@ -122,6 +123,10 @@ export class CreateMonsterComponent implements OnInit {
   filteredSeconds: Observable<string[]>;
   thirdCtrl = new FormControl();
   filteredThirds: Observable<string[]>;
+  fourthCtrl = new FormControl();
+  filteredFourths: Observable<string[]>;
+  fifthCtrl = new FormControl();
+  filteredFifths: Observable<string[]>;
 
   @ViewChild("cantripInput", { static: false }) cantripInput: ElementRef<
     HTMLInputElement
@@ -133,6 +138,12 @@ export class CreateMonsterComponent implements OnInit {
     HTMLInputElement
   >;
   @ViewChild("thirdInput", { static: false }) thirdInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("fourthInput", { static: false }) fourthInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("fifthInput", { static: false }) fifthInput: ElementRef<
     HTMLInputElement
   >;
 
@@ -191,6 +202,20 @@ export class CreateMonsterComponent implements OnInit {
         third ? this._thirdFilter(third) : this.allThird.slice()
       )
     );
+    this.filteredFourths = this.fourthCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((fourth: string | null) =>
+        fourth ? this._fourthFilter(fourth) : this.allFourth.slice()
+      )
+    );
+    this.filteredFifths = this.fifthCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((fifth: string | null) =>
+        fifth ? this._fifthFilter(fifth) : this.allFifth.slice()
+      )
+    );
   }
 
   ngOnInit() {
@@ -230,6 +255,18 @@ export class CreateMonsterComponent implements OnInit {
 
   private _thirdFilter(name: string) {
     return this.allThird.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  private _fourthFilter(name: string) {
+    return this.allFourth.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+
+  private _fifthFilter(name: string) {
+    return this.allFifth.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
@@ -306,6 +343,34 @@ export class CreateMonsterComponent implements OnInit {
     this.thirdCtrl.setValidators(null);
   }
 
+  addFourth(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.fourths.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.fourthCtrl.setValidators(null);
+  }
+
+  addFifth(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.fifths.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.fifthCtrl.setValidators(null);
+  }
+
   removeCantrip(spell: string): void {
     const index = this.cantrips.indexOf(spell);
 
@@ -338,6 +403,22 @@ export class CreateMonsterComponent implements OnInit {
     }
   }
 
+  removeFourth(spell: string): void {
+    const index = this.fourths.indexOf(spell);
+
+    if (index >= 0) {
+      this.fourths.splice(index, 1);
+    }
+  }
+
+  removeFifth(spell: string): void {
+    const index = this.fifths.indexOf(spell);
+
+    if (index >= 0) {
+      this.fifths.splice(index, 1);
+    }
+  }
+
   selectedCantrip(event: MatAutocompleteSelectedEvent): void {
     this.cantrips.push(event.option.viewValue);
     this.cantripInput.nativeElement.value = "";
@@ -357,6 +438,16 @@ export class CreateMonsterComponent implements OnInit {
     this.thirds.push(event.option.viewValue);
     this.thirdInput.nativeElement.value = "";
     this.thirdCtrl.setValue(null);
+  }
+  selectedFourth(event: MatAutocompleteSelectedEvent): void {
+    this.fourths.push(event.option.viewValue);
+    this.fourthInput.nativeElement.value = "";
+    this.fourthCtrl.setValue(null);
+  }
+  selectedFifth(event: MatAutocompleteSelectedEvent): void {
+    this.fifths.push(event.option.viewValue);
+    this.fifthInput.nativeElement.value = "";
+    this.fifthCtrl.setValue(null);
   }
 
   /* End of Spell chips */
