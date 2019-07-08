@@ -6,36 +6,21 @@
           <div class="card-profile">
             <div class="card-avatar">
               <a href="#pablo">
-                <img
-                  class="img"
-                  src="./assets/img/dm-default-avatar.png"
-                  matTooltip="Click here to upload a picture"
-                  [matTooltipPosition]="'above'"
-                />
+                <img class="img" src="./assets/img/dm-default-avatar.png" matTooltip="Click here to upload a picture"
+                  [matTooltipPosition]="'above'" />
               </a>
             </div>
           </div>
 
           <div class="card-body ">
-            <form
-              method="get"
-              action="/"
-              class="form-horizontal"
-              [formGroup]="creatureForm"
-            >
+            <form method="get" action="/" class="form-horizontal" [formGroup]="creatureForm">
               <div class="row">
                 <label class="col-sm-4 col-form-label">Creature Name: </label>
                 <div class="col-sm-5">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Specify Creature Name</strong>
+                    <mat-hint align="start"><strong>Specify Creature Name</strong>
                     </mat-hint>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="creatureName"
-                    />
+                    <input matInput type="text" autocomplete="off" formControlName="creatureName" />
                   </mat-form-field>
                 </div>
               </div>
@@ -44,14 +29,8 @@
                 <label class="col-sm-2 col-form-label">Select Size</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select
-                      name="creatireSize"
-                      [(value)]="creatureSizeSelect"
-                    >
-                      <mat-option
-                        *ngFor="let size of creatureSizes"
-                        [value]="size.value"
-                      >
+                    <mat-select name="creatireSize" [(value)]="creatureSizeSelect">
+                      <mat-option *ngFor="let size of creatureSizes" [value]="size.value">
                         {{ size.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -61,10 +40,7 @@
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
                     <mat-select name="races" [(value)]="creatureRacesSelect">
-                      <mat-option
-                        *ngFor="let races of creatureRaces"
-                        [value]="races.value"
-                      >
+                      <mat-option *ngFor="let races of creatureRaces" [value]="races.value">
                         {{ races.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -74,10 +50,7 @@
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
                     <mat-select name="alignments" [(value)]="alignmentsSelect">
-                      <mat-option
-                        *ngFor="let alignment of alignments"
-                        [value]="alignment.value"
-                      >
+                      <mat-option *ngFor="let alignment of alignments" [value]="alignment.value">
                         {{ alignment.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -91,100 +64,62 @@
               <!-- SKILL POINTS -->
               <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-form-label"></div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>STR</h6>
                   <mat-form-field class="example-full-width">
-                    <span matSuffix>+0 &nbsp;</span>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      matTooltip="Strength is being able to crush a tomato"
-                      [matTooltipPosition]="'below'"
-                    />
+
+                    <mat-select name="strength" [(value)]="strSelect">
+                      <mat-option *ngFor="let str of str" [value]="str.value">
+                        {{ str.viewValue }}
+                        <span matSuffix class="pull-right">{{str.suffix}} &nbsp;</span>
+                      </mat-option>
+                    </mat-select>
+                    <!-- 
+                    <input matInput #strength type="text" autocomplete="off"
+                      matTooltip="Strength is being able to crush a tomato" [matTooltipPosition]="'below'" /> -->
+
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>DEX</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      matTooltip="Dexterity is being able to dodge a tomato"
-                      [matTooltipPosition]="'below'"
-                    />
+                    <input matInput type="text" autocomplete="off"
+                      matTooltip="Dexterity is being able to dodge a tomato" [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>CON</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      matTooltip="Constitution is being able to eat a bad tomato"
-                      [matTooltipPosition]="'below'"
-                    />
+                    <input matInput type="text" autocomplete="off"
+                      matTooltip="Constitution is being able to eat a bad tomato" [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>INT</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      matTooltip="Intelligence is knowing a tomato is a fruit"
-                      [matTooltipPosition]="'below'"
-                    />
+                    <input matInput type="text" autocomplete="off"
+                      matTooltip="Intelligence is knowing a tomato is a fruit" [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>WIS</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
+                    <input matInput type="text" autocomplete="off"
                       matTooltip="Wisdom is knowing not to put a tomato in a fruit salad"
-                      [matTooltipPosition]="'below'"
-                    />
+                      [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>CHA</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
+                    <input matInput type="text" autocomplete="off"
                       matTooltip="Charisma is being able to sell a tomato based fruit salad"
-                      [matTooltipPosition]="'below'"
-                    />
+                      [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-form-label"></div>
@@ -198,34 +133,23 @@
                 <label class="col-sm-2 col-form-label">Armor Class: </label>
                 <div class="col-sm-2">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>16 (natural armor)</strong> </mat-hint
-                    ><input matInput type="text" autocomplete="off" />
+                    <mat-hint align="start"><strong>16 (natural armor)</strong> </mat-hint><input matInput type="text"
+                      autocomplete="off" />
                   </mat-form-field>
                 </div>
                 <label class="col-sm-1 col-form-label">Hit Points: </label>
                 <div class="col-sm-1">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"><strong>HP Value</strong> </mat-hint
-                    ><input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      matTooltip="Insert number of dice"
-                      [matTooltipPosition]="'above'"
-                    />
+                    <mat-hint align="start"><strong>HP Value</strong> </mat-hint><input matInput type="text"
+                      autocomplete="off" matTooltip="Insert number of dice" [matTooltipPosition]="'above'" />
                   </mat-form-field>
                 </div>
                 <div class="col-sm-1">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Dice Select</strong>
+                    <mat-hint align="start"><strong>Dice Select</strong>
                     </mat-hint>
                     <mat-select name="dices" [(value)]="dicesSelect">
-                      <mat-option
-                        *ngFor="let dice of dices"
-                        [value]="dice.value"
-                      >
+                      <mat-option *ngFor="let dice of dices" [value]="dice.value">
                         {{ dice.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -233,8 +157,7 @@
                 </div>
                 <div class="col-sm-1">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>HP Modifier</strong>
+                    <mat-hint align="start"><strong>HP Modifier</strong>
                     </mat-hint>
                     <span matPrefix>+ &nbsp;</span>
                     <input matInput type="text" autocomplete="off" />
@@ -258,44 +181,34 @@
                 <label class="col-sm-2 col-form-label">Saving Throws: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Str +7, Con +4</strong> </mat-hint
-                    ><input matInput type="text" autocomplete="off" />
+                    <mat-hint align="start"><strong>Str +7, Con +4</strong> </mat-hint><input matInput type="text"
+                      autocomplete="off" />
                   </mat-form-field>
                 </div>
                 <label class="col-sm-2 col-form-label">Skills: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Perception +4, Insight +3</strong> </mat-hint
-                    ><input matInput type="text" autocomplete="off" />
+                    <mat-hint align="start"><strong>Perception +4, Insight +3</strong> </mat-hint><input matInput
+                      type="text" autocomplete="off" />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                <label class="col-sm-2 col-form-label"
-                  >Damage Resistances:
+                <label class="col-sm-2 col-form-label">Damage Resistances:
                 </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong
-                        >Bludgeoning, Piercing & Slashing
-                      </strong> </mat-hint
-                    ><input matInput type="text" autocomplete="off" />
+                    <mat-hint align="start"><strong>Bludgeoning, Piercing & Slashing
+                      </strong> </mat-hint><input matInput type="text" autocomplete="off" />
                   </mat-form-field>
                 </div>
-                <label class="col-sm-2 col-form-label"
-                  >Damage Immunities:
+                <label class="col-sm-2 col-form-label">Damage Immunities:
                 </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong
-                        >Bludgeoning, Piercing & Slashing from non-magical
+                    <mat-hint align="start"><strong>Bludgeoning, Piercing & Slashing from non-magical
                         weapons
-                      </strong> </mat-hint
-                    ><input matInput type="text" autocomplete="off" />
+                      </strong> </mat-hint><input matInput type="text" autocomplete="off" />
                   </mat-form-field>
                 </div>
               </div>
@@ -303,38 +216,26 @@
                 <label class="col-sm-2 col-form-label">Languages: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong
-                        >any one language (usually Common)
-                      </strong> </mat-hint
-                    ><input matInput type="text" autocomplete="off" />
+                    <mat-hint align="start"><strong>any one language (usually Common)
+                      </strong> </mat-hint><input matInput type="text" autocomplete="off" />
                   </mat-form-field>
                 </div>
                 <label class="col-sm-2 col-form-label">Senses: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>
+                    <mat-hint align="start"><strong>
                         Dark Vision 60ft, passive Perception 14
-                      </strong> </mat-hint
-                    ><input matInput type="text" autocomplete="off" />
+                      </strong> </mat-hint><input matInput type="text" autocomplete="off" />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                <label class="col-sm-2 col-form-label"
-                  >Challenge Rating:
+                <label class="col-sm-2 col-form-label">Challenge Rating:
                 </label>
                 <div class="col-sm-3">
                   <mat-form-field class="example-full-width">
-                    <mat-select
-                      name="challengeRating"
-                      [(value)]="challengeRatingSelect"
-                    >
-                      <mat-option
-                        *ngFor="let cr of challengeRatings"
-                        [value]="cr.value"
-                      >
+                    <mat-select name="challengeRating" [(value)]="challengeRatingSelect">
+                      <mat-option *ngFor="let cr of challengeRatings" [value]="cr.value">
                         {{ cr.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -348,23 +249,14 @@
               <!-- TRAITS -->
               <div class="row">
                 <div class="col-sm-2">
-                  <button
-                    mat-raised-button
-                    class="btn btn-success btn-sm"
-                    (click)="addTrait()"
-                  >
+                  <button mat-raised-button class="btn btn-success btn-sm" (click)="addTrait()">
                     <i class="material-icons">add</i> New Trait
                   </button>
                 </div>
                 <div class="col-sm-2">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        (change)="test($event)"
-                      />
+                      <input class="form-check-input" type="checkbox" value="" (change)="test($event)" />
                       Spell Caster?
                       <span class="form-check-sign">
                         <span class="check"></span>
@@ -375,11 +267,7 @@
                 <div class="col-sm-2">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                      />
+                      <input class="form-check-input" type="checkbox" value="" />
                       Legendary Creature?
                       <span class="form-check-sign">
                         <span class="check"></span>
@@ -394,43 +282,25 @@
               </div>
 
               <div formArrayName="traits">
-                <div
-                  *ngFor="let trait of traitFormGroup.controls; let i = index"
-                >
+                <div *ngFor="let trait of traitFormGroup.controls; let i = index">
                   <div class="row" [formGroupName]="i">
                     <label class="col-sm-2 col-form-label">Trait: </label>
                     <div class="col-sm-2">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Trait Name</strong>
+                        <mat-hint align="start"><strong>Trait Name</strong>
                         </mat-hint>
-                        <input
-                          matInput
-                          type="text"
-                          autocomplete="off"
-                          formControlName="traitName"
-                        />
+                        <input matInput type="text" autocomplete="off" formControlName="traitName" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-7">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Trait Description</strong>
+                        <mat-hint align="start"><strong>Trait Description</strong>
                         </mat-hint>
-                        <input
-                          matInput
-                          type="text"
-                          autocomplete="off"
-                          formControlName="traitDescription"
-                        />
+                        <input matInput type="text" autocomplete="off" formControlName="traitDescription" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1" style="padding: 2px">
-                      <button
-                        mat-raised-button
-                        class="btn btn-danger btn-sm"
-                        (click)="removeTrait(i)"
-                      >
+                      <button mat-raised-button class="btn btn-danger btn-sm" (click)="removeTrait(i)">
                         <i class="material-icons">clear</i> Clear
                       </button>
                     </div>
@@ -447,8 +317,7 @@
                     <mat-form-field class="example-full-width">
                       <span matPrefix>DC &nbsp;</span>
                       <input matInput type="number" autocomplete="off" />
-                      <mat-hint align="start"
-                        ><strong>Spell Save</strong>
+                      <mat-hint align="start"><strong>Spell Save</strong>
                       </mat-hint>
                     </mat-form-field>
                   </div>
@@ -456,65 +325,41 @@
                     <mat-form-field class="example-full-width">
                       <span matPrefix>+ &nbsp;</span>
                       <input matInput type="number" autocomplete="off" />
-                      <mat-hint align="start"
-                        ><strong>Spell Att. Mod</strong>
+                      <mat-hint align="start"><strong>Spell Att. Mod</strong>
                       </mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-2">
                     <mat-form-field class="example-full-width">
-                      <mat-select
-                        name="spellcastingAbility"
-                        [(value)]="spellcastingAbilitySelect"
-                        formControlName="spellcastingAbility"
-                      >
-                        <mat-option
-                          *ngFor="let sa of spellCastingAbility"
-                          [value]="sa.value"
-                        >
+                      <mat-select name="spellcastingAbility" [(value)]="spellcastingAbilitySelect"
+                        formControlName="spellcastingAbility">
+                        <mat-option *ngFor="let sa of spellCastingAbility" [value]="sa.value">
                           {{ sa.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Spellcasting Ability</strong>
+                      <mat-hint align="start"><strong>Spellcasting Ability</strong>
                       </mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-1">
                     <mat-form-field class="example-full-width">
-                      <mat-select
-                        name="spellClass"
-                        [(value)]="spellClassSelect"
-                        formControlName="spellClass"
-                      >
-                        <mat-option
-                          *ngFor="let class of spellClass"
-                          [value]="class.value"
-                        >
+                      <mat-select name="spellClass" [(value)]="spellClassSelect" formControlName="spellClass">
+                        <mat-option *ngFor="let class of spellClass" [value]="class.value">
                           {{ class.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Spell Class</strong>
+                      <mat-hint align="start"><strong>Spell Class</strong>
                       </mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-1">
                     <mat-form-field class="example-full-width">
-                      <mat-select
-                        name="spellLevel"
-                        [(value)]="wizardLevelSelect"
-                        formControlName="spellLevel"
-                      >
-                        <mat-option
-                          *ngFor="let lvl of wizardLevelTable"
-                          [value]="lvl.value"
-                        >
+                      <mat-select name="spellLevel" [(value)]="wizardLevelSelect" formControlName="spellLevel">
+                        <mat-option *ngFor="let lvl of spellLevels" [value]="lvl.value">
                           {{ lvl.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Class Level</strong>
+                      <mat-hint align="start"><strong>Class Level</strong>
                       </mat-hint>
                     </mat-form-field>
                   </div>
@@ -525,60 +370,25 @@
                   <div class="col-sm-9">
                     <mat-form-field>
                       <mat-chip-list #chipListCantrip aria-label="Cantrip selection">
-                        <mat-chip
-                          *ngFor="let cantrip of cantrips"
-                          [selectable]="selectable"
-                          [removable]="removable"
-                          (removed)="removeCantrip(cantrip)"
-                          [color]="success"
-                        >
+                        <mat-chip *ngFor="let cantrip of cantrips" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeCantrip(cantrip)" [color]="success">
                           {{ cantrip }}
-                          <mat-icon matChipRemove *ngIf="removable"
-                            >cancel</mat-icon
-                          >
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input
-                          #spellInput
-                          [formControl]="cantripCtrl"
-                          [matAutocomplete]="autoCantrip"
-                          [matChipInputFor]="chipListCantrip"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          [matChipInputAddOnBlur]="addOnBlur"
-                          (matChipInputTokenEnd)="addCantrip($event)"
-                        />
+                        <input #spellInput [formControl]="cantripCtrl" [matAutocomplete]="autoCantrip"
+                          [matChipInputFor]="chipListCantrip" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addCantrip($event)" />
                       </mat-chip-list>
-                      <mat-autocomplete
-                        #autoCantrip="matAutocomplete"
-                        (optionSelected)="selectedCantrip($event)"
-                      >
-                        <mat-option
-                          *ngFor="let cantrip of filteredCantrips | async"
-                          [value]="cantrip"
-                        >
+                      <mat-autocomplete #autoCantrip="matAutocomplete" (optionSelected)="selectedCantrip($event)">
+                        <mat-option *ngFor="let cantrip of filteredCantrips | async" [value]="cantrip">
                           {{ cantrip }}
                         </mat-option>
                       </mat-autocomplete>
-                      <mat-hint align="start"
-                        ><strong>Cantrips</strong>
+                      <mat-hint align="start"><strong>Cantrips </strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
                     </mat-form-field>
-
-                    <!-- <mat-form-field class="example-full-width">
-                      <mat-select
-                        name="cantrip"
-                        [(value)]="spellListSelect"
-                        formControlName="cantrip"
-                      >
-                        <mat-option
-                          *ngFor="let cantrip of this.spellList"
-                        >
-                          {{ cantrip.name }}
-                        </mat-option>
-                      </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Cantrip #1</strong>
-                      </mat-hint>
-                    </mat-form-field> -->
                   </div>
                 </div>
 
@@ -587,41 +397,23 @@
                   <div class="col-sm-9">
                     <mat-form-field>
                       <mat-chip-list #firstChipList aria-label="First level spell selection">
-                        <mat-chip
-                          *ngFor="let first of firsts"
-                          [selectable]="selectable"
-                          [removable]="removable"
-                          (removed)="removeFirst(first)"
-                          [color]="success"
-                        >
+                        <mat-chip *ngFor="let first of firsts" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeFirst(first)" [color]="success">
                           {{ first }}
-                          <mat-icon matChipRemove *ngIf="removable"
-                            >cancel</mat-icon
-                          >
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input
-                          #spellInput
-                          [formControl]="firstCtrl"
-                          [matAutocomplete]="autoFirst"
-                          [matChipInputFor]="firstChipList"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          [matChipInputAddOnBlur]="addOnBlur"
-                          (matChipInputTokenEnd)="addFirst($event)"
-                        />
+                        <input #spellInput [formControl]="firstCtrl" [matAutocomplete]="autoFirst"
+                          [matChipInputFor]="firstChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addFirst($event)" />
                       </mat-chip-list>
-                      <mat-autocomplete
-                        #autoFirst="matAutocomplete"
-                        (optionSelected)="selectedFirst($event)"
-                      >
-                        <mat-option
-                          *ngFor="let first of filteredFirsts | async"
-                          [value]="first"
-                        >
+                      <mat-autocomplete #autoFirst="matAutocomplete" (optionSelected)="selectedFirst($event)">
+                        <mat-option *ngFor="let first of filteredFirsts | async" [value]="first">
                           {{ first }}
                         </mat-option>
                       </mat-autocomplete>
-                      <mat-hint align="start"
-                        ><strong>1st Level Spells</strong>
+                      <mat-hint align="start"><strong>1st Level Spells</strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
                     </mat-form-field>
 
@@ -633,41 +425,107 @@
                   <div class="col-sm-9">
                     <mat-form-field>
                       <mat-chip-list #secondChipList aria-label="Second level spell selection">
-                        <mat-chip
-                          *ngFor="let second of seconds"
-                          [selectable]="selectable"
-                          [removable]="removable"
-                          (removed)="removeSecond(second)"
-                          [color]="success"
-                        >
+                        <mat-chip *ngFor="let second of seconds" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeSecond(second)" [color]="success">
                           {{ second }}
-                          <mat-icon matChipRemove *ngIf="removable"
-                            >cancel</mat-icon
-                          >
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input
-                          #spellInput
-                          [formControl]="secondCtrl"
-                          [matAutocomplete]="autosecond"
-                          [matChipInputFor]="secondChipList"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          [matChipInputAddOnBlur]="addOnBlur"
-                          (matChipInputTokenEnd)="addsecond($event)"
-                        />
+                        <input #spellInput [formControl]="secondCtrl" [matAutocomplete]="autosecond"
+                          [matChipInputFor]="secondChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addsecond($event)" />
                       </mat-chip-list>
-                      <mat-autocomplete
-                        #autosecond="matAutocomplete"
-                        (optionSelected)="selectedSecond($event)"
-                      >
-                        <mat-option
-                          *ngFor="let second of filteredSeconds | async"
-                          [value]="second"
-                        >
+                      <mat-autocomplete #autosecond="matAutocomplete" (optionSelected)="selectedSecond($event)">
+                        <mat-option *ngFor="let second of filteredSeconds | async" [value]="second">
                           {{ second }}
                         </mat-option>
                       </mat-autocomplete>
-                      <mat-hint align="start"
-                        ><strong>2nd Level Spells</strong>
+                      <mat-hint align="start"><strong>2nd Level Spells</strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
+                      </mat-hint>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">3rd Level: </label>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #thirdChipList aria-label="Third level spell selection">
+                        <mat-chip *ngFor="let third of thirds" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeThird(third)" [color]="success">
+                          {{ third }}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input #spellInput [formControl]="thirdCtrl" [matAutocomplete]="autothird"
+                          [matChipInputFor]="thirdChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addThird($event)" />
+                      </mat-chip-list>
+                      <mat-autocomplete #autothird="matAutocomplete" (optionSelected)="selectedThird($event)">
+                        <mat-option *ngFor="let third of filteredThirds | async" [value]="third">
+                          {{ third }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"><strong>3rd Level Spells</strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
+                      </mat-hint>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">4th Level: </label>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #fourthChipList aria-label="Fourth level spell selection">
+                        <mat-chip *ngFor="let fourth of fourths" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeFourth(fourth)" [color]="success">
+                          {{ fourth }}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input #spellInput [formControl]="fourthCtrl" [matAutocomplete]="autofourth"
+                          [matChipInputFor]="fourthChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addFourth($event)" />
+                      </mat-chip-list>
+                      <mat-autocomplete #autofourth="matAutocomplete" (optionSelected)="selectedFourth($event)">
+                        <mat-option *ngFor="let fourth of filteredFourths | async" [value]="fourth">
+                          {{ fourth }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"><strong>4th Level Spells</strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
+                      </mat-hint>
+                    </mat-form-field>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">5th Level: </label>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #fifthChipList aria-label="Fifth level spell selection">
+                        <mat-chip *ngFor="let fifth of fifths" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeFifth(fifth)" [color]="success">
+                          {{ fifth }}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input #spellInput [formControl]="fifthCtrl" [matAutocomplete]="autofifth"
+                          [matChipInputFor]="fifthChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addFifth($event)" />
+                      </mat-chip-list>
+                      <mat-autocomplete #autofifth="matAutocomplete" (optionSelected)="selectedFifth($event)">
+                        <mat-option *ngFor="let fifth of filteredFifths | async" [value]="fifth">
+                          {{ fifth }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"><strong>5th Level Spells</strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
                     </mat-form-field>
 
@@ -685,102 +543,58 @@
               <!-- ACTIONS -->
               <div class="row">
                 <div class="col-sm-1">
-                  <button
-                    mat-raised-button
-                    class="btn btn-success btn-sm"
-                    (click)="addAction()"
-                  >
+                  <button mat-raised-button class="btn btn-success btn-sm" (click)="addAction()">
                     <i class="material-icons">add</i> New Action
                   </button>
                 </div>
               </div>
 
               <div formArrayName="actions">
-                <div
-                  *ngFor="let action of actionFormGroup.controls; let i = index"
-                >
+                <div *ngFor="let action of actionFormGroup.controls; let i = index">
                   <div class="row" [formGroupName]="i">
                     <label class="col-sm-1 col-form-label">Action: </label>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Action Name</strong>
+                        <mat-hint align="start"><strong>Action Name</strong>
                         </mat-hint>
-                        <input
-                          matInput
-                          type="text"
-                          autocomplete="off"
-                          formControlName="actionName"
-                        />
+                        <input matInput type="text" autocomplete="off" formControlName="actionName" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-4">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Action Description</strong>
+                        <mat-hint align="start"><strong>Action Description</strong>
                         </mat-hint>
-                        <input
-                          matInput
-                          type="text"
-                          autocomplete="off"
-                          formControlName="actionDescription"
-                        />
+                        <input matInput type="text" autocomplete="off" formControlName="actionDescription" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Hit Modifier</strong>
+                        <mat-hint align="start"><strong>Hit Modifier</strong>
                         </mat-hint>
-                        <input
-                          matInput
-                          type="text"
-                          autocomplete="off"
-                          formControlName="actionHitMod"
-                        />
+                        <input matInput type="text" autocomplete="off" formControlName="actionHitMod" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Reach</strong>
+                        <mat-hint align="start"><strong>Reach</strong>
                         </mat-hint>
                         <span matSuffix>ft &nbsp;</span>
-                        <input
-                          matInput
-                          type="text"
-                          autocomplete="off"
-                          formControlName="actionDmg"
-                        />
+                        <input matInput type="text" autocomplete="off" formControlName="actionDmg" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Action Damage</strong>
+                        <mat-hint align="start"><strong>Action Damage</strong>
                         </mat-hint>
-                        <input
-                          matInput
-                          type="text"
-                          autocomplete="off"
-                          formControlName="actionDmg"
-                        />
+                        <input matInput type="text" autocomplete="off" formControlName="actionDmg" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Dice Select</strong>
+                        <mat-hint align="start"><strong>Dice Select</strong>
                         </mat-hint>
-                        <mat-select
-                          name="dmgDice"
-                          [(value)]="dmgDicesSelect"
-                          formControlName="actionDice"
-                        >
-                          <mat-option
-                            *ngFor="let dmg of dmgDices"
-                            [value]="dmg.value"
-                          >
+                        <mat-select name="dmgDice" [(value)]="dmgDicesSelect" formControlName="actionDice">
+                          <mat-option *ngFor="let dmg of dmgDices" [value]="dmg.value">
                             {{ dmg.viewValue }}
                           </mat-option>
                         </mat-select>
@@ -788,23 +602,13 @@
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Damage Modifier</strong>
+                        <mat-hint align="start"><strong>Damage Modifier</strong>
                         </mat-hint>
-                        <input
-                          matInput
-                          type="number"
-                          autocomplete="off"
-                          formControlName="actionDmgMod"
-                        />
+                        <input matInput type="number" autocomplete="off" formControlName="actionDmgMod" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1" style="padding: 2px">
-                      <button
-                        mat-raised-button
-                        class="btn btn-danger btn-sm"
-                        (click)="removeAction(i)"
-                      >
+                      <button mat-raised-button class="btn btn-danger btn-sm" (click)="removeAction(i)">
                         <i class="material-icons">clear</i> Clear
                       </button>
                     </div>
