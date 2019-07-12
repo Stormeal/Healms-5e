@@ -371,9 +371,9 @@
                     <mat-form-field>
                       <mat-chip-list #chipListCantrip aria-label="Cantrip selection">
                         <mat-chip *ngFor="let cantrip of cantrips" [selectable]="selectable" [removable]="removable"
-                          (removed)="removeCantrip(cantrip)" [color]="success">
+                          (removed)="removeCantrip(cantrip)" style="background-color: #5cb85c; color: white;">
                           {{ cantrip }}
-                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          <mat-icon matChipRemove *ngIf="removable" style="color: black;">cancel</mat-icon>
                         </mat-chip>
                         <input #spellInput [formControl]="cantripCtrl" [matAutocomplete]="autoCantrip"
                           [matChipInputFor]="chipListCantrip" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
