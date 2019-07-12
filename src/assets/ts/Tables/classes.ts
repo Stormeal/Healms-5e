@@ -13,4 +13,6 @@ export class Classes {
   seventh?: number;
   eigth?: number;
   nineth?: number;
+  invocationsKnown?: number;
+  spellSlots?: number;
 }
