@@ -21,11 +21,14 @@ import { Router } from "@angular/router";
 import { NotificationsComponent } from "../../../components/notifications/notifications.component";
 
 import { Classes } from "src/assets/ts/Tables/classes";
-import { WIZARD } from "src/assets/ts/Tables/wizardLevelTable";
 import { BARD } from "src/assets/ts/Tables/bardLevelTable";
-import { SORCERER } from "src/assets/ts/Tables/sorcererLevelTable";
 import { CLERIC } from "src/assets/ts/Tables/clericLevelTable";
 import { DRUID } from "src/assets/ts/Tables/druidLevelTabel";
+import { PALADIN } from "src/assets/ts/Tables/paladinLevelTable";
+import { RANGER } from "src/assets/ts/Tables/rangerLevelTable";
+import { SORCERER } from "src/assets/ts/Tables/sorcererLevelTable";
+import { WARLOCK } from "src/assets/ts/Tables/warlockLevelTable";
+import { WIZARD } from "src/assets/ts/Tables/wizardLevelTable";
 
 import { CreatureRaces } from "src/assets/ts/creatureRaces";
 import { CreatureSizes } from "src/assets/ts/creatureSizes";
@@ -83,6 +86,10 @@ export class CreateMonsterComponent implements OnInit {
   public fourths = [Fourth[0]];
   public allFifth = Fifth;
   public fifths = [Fifth[0]];
+  public allSixth = Sixth;
+  public sixths = [Sixth[0]];
+  public allSeventh = Seventh;
+  public sevenths = [Seventh[0]];
 
   creatureForm: FormGroup;
   traitList: FormArray;
@@ -91,7 +98,10 @@ export class CreateMonsterComponent implements OnInit {
   bard = BARD;
   cleric = CLERIC;
   druid = DRUID;
+  paladin = PALADIN;
+  ranger = RANGER;
   sorcerer = SORCERER;
+  warlock = WARLOCK;
   wizard = WIZARD;
 
   selectedWizard: Classes;
@@ -118,15 +128,19 @@ export class CreateMonsterComponent implements OnInit {
   cantripCtrl = new FormControl();
   filteredCantrips: Observable<string[]>;
   firstCtrl = new FormControl();
-  filteredFirsts: Observable<string[]>;
+  filteredFirsts: Observable<string[]>; // 1st
   secondCtrl = new FormControl();
-  filteredSeconds: Observable<string[]>;
+  filteredSeconds: Observable<string[]>; // 2nd
   thirdCtrl = new FormControl();
-  filteredThirds: Observable<string[]>;
+  filteredThirds: Observable<string[]>; // 3rd
   fourthCtrl = new FormControl();
-  filteredFourths: Observable<string[]>;
+  filteredFourths: Observable<string[]>; // 4th
   fifthCtrl = new FormControl();
-  filteredFifths: Observable<string[]>;
+  filteredFifths: Observable<string[]>; // 5th
+  sixthCtrl = new FormControl();
+  filteredSixths: Observable<string[]>; // 6th
+  seventhCtrl = new FormControl();
+  filteredSevenths: Observable<string[]>; // 7th
 
   @ViewChild("cantripInput", { static: false }) cantripInput: ElementRef<
     HTMLInputElement
@@ -146,16 +160,22 @@ export class CreateMonsterComponent implements OnInit {
   @ViewChild("fifthInput", { static: false }) fifthInput: ElementRef<
     HTMLInputElement
   >;
+  @ViewChild("sixthInput", { static: false }) sixthInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("seventhInput", { static: false }) seventhInput: ElementRef<
+    HTMLInputElement
+  >;
 
   public wizardLevelSelect = this.wizard[0].viewValue;
   public spellClass = [
     { value: this.bard, viewValue: "Bard" },
     { value: this.cleric, viewValue: "Cleric" },
     { value: this.druid, viewValue: "Druid" },
-    { value: "Paladin", viewValue: "Paladin" },
-    { value: "Ranger", viewValue: "Ranger" },
+    { value: this.paladin, viewValue: "Paladin" },
+    { value: this.ranger, viewValue: "Ranger" },
     { value: this.sorcerer, viewValue: "Sorcerer" },
-    { value: "Warlock", viewValue: "Warlock" },
+    { value: this.warlock, viewValue: "Warlock" },
     { value: this.wizard, viewValue: "Wizard" }
   ];
   public spellClassSelect = this.spellClass[7].value;
@@ -216,6 +236,20 @@ export class CreateMonsterComponent implements OnInit {
         fifth ? this._fifthFilter(fifth) : this.allFifth.slice()
       )
     );
+    this.filteredSixths = this.sixthCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((sixth: string | null) =>
+        sixth ? this._sixthFilter(sixth) : this.allSixth.slice()
+      )
+    );
+    this.filteredSevenths = this.seventhCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((seventh: string | null) =>
+        seventh ? this._seventhFilter(seventh) : this.allSeventh.slice()
+      )
+    );
   }
 
   ngOnInit() {
@@ -240,33 +274,38 @@ export class CreateMonsterComponent implements OnInit {
       spell => spell.toLowerCase().indexOf(cantrip.toLowerCase()) === 0
     );
   }
-
   private _firstFilter(name: string) {
     return this.allFirst.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
-
   private _secondFilter(name: string) {
     return this.allSecond.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
-
   private _thirdFilter(name: string) {
     return this.allThird.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
-
   private _fourthFilter(name: string) {
     return this.allFourth.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
-
   private _fifthFilter(name: string) {
     return this.allFifth.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+  private _sixthFilter(name: string) {
+    return this.allSixth.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+  private _seventhFilter(name: string) {
+    return this.allSeventh.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
@@ -371,6 +410,34 @@ export class CreateMonsterComponent implements OnInit {
     this.fifthCtrl.setValidators(null);
   }
 
+  addSixth(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.sixths.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.sixthCtrl.setValidators(null);
+  }
+
+  addSeventh(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.sevenths.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.seventhCtrl.setValidators(null);
+  }
+
   removeCantrip(spell: string): void {
     const index = this.cantrips.indexOf(spell);
 
@@ -419,6 +486,22 @@ export class CreateMonsterComponent implements OnInit {
     }
   }
 
+  removeSixth(spell: string): void {
+    const index = this.sixths.indexOf(spell);
+
+    if (index >= 0) {
+      this.sixths.splice(index, 1);
+    }
+  }
+
+  removeSeventh(spell: string): void {
+    const index = this.sevenths.indexOf(spell);
+
+    if (index >= 0) {
+      this.sevenths.splice(index, 1);
+    }
+  }
+
   selectedCantrip(event: MatAutocompleteSelectedEvent): void {
     this.cantrips.push(event.option.viewValue);
     this.cantripInput.nativeElement.value = "";
@@ -448,6 +531,16 @@ export class CreateMonsterComponent implements OnInit {
     this.fifths.push(event.option.viewValue);
     this.fifthInput.nativeElement.value = "";
     this.fifthCtrl.setValue(null);
+  }
+  selectedSixth(event: MatAutocompleteSelectedEvent): void {
+    this.sixths.push(event.option.viewValue);
+    this.sixthInput.nativeElement.value = "";
+    this.sixthCtrl.setValue(null);
+  }
+  selectedSeventh(event: MatAutocompleteSelectedEvent): void {
+    this.sevenths.push(event.option.viewValue);
+    this.seventhInput.nativeElement.value = "";
+    this.seventhCtrl.setValue(null);
   }
 
   /* End of Spell chips */
