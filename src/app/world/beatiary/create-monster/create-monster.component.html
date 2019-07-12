@@ -267,7 +267,7 @@
                 <div class="col-sm-2">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" value="" />
+                      <input class="form-check-input" type="checkbox" value="" (change)="legendary($event)" />
                       Legendary Creature?
                       <span class="form-check-sign">
                         <span class="check"></span>
@@ -558,6 +558,7 @@
                   </div>
                 </div>
 
+                <!-- 7th -->
                 <div class="row">
                   <label class="col-sm-2 col-form-label">7th Level: </label>
                   <div class="col-sm-9">
@@ -584,6 +585,7 @@
                     </mat-form-field>
                   </div>
                 </div>
+                <!-- 7th END -->
 
                 <div class="row">
                   <label class="col-sm-2 col-form-label">8th Level: </label>
@@ -722,6 +724,22 @@
                   </div>
                 </div>
               </div>
+
+              
+              <ng-container *ngIf="legendaryTrue">
+                <hr />
+                <h4 style="text-align: center"><b>LEGENDARY ACTIONS</b></h4>
+                <hr />
+                <!-- ACTIONS -->
+                <div class="row">
+                  <div class="col-sm-1">
+                    <button mat-raised-button class="btn btn-success btn-sm" (click)="addAction()">
+                      <i class="material-icons">add</i> New Action
+                    </button>
+                  </div>
+                </div>
+                <p>Legendary Test</p>
+              </ng-container>
 
               <!-- ACTIONS END -->
             </form>

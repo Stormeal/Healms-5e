@@ -110,6 +110,7 @@ export class CreateMonsterComponent implements OnInit {
 
   selectedWizard: Classes;
   isTrue = false; // Set this to false when live. True is for testing purposes.
+  legendaryTrue = true; // Set this to false when live. Thre is for testing purposes.
 
   creatureRaces = CreatureRaces;
   creatureSizes = CreatureSizes;
@@ -687,8 +688,21 @@ export class CreateMonsterComponent implements OnInit {
     }
   }
 
+  legendary(e): boolean {
+    if (e.target.checked) {
+      return this.legendaryReturnsTrue();
+    } else {
+      return (this.legendaryTrue = false);
+    }
+  }
+
   returnsTrue(): boolean {
     console.log("Returns true");
     return (this.isTrue = true);
+  }
+
+  legendaryReturnsTrue(): boolean {
+    console.log("Legardy Affirmative");
+    return (this.legendaryTrue = true);
   }
 }
