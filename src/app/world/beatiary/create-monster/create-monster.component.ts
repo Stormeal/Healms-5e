@@ -109,7 +109,7 @@ export class CreateMonsterComponent implements OnInit {
   wizard = WIZARD;
 
   selectedWizard: Classes;
-  isTrue = true; // Set this to false when live. True is for testing purposes.
+  isTrue = false; // Set this to false when live. True is for testing purposes.
 
   creatureRaces = CreatureRaces;
   creatureSizes = CreatureSizes;
