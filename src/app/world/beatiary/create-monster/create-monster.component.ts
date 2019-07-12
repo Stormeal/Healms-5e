@@ -90,6 +90,10 @@ export class CreateMonsterComponent implements OnInit {
   public sixths = [Sixth[0]];
   public allSeventh = Seventh;
   public sevenths = [Seventh[0]];
+  public allEigth = Eigth;
+  public eigths = [Eigth[0]];
+  public allNineth = Nineth;
+  public nineths = [Nineth[0]];
 
   creatureForm: FormGroup;
   traitList: FormArray;
@@ -105,7 +109,7 @@ export class CreateMonsterComponent implements OnInit {
   wizard = WIZARD;
 
   selectedWizard: Classes;
-  isTrue = true; // Set this to false when live. True is for testing purposes.
+  isTrue = false; // Set this to false when live. True is for testing purposes.
 
   creatureRaces = CreatureRaces;
   creatureSizes = CreatureSizes;
@@ -141,6 +145,10 @@ export class CreateMonsterComponent implements OnInit {
   filteredSixths: Observable<string[]>; // 6th
   seventhCtrl = new FormControl();
   filteredSevenths: Observable<string[]>; // 7th
+  eigthCtrl = new FormControl();
+  filteredEigths: Observable<string[]>; // 6th
+  ninethCtrl = new FormControl();
+  filteredNineths: Observable<string[]>; // 7th
 
   @ViewChild("cantripInput", { static: false }) cantripInput: ElementRef<
     HTMLInputElement
@@ -164,6 +172,12 @@ export class CreateMonsterComponent implements OnInit {
     HTMLInputElement
   >;
   @ViewChild("seventhInput", { static: false }) seventhInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("eigthInput", { static: false }) eigthInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild("ninethInput", { static: false }) ninethInput: ElementRef<
     HTMLInputElement
   >;
 
@@ -250,6 +264,20 @@ export class CreateMonsterComponent implements OnInit {
         seventh ? this._seventhFilter(seventh) : this.allSeventh.slice()
       )
     );
+    this.filteredEigths = this.sixthCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((eigth: string | null) =>
+        eigth ? this._eigthFilter(eigth) : this.allEigth.slice()
+      )
+    );
+    this.filteredNineths = this.seventhCtrl.valueChanges.pipe(
+      // tslint:disable-next-line: deprecation
+      startWith(null),
+      map((nineth: string | null) =>
+        nineth ? this._ninethFilter(nineth) : this.allNineth.slice()
+      )
+    );
   }
 
   ngOnInit() {
@@ -306,6 +334,16 @@ export class CreateMonsterComponent implements OnInit {
   }
   private _seventhFilter(name: string) {
     return this.allSeventh.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+  private _eigthFilter(name: string) {
+    return this.allEigth.filter(
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+    );
+  }
+  private _ninethFilter(name: string) {
+    return this.allNineth.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
     );
   }
@@ -437,6 +475,33 @@ export class CreateMonsterComponent implements OnInit {
     }
     this.seventhCtrl.setValidators(null);
   }
+  addEigth(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.eigths.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.eigthCtrl.setValidators(null);
+  }
+
+  addNineth(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.nineths.push(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+    this.ninethCtrl.setValidators(null);
+  }
 
   removeCantrip(spell: string): void {
     const index = this.cantrips.indexOf(spell);
@@ -502,6 +567,22 @@ export class CreateMonsterComponent implements OnInit {
     }
   }
 
+  removeEigth(spell: string): void {
+    const index = this.eigths.indexOf(spell);
+
+    if (index >= 0) {
+      this.eigths.splice(index, 1);
+    }
+  }
+
+  removeNineth(spell: string): void {
+    const index = this.nineths.indexOf(spell);
+
+    if (index >= 0) {
+      this.nineths.splice(index, 1);
+    }
+  }
+
   selectedCantrip(event: MatAutocompleteSelectedEvent): void {
     this.cantrips.push(event.option.viewValue);
     this.cantripInput.nativeElement.value = "";
@@ -541,6 +622,16 @@ export class CreateMonsterComponent implements OnInit {
     this.sevenths.push(event.option.viewValue);
     this.seventhInput.nativeElement.value = "";
     this.seventhCtrl.setValue(null);
+  }
+  selectedEigth(event: MatAutocompleteSelectedEvent): void {
+    this.eigths.push(event.option.viewValue);
+    this.eigthInput.nativeElement.value = "";
+    this.eigthCtrl.setValue(null);
+  }
+  selectedNineth(event: MatAutocompleteSelectedEvent): void {
+    this.nineths.push(event.option.viewValue);
+    this.ninethInput.nativeElement.value = "";
+    this.ninethCtrl.setValue(null);
   }
 
   /* End of Spell chips */

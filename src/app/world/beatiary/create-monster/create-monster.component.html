@@ -582,7 +582,60 @@
                       <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
                     </mat-form-field>
+                  </div>
+                </div>
 
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">8th Level: </label>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #chipListEigth aria-label="Eigth level spell selection">
+                        <mat-chip *ngFor="let eigth of eigths" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeEigth(eigth)" style="background-color: #5cb85c; color: white;">
+                          {{ eigth }}
+                          <mat-icon matChipRemove *ngIf="removable" style="color: black;">cancel</mat-icon>
+                        </mat-chip>
+                        <input #spellInput [formControl]="eigthCtrl" [matAutocomplete]="autoEigth"
+                          [matChipInputFor]="chipListEigth" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addEigth($event)" />
+                      </mat-chip-list>
+                      <mat-autocomplete #autoEigth="matAutocomplete" (optionSelected)="selectedEigth($event)">
+                        <mat-option *ngFor="let eigth of filteredEigths | async" [value]="eigth">
+                          {{ eigth }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"><strong>8th Level Spells </strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">9th Level: </label>
+                  <div class="col-sm-9">
+                    <mat-form-field>
+                      <mat-chip-list #ninethChipList aria-label="Nineth level spell selection">
+                        <mat-chip *ngFor="let nineth of nineths" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeNineth(nineth)" style="background-color: #5cb85c; color: white;">
+                          {{ nineth }}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input #spellInput [formControl]="ninethCtrl" [matAutocomplete]="autoNineth"
+                          [matChipInputFor]="ninethChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addNineth($event)" />
+                      </mat-chip-list>
+                      <mat-autocomplete #autoNineth="matAutocomplete" (optionSelected)="selectedNineth($event)">
+                        <mat-option *ngFor="let nineth of filteredNineths | async" [value]="nineth">
+                          {{ nineth }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-hint align="start"><strong>9th Level Spells</strong>
+                      </mat-hint>
+                      <mat-hint align="end"><strong>*Leave blank if not applicable</strong>
+                      </mat-hint>
+                    </mat-form-field>
                   </div>
                 </div>
               </ng-container>
