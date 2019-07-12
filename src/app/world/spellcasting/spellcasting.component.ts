@@ -1,21 +1,26 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
-import * as data from '../../../assets/srd/spellcasting.json';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Inject, ViewEncapsulation } from "@angular/core";
+import * as data from "../../../assets/srd/spellcasting.json";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogConfig
+} from "@angular/material";
+import { Observable } from "rxjs";
 
 declare var require: any;
 
 @Component({
-  selector: 'app-spellcasting',
-  templateUrl: './spellcasting.component.html',
+  selector: "app-spellcasting",
+  templateUrl: "./spellcasting.component.html",
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./spellcasting.component.scss']
+  styleUrls: ["./spellcasting.component.scss"]
 })
 export class SpellcastingComponent implements OnInit {
-  spellCasting = require('../../../assets/srd/spellcasting.json');
-  spellList = require('../../../assets/srd/spellList.json');
-  spells = require('../../../assets/srd/spells.json');
-  spells2 = require('../../../assets/srd/spells2.json');
+  spellCasting = require("../../../assets/srd/spellcasting.json");
+  spellList = require("../../../assets/srd/spellList.json");
+  spells = require("../../../assets/srd/spells.json");
+  spells2 = require("../../../assets/srd/spells2.json");
 
   bardCantrips: Observable<any>;
   bardCantripsDescription;
@@ -29,41 +34,34 @@ export class SpellcastingComponent implements OnInit {
   bard8th: Observable<any>;
   bard9th: Observable<any>;
 
-
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
     this.loader();
     this.getBardSpells();
-
-
   }
 
   loader() {
     const required = this.spellList.Bard.Cantrips[0];
 
-    console.log('Required: ', this.spellList.Bard.Cantrips[0]);
+    console.log("Required: ", this.spellList.Bard.Cantrips[0]);
 
-    console.log('Spell', this.spells2.spell);
+    console.log("Spell", this.spells2.spell);
 
     const result = this.spells2.spell.find(spell => spell.name[0] === required);
 
-    console.log('Result', result);
-
-
+    console.log("Result", result);
   }
 
   mouseEnter(spell: any) {
-    console.log('Spello', spell);
+    console.log("Spello", spell);
 
     const required = spell;
 
-    const result = this.spells2.spell.find(_spell => _spell.name[0] === required);
-    console.log('Spell Description', result);
+    const result = this.spells2.find(_spell => _spell.name[0] === required);
+    console.log("Spell Description", result);
 
-    return this.bardCantripsDescription = result;
-
-
+    return (this.bardCantripsDescription = result);
   }
 
   getBardSpells() {
@@ -74,40 +72,31 @@ export class SpellcastingComponent implements OnInit {
 
     this.bardCantrips = this.spellList.Bard.Cantrips;
 
-
-
-
-
-
     // this.bardCantripsDescription = this.spells2.spell.find(spell => spell.name[0] === cantrips);
 
-    console.log('Test 1', this.bardCantripsDescription);
-
-
-
-
-
+    console.log("Test 1", this.bardCantripsDescription);
   }
 
   openDialog(spell: any, dialogConfig: MatDialogConfig) {
+    // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(SpellDialogComponent, {
       data: spell
     });
     dialogRef.componentInstance.dialogConfig = dialogConfig;
   }
-
 }
 
 @Component({
-  selector: 'app-spell',
-  templateUrl: 'spell-dialog.html'
+  selector: "app-spell",
+  templateUrl: "spell-dialog.html"
 })
 export class SpellDialogComponent {
   dialogConfig: MatDialogConfig;
 
   constructor(
     public dialogRef: MatDialogRef<SpellDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public spell: any) { }
+    @Inject(MAT_DIALOG_DATA) public spell: any
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();

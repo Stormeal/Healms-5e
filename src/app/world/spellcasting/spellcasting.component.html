@@ -34,14 +34,14 @@
 
 
       </div>
-
+<!-- 
       <div class="col-md-4">
 
 
-      </div>
+      </div> -->
 
 
-      <div class="col-md-4">
+      <div class="col-md-8">
 
         <ng-template #spell>
 
@@ -112,7 +112,7 @@
 
                     <h6>Cantrips</h6>
                     <div class="row">
-                      <ng-container *ngFor="let cantrip of this.bardCantrips">
+                      <ng-container *ngFor="let cantrip of this.spellList.Bard.Cantrips">
                         <li [ngbPopover]="spell" triggers="mouseenter:mouseleave" popoverTitle="{{cantrip}}"
                           (mouseenter)="mouseEnter(cantrip)" popoverClass="spellPopup">
                           {{cantrip}}&nbsp;&nbsp;&nbsp;
