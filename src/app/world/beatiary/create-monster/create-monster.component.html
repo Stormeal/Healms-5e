@@ -688,7 +688,7 @@
                         <mat-hint align="start"><strong>Reach</strong>
                         </mat-hint>
                         <span matSuffix>ft &nbsp;</span>
-                        <input matInput type="text" autocomplete="off" formControlName="actionDmg" />
+                        <input matInput type="text" autocomplete="off" formControlName="actionReach" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-1">
@@ -725,7 +725,7 @@
                 </div>
               </div>
 
-              
+
               <ng-container *ngIf="legendaryTrue">
                 <hr />
                 <h4 style="text-align: center"><b>LEGENDARY ACTIONS</b></h4>
@@ -733,12 +733,79 @@
                 <!-- ACTIONS -->
                 <div class="row">
                   <div class="col-sm-1">
-                    <button mat-raised-button class="btn btn-success btn-sm" (click)="addAction()">
+                    <button mat-raised-button class="btn btn-success btn-sm" (click)="addLegendary()">
                       <i class="material-icons">add</i> New Action
                     </button>
                   </div>
                 </div>
-                <p>Legendary Test</p>
+
+
+                <div formArrayName="legendary">
+                  <div *ngFor="let leg of legendaryFormGroup.controls; let i = index">
+                    <div class="row" [formGroupName]="i">
+                      <label class="col-sm-1 col-form-label">Action: </label>
+                      <div class="col-sm-1">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"><strong>Legendary Name</strong>
+                          </mat-hint>
+                          <input matInput type="text" autocomplete="off" formControlName="legendaryName" />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-4">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"><strong>Legendary Description</strong>
+                          </mat-hint>
+                          <input matInput type="text" autocomplete="off" formControlName="legendaryDescription" />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"><strong>Hit Modifier</strong>
+                          </mat-hint>
+                          <input matInput type="text" autocomplete="off" formControlName="legendaryHitMod" />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"><strong>Reach</strong>
+                          </mat-hint>
+                          <span matSuffix>ft &nbsp;</span>
+                          <input matInput type="text" autocomplete="off" formControlName="legendaryReach" />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"><strong>Action Damage</strong>
+                          </mat-hint>
+                          <input matInput type="text" autocomplete="off" formControlName="legendaryDmg" />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"><strong>Dice Select</strong>
+                          </mat-hint>
+                          <mat-select name="dmgDice" [(value)]="dmgDicesSelect" formControlName="legendaryDice">
+                            <mat-option *ngFor="let dmg of dmgDices" [value]="dmg.value">
+                              {{ dmg.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1">
+                        <mat-form-field class="example-full-width">
+                          <mat-hint align="start"><strong>Damage Modifier</strong>
+                          </mat-hint>
+                          <input matInput type="number" autocomplete="off" formControlName="legendaryDmgMod" />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1" style="padding: 2px">
+                        <button mat-raised-button class="btn btn-danger btn-sm" (click)="removeLegendary(i)">
+                          <i class="material-icons">clear</i> Clear
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </ng-container>
 
               <!-- ACTIONS END -->
