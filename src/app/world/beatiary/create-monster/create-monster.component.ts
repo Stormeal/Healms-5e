@@ -98,6 +98,7 @@ export class CreateMonsterComponent implements OnInit {
   creatureForm: FormGroup;
   traitList: FormArray;
   actionList: FormArray;
+  legendaryList: FormArray;
 
   bard = BARD;
   cleric = CLERIC;
@@ -110,7 +111,7 @@ export class CreateMonsterComponent implements OnInit {
 
   selectedWizard: Classes;
   isTrue = false; // Set this to false when live. True is for testing purposes.
-  legendaryTrue = true; // Set this to false when live. Thre is for testing purposes.
+  legendaryTrue = false; // Set this to false when live. Thre is for testing purposes.
 
   creatureRaces = CreatureRaces;
   creatureSizes = CreatureSizes;
@@ -203,6 +204,10 @@ export class CreateMonsterComponent implements OnInit {
     return this.creatureForm.get("actions") as FormArray;
   }
 
+  get legendaryFormGroup() {
+    return this.creatureForm.get("legendary") as FormArray;
+  }
+
   constructor(
     private auth: AuthService,
     // private cs: ClassService,
@@ -289,10 +294,12 @@ export class CreateMonsterComponent implements OnInit {
       spellcastingAbility: "",
       cantrip: "",
       traits: this.fb.array([this.createTrait()]),
-      actions: this.fb.array([this.createAction()])
+      actions: this.fb.array([this.createAction()]),
+      legendary: this.fb.array([this.createLegendary()])
     });
     this.traitList = this.creatureForm.get("traits") as FormArray;
     this.actionList = this.creatureForm.get("actions") as FormArray;
+    this.legendaryList = this.creatureForm.get("legendary") as FormArray;
 
     this.getWizard();
   }
@@ -666,6 +673,7 @@ export class CreateMonsterComponent implements OnInit {
       actionName: ["", Validators.compose([Validators.required])],
       actionDescription: ["", Validators.compose([Validators.required])],
       actionHitMod: ["", Validators.compose([Validators.required])],
+      actionReach: ["", Validators.compose([Validators.required])],
       actionDmg: ["", Validators.compose([Validators.required])],
       actionDice: ["", Validators.compose([Validators.required])],
       actionDmgMod: ["", Validators.compose([Validators.required])]
@@ -678,6 +686,26 @@ export class CreateMonsterComponent implements OnInit {
 
   removeAction(index) {
     this.actionList.removeAt(index);
+  }
+
+  createLegendary(): FormGroup {
+    return this.fb.group({
+      legendaryName: ["", Validators.compose([Validators.required])],
+      legendaryDescription: ["", Validators.compose([Validators.required])],
+      legendaryHitMod: ["", Validators.compose([Validators.required])],
+      legendaryReach: ["", Validators.compose([Validators.required])],
+      legendaryDmg: ["", Validators.compose([Validators.required])],
+      legendaryDice: ["", Validators.compose([Validators.required])],
+      legendaryDmgMod: ["", Validators.compose([Validators.required])]
+    });
+  }
+
+  addLegendary() {
+    this.legendaryList.push(this.createLegendary());
+  }
+
+  removeLegendary(index) {
+    this.legendaryList.removeAt(index);
   }
 
   test(e): boolean {
