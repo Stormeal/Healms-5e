@@ -14,6 +14,7 @@ import {
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
+import * as faker from 'faker';
 
 import { AuthService } from "src/app/core/auth.service";
 import { ClassService } from "src/app/core/class.service";
@@ -53,6 +54,9 @@ import {
   Eigth,
   Nineth
 } from "src/assets/ts/spells";
+import { Upload } from "src/app/core/upload";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
 declare var require: any;
 
@@ -99,6 +103,12 @@ export class CreateMonsterComponent implements OnInit {
   traitList: FormArray;
   actionList: FormArray;
   legendaryList: FormArray;
+
+  user;
+  campaign: any;
+  campaignId: any;
+  selectedFiles: FileList;
+  currentUpload: Upload;
 
   bard = BARD;
   cleric = CLERIC;
@@ -212,7 +222,8 @@ export class CreateMonsterComponent implements OnInit {
     private auth: AuthService,
     // private cs: ClassService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private afs: AngularFirestore
   ) {
     this.filteredCantrips = this.cantripCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
@@ -289,6 +300,9 @@ export class CreateMonsterComponent implements OnInit {
   ngOnInit() {
     this.creatureForm = this.fb.group({
       creatureName: "",
+      creatureSize: "",
+      createRace: "",
+      creatureAlignment: "",
       spellClass: "",
       spellLevel: "",
       spellcastingAbility: "",
@@ -732,5 +746,22 @@ export class CreateMonsterComponent implements OnInit {
   legendaryReturnsTrue(): boolean {
     console.log("Legardy Affirmative");
     return (this.legendaryTrue = true);
+  }
+
+
+  newMonster() {
+    /* CAMPAIGN GETTER */
+    this.auth.getUser().subscribe(user => {
+      this.user = user;
+      this.campaignId = this.user.campaigns.campaignId;
+      this.afs.doc(`campaigns/${this.campaignId}`).valueChanges().subscribe(campaign => {
+        this.campaign = campaign;
+        const campId = this.campaign.uid;
+
+        const creatureId = {
+          uid: this.creatureForm.value["creatureName"] + "_" + faker.random.alphaNumeric(4)
+        };
+      });
+    });
   }
 }

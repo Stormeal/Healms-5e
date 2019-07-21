@@ -29,7 +29,7 @@
                 <label class="col-sm-2 col-form-label">Select Size</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select name="creatireSize" [(value)]="creatureSizeSelect">
+                    <mat-select name="creatireSize" [(value)]="creatureSizeSelect" formControlName="creatureSize">
                       <mat-option *ngFor="let size of creatureSizes" [value]="size.value">
                         {{ size.viewValue }}
                       </mat-option>
@@ -39,7 +39,7 @@
                 <label class="col-sm-2 col-form-label">Select Race</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select name="races" [(value)]="creatureRacesSelect">
+                    <mat-select name="races" [(value)]="creatureRacesSelect" formControlName="creatureRace">
                       <mat-option *ngFor="let races of creatureRaces" [value]="races.value">
                         {{ races.viewValue }}
                       </mat-option>
@@ -49,7 +49,7 @@
                 <label class="col-sm-2 col-form-label">Select Alignment</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select name="alignments" [(value)]="alignmentsSelect">
+                    <mat-select name="alignments" [(value)]="alignmentsSelect" formControlName="creatureAlignment">
                       <mat-option *ngFor="let alignment of alignments" [value]="alignment.value">
                         {{ alignment.viewValue }}
                       </mat-option>
@@ -67,13 +67,15 @@
                 <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>STR</h6>
                   <mat-form-field class="example-full-width">
-
-                    <mat-select name="strength" [(value)]="strSelect">
+                    <span matSuffix>+0 &nbsp;</span>
+                    <input matInput type="text" autocomplete="off" matTooltip="Strength is being able to crush a tomato"
+                      [matTooltipPosition]="'below'" />
+                    <!-- <mat-select name="strength" [(value)]="strSelect">
                       <mat-option *ngFor="let str of str" [value]="str.value">
                         {{ str.viewValue }}
                         <span matSuffix class="pull-right">{{str.suffix}} &nbsp;</span>
                       </mat-option>
-                    </mat-select>
+                    </mat-select> -->
                     <!-- 
                     <input matInput #strength type="text" autocomplete="off"
                       matTooltip="Strength is being able to crush a tomato" [matTooltipPosition]="'below'" /> -->
