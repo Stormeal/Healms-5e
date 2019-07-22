@@ -14,7 +14,7 @@ import {
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
-import * as faker from 'faker';
+import * as faker from "faker";
 
 import { AuthService } from "src/app/core/auth.service";
 import { ClassService } from "src/app/core/class.service";
@@ -109,6 +109,8 @@ export class CreateMonsterComponent implements OnInit {
   campaignId: any;
   selectedFiles: FileList;
   currentUpload: Upload;
+
+  strength: string;
 
   bard = BARD;
   cleric = CLERIC;
@@ -301,8 +303,16 @@ export class CreateMonsterComponent implements OnInit {
     this.creatureForm = this.fb.group({
       creatureName: "",
       creatureSize: "",
-      createRace: "",
+      creatureRace: "",
       creatureAlignment: "",
+
+      str: "",
+      dex: "",
+      con: "",
+      int: "",
+      wis: "",
+      cha: "",
+
       spellClass: "",
       spellLevel: "",
       spellcastingAbility: "",
@@ -669,7 +679,6 @@ export class CreateMonsterComponent implements OnInit {
   createTrait(): FormGroup {
     return this.fb.group({
       traitName: ["", Validators.compose([Validators.required])],
-      spellcastingAbility: ["", Validators.compose([Validators.required])],
       traitDescription: ["", Validators.compose([Validators.required])]
     });
   }
@@ -761,6 +770,26 @@ export class CreateMonsterComponent implements OnInit {
         const creatureId = {
           uid: this.creatureForm.value["creatureName"] + "_" + faker.random.alphaNumeric(4)
         };
+
+        const creature = {
+          uid: creatureId.uid,
+          creatureName: this.creatureForm.value["creatureName"],
+          creatureSize: this.creatureForm.value["creatureSize"],
+          creatureRace: this.creatureForm.value["creatureRace"],
+          creatureAlignment: this.creatureForm.value["creatureAlignment"],
+
+          strength: this.creatureForm.value["str"],
+          // dexterity: this.creatureForm.value["dex"],
+          // constitution: this.creatureForm.value["con"],
+          // intelligence: this.creatureForm.value["int"],
+          // wisdom: this.creatureForm.value["wis"],
+          // charisma: this.creatureForm.value["cha"],
+
+          traits: this.creatureForm.value["traits"],
+          actions: this.creatureForm.value["actions"]
+        };
+        this.afs.collection(`campaigns/${campId}/creatures`).doc(creatureId.uid).set(creature);
+        return this.creatureForm.reset();
       });
     });
   }
