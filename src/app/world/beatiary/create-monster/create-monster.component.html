@@ -39,7 +39,7 @@
                 <label class="col-sm-2 col-form-label">Select Race</label>
                 <div class="col-lg-2 col-md-2 col-sm-1">
                   <mat-form-field>
-                    <mat-select name="races" [(value)]="creatureRacesSelect" formControlName="creatureRace">
+                    <mat-select name="creatureRace" [(value)]="creatureRacesSelect" formControlName="creatureRace">
                       <mat-option *ngFor="let races of creatureRaces" [value]="races.value">
                         {{ races.viewValue }}
                       </mat-option>
@@ -67,15 +67,16 @@
                 <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>STR</h6>
                   <mat-form-field class="example-full-width">
-                    <span matSuffix>+0 &nbsp;</span>
-                    <input matInput type="text" autocomplete="off" matTooltip="Strength is being able to crush a tomato"
-                      [matTooltipPosition]="'below'" />
-                    <!-- <mat-select name="strength" [(value)]="strSelect">
+                    <!-- <input matInput [(ngModel)]="strength" name="strength" id="strength" type="text" autocomplete="off"
+                      matTooltip="Strength is being able to crush a tomato" [matTooltipPosition]="'below'"
+                      formControlName="str" />
+                    <span matSuffix>+{{strength}} &nbsp;</span> -->
+                    <mat-select name="strength" [(value)]="strSelect" formControlName="str">
                       <mat-option *ngFor="let str of str" [value]="str.value">
                         {{ str.viewValue }}
                         <span matSuffix class="pull-right">{{str.suffix}} &nbsp;</span>
                       </mat-option>
-                    </mat-select> -->
+                    </mat-select>
                     <!-- 
                     <input matInput #strength type="text" autocomplete="off"
                       matTooltip="Strength is being able to crush a tomato" [matTooltipPosition]="'below'" /> -->
@@ -86,7 +87,7 @@
                   <h6>DEX</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input matInput type="text" autocomplete="off"
+                    <input matInput type="text" autocomplete="off" formControlName="dex"
                       matTooltip="Dexterity is being able to dodge a tomato" [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
@@ -94,7 +95,7 @@
                   <h6>CON</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input matInput type="text" autocomplete="off"
+                    <input matInput type="text" autocomplete="off" formControlName="con"
                       matTooltip="Constitution is being able to eat a bad tomato" [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
@@ -102,7 +103,7 @@
                   <h6>INT</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input matInput type="text" autocomplete="off"
+                    <input matInput type="text" autocomplete="off" formControlName="int"
                       matTooltip="Intelligence is knowing a tomato is a fruit" [matTooltipPosition]="'below'" />
                   </mat-form-field>
                 </div>
@@ -110,7 +111,7 @@
                   <h6>WIS</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input matInput type="text" autocomplete="off"
+                    <input matInput type="text" autocomplete="off" formControlName="wis"
                       matTooltip="Wisdom is knowing not to put a tomato in a fruit salad"
                       [matTooltipPosition]="'below'" />
                   </mat-form-field>
@@ -119,7 +120,7 @@
                   <h6>CHA</h6>
                   <mat-form-field class="example-full-width">
                     <span matSuffix>+0 &nbsp;</span>
-                    <input matInput type="text" autocomplete="off"
+                    <input matInput type="text" autocomplete="off" formControlName="cha"
                       matTooltip="Charisma is being able to sell a tomato based fruit salad"
                       [matTooltipPosition]="'below'" />
                   </mat-form-field>
@@ -811,6 +812,11 @@
               </ng-container>
 
               <!-- ACTIONS END -->
+
+              <hr />
+              <button mat-raised-button class="btn btn-success btn-sm" (click)="newMonster()">
+                Save
+              </button>
             </form>
           </div>
         </div>
