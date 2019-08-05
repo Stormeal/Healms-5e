@@ -5,11 +5,11 @@ import {
   FormArray,
   FormControl,
   FormBuilder,
-  Validators
+  Validators,
 } from "@angular/forms";
 import {
   MatAutocompleteSelectedEvent,
-  MatAutocomplete
+  MatAutocomplete,
 } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Observable } from "rxjs";
@@ -36,11 +36,11 @@ import { CreatureSizes } from "src/assets/ts/creatureSizes";
 import { Alignments } from "src/assets/ts/alignments";
 import { ChallengeRatings } from "src/assets/ts/challengeRatings";
 import { dmgDices, Dices } from "src/assets/ts/dices";
-import { STR } from "src/assets/ts/skillPoints";
+import { STR, DEX, CON, INT, WIS, CHA } from "src/assets/ts/skillPoints";
 import {
   SpellCastingAbility,
   SpellLevel,
-  SpellSlots
+  SpellSlots,
 } from "src/assets/ts/spellcasting";
 import {
   Cantrips,
@@ -52,7 +52,7 @@ import {
   Sixth,
   Seventh,
   Eigth,
-  Nineth
+  Nineth,
 } from "src/assets/ts/spells";
 import { Upload } from "src/app/core/upload";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -62,7 +62,7 @@ declare var require: any;
 
 @Component({
   selector: "app-create-monster",
-  templateUrl: "./create-monster.component.html"
+  templateUrl: "./create-monster.component.html",
 })
 export class CreateMonsterComponent implements OnInit {
   public creatureRacesSelect = CreatureRaces[0].viewValue;
@@ -76,7 +76,11 @@ export class CreateMonsterComponent implements OnInit {
   public spellLevelSelect = SpellLevel[0].viewValue;
 
   public strSelect = STR[2].viewValue;
-  public strSufSelect = STR[2].suffix;
+  public dexSelect = DEX[2].viewValue;
+  public conSelect = CON[2].viewValue;
+  public intSelect = INT[2].viewValue;
+  public wisSelect = WIS[2].viewValue;
+  public chaSelect = CHA[2].viewValue;
 
   public allCantrips = Cantrips;
   public cantrips = ["Dancing Light"];
@@ -136,6 +140,11 @@ export class CreateMonsterComponent implements OnInit {
   spellLevels = SpellLevel;
 
   str = STR;
+  dex = DEX;
+  con = CON;
+  int = INT;
+  wis = WIS;
+  cha = CHA;
 
   visible = true;
   selectable = true;
@@ -204,7 +213,7 @@ export class CreateMonsterComponent implements OnInit {
     { value: this.ranger, viewValue: "Ranger" },
     { value: this.sorcerer, viewValue: "Sorcerer" },
     { value: this.warlock, viewValue: "Warlock" },
-    { value: this.wizard, viewValue: "Wizard" }
+    { value: this.wizard, viewValue: "Wizard" },
   ];
   public spellClassSelect = this.spellClass[7].value;
 
@@ -225,77 +234,77 @@ export class CreateMonsterComponent implements OnInit {
     // private cs: ClassService,
     private router: Router,
     private fb: FormBuilder,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
   ) {
     this.filteredCantrips = this.cantripCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((cantrip: string | null) =>
-        cantrip ? this._filter(cantrip) : this.allCantrips.slice()
-      )
+        cantrip ? this._filter(cantrip) : this.allCantrips.slice(),
+      ),
     );
     this.filteredFirsts = this.firstCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((first: string | null) =>
-        first ? this._firstFilter(first) : this.allFirst.slice()
-      )
+        first ? this._firstFilter(first) : this.allFirst.slice(),
+      ),
     );
     this.filteredSeconds = this.secondCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((second: string | null) =>
-        second ? this._secondFilter(second) : this.allSecond.slice()
-      )
+        second ? this._secondFilter(second) : this.allSecond.slice(),
+      ),
     );
     this.filteredThirds = this.thirdCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((third: string | null) =>
-        third ? this._thirdFilter(third) : this.allThird.slice()
-      )
+        third ? this._thirdFilter(third) : this.allThird.slice(),
+      ),
     );
     this.filteredFourths = this.fourthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((fourth: string | null) =>
-        fourth ? this._fourthFilter(fourth) : this.allFourth.slice()
-      )
+        fourth ? this._fourthFilter(fourth) : this.allFourth.slice(),
+      ),
     );
     this.filteredFifths = this.fifthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((fifth: string | null) =>
-        fifth ? this._fifthFilter(fifth) : this.allFifth.slice()
-      )
+        fifth ? this._fifthFilter(fifth) : this.allFifth.slice(),
+      ),
     );
     this.filteredSixths = this.sixthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((sixth: string | null) =>
-        sixth ? this._sixthFilter(sixth) : this.allSixth.slice()
-      )
+        sixth ? this._sixthFilter(sixth) : this.allSixth.slice(),
+      ),
     );
     this.filteredSevenths = this.seventhCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((seventh: string | null) =>
-        seventh ? this._seventhFilter(seventh) : this.allSeventh.slice()
-      )
+        seventh ? this._seventhFilter(seventh) : this.allSeventh.slice(),
+      ),
     );
     this.filteredEigths = this.sixthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((eigth: string | null) =>
-        eigth ? this._eigthFilter(eigth) : this.allEigth.slice()
-      )
+        eigth ? this._eigthFilter(eigth) : this.allEigth.slice(),
+      ),
     );
     this.filteredNineths = this.seventhCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((nineth: string | null) =>
-        nineth ? this._ninethFilter(nineth) : this.allNineth.slice()
-      )
+        nineth ? this._ninethFilter(nineth) : this.allNineth.slice(),
+      ),
     );
   }
 
@@ -306,20 +315,47 @@ export class CreateMonsterComponent implements OnInit {
       creatureRace: "",
       creatureAlignment: "",
 
-      str: "",
+      str: STR[2],
       dex: "",
       con: "",
       int: "",
       wis: "",
       cha: "",
 
+      armorClass: "",
+      hitPoints: "",
+      hitDie: "",
+      hitModifier: "",
+      speed: "",
+
+      savingThrows: "",
+      skills: "",
+      dmgRes: "",
+      dmgImmunities: "",
+      languages: "",
+      senses: "",
+      challengeRating: "",
+
       spellClass: "",
       spellLevel: "",
       spellcastingAbility: "",
-      cantrip: "",
+      spellAttMod: "",
+      spellSave: "",
+
+      cantrips: this.cantripCtrl,
+      // selectedFirst: "",
+      // selectedSecond: "",
+      // selectedThird: "",
+      // selectedFourth: "",
+      // selectedFifth: "",
+      // selectedSixth: "",
+      // selectedSeventh: "",
+      // selectedEigth: "",
+      // selectedNineth: "",
+
       traits: this.fb.array([this.createTrait()]),
       actions: this.fb.array([this.createAction()]),
-      legendary: this.fb.array([this.createLegendary()])
+      legendary: this.fb.array([this.createLegendary()]),
     });
     this.traitList = this.creatureForm.get("traits") as FormArray;
     this.actionList = this.creatureForm.get("actions") as FormArray;
@@ -331,52 +367,52 @@ export class CreateMonsterComponent implements OnInit {
   /* Everything related to the spellchips */
   private _filter(cantrip: string) {
     return this.allCantrips.filter(
-      spell => spell.toLowerCase().indexOf(cantrip.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(cantrip.toLowerCase()) === 0,
     );
   }
   private _firstFilter(name: string) {
     return this.allFirst.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _secondFilter(name: string) {
     return this.allSecond.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _thirdFilter(name: string) {
     return this.allThird.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _fourthFilter(name: string) {
     return this.allFourth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _fifthFilter(name: string) {
     return this.allFifth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _sixthFilter(name: string) {
     return this.allSixth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _seventhFilter(name: string) {
     return this.allSeventh.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _eigthFilter(name: string) {
     return this.allEigth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
   private _ninethFilter(name: string) {
     return this.allNineth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0
+      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
 
@@ -679,7 +715,7 @@ export class CreateMonsterComponent implements OnInit {
   createTrait(): FormGroup {
     return this.fb.group({
       traitName: ["", Validators.compose([Validators.required])],
-      traitDescription: ["", Validators.compose([Validators.required])]
+      traitDescription: ["", Validators.compose([Validators.required])],
     });
   }
 
@@ -699,7 +735,7 @@ export class CreateMonsterComponent implements OnInit {
       actionReach: ["", Validators.compose([Validators.required])],
       actionDmg: ["", Validators.compose([Validators.required])],
       actionDice: ["", Validators.compose([Validators.required])],
-      actionDmgMod: ["", Validators.compose([Validators.required])]
+      actionDmgMod: ["", Validators.compose([Validators.required])],
     });
   }
 
@@ -719,7 +755,7 @@ export class CreateMonsterComponent implements OnInit {
       legendaryReach: ["", Validators.compose([Validators.required])],
       legendaryDmg: ["", Validators.compose([Validators.required])],
       legendaryDice: ["", Validators.compose([Validators.required])],
-      legendaryDmgMod: ["", Validators.compose([Validators.required])]
+      legendaryDmgMod: ["", Validators.compose([Validators.required])],
     });
   }
 
@@ -757,40 +793,68 @@ export class CreateMonsterComponent implements OnInit {
     return (this.legendaryTrue = true);
   }
 
-
   newMonster() {
     /* CAMPAIGN GETTER */
     this.auth.getUser().subscribe(user => {
       this.user = user;
       this.campaignId = this.user.campaigns.campaignId;
-      this.afs.doc(`campaigns/${this.campaignId}`).valueChanges().subscribe(campaign => {
-        this.campaign = campaign;
-        const campId = this.campaign.uid;
+      this.afs
+        .doc(`campaigns/${this.campaignId}`)
+        .valueChanges()
+        .subscribe(campaign => {
+          this.campaign = campaign;
+          const campId = this.campaign.uid;
 
-        const creatureId = {
-          uid: this.creatureForm.value["creatureName"] + "_" + faker.random.alphaNumeric(4)
-        };
+          const creatureId = {
+            uid:
+              this.creatureForm.value["creatureName"] +
+              "_" +
+              faker.random.alphaNumeric(4),
+          };
 
-        const creature = {
-          uid: creatureId.uid,
-          creatureName: this.creatureForm.value["creatureName"],
-          creatureSize: this.creatureForm.value["creatureSize"],
-          creatureRace: this.creatureForm.value["creatureRace"],
-          creatureAlignment: this.creatureForm.value["creatureAlignment"],
+          const creature = {
+            uid: creatureId.uid,
+            creatureName: this.creatureForm.value["creatureName"],
+            creatureSize: this.creatureForm.value["creatureSize"],
+            creatureRace: this.creatureForm.value["creatureRace"],
+            creatureAlignment: this.creatureForm.value["creatureAlignment"],
 
-          strength: this.creatureForm.value["str"],
-          // dexterity: this.creatureForm.value["dex"],
-          // constitution: this.creatureForm.value["con"],
-          // intelligence: this.creatureForm.value["int"],
-          // wisdom: this.creatureForm.value["wis"],
-          // charisma: this.creatureForm.value["cha"],
+            strength: this.creatureForm.value["str"],
+            dexterity: this.creatureForm.value["dex"],
+            constitution: this.creatureForm.value["con"],
+            intelligence: this.creatureForm.value["int"],
+            wisdom: this.creatureForm.value["wis"],
+            charisma: this.creatureForm.value["cha"],
 
-          traits: this.creatureForm.value["traits"],
-          actions: this.creatureForm.value["actions"]
-        };
-        this.afs.collection(`campaigns/${campId}/creatures`).doc(creatureId.uid).set(creature);
-        return this.creatureForm.reset();
-      });
+            armorClass: this.creatureForm.value["armorClass"],
+            hitPoints: this.creatureForm.value["hitPoints"],
+            hitDie: this.creatureForm.value["hitDie"],
+            hitModifier: this.creatureForm.value["hitModifier"],
+            speed: this.creatureForm.value["speed"],
+
+            savingThrows: this.creatureForm.value["savingThrows"],
+            skills: this.creatureForm.value["skills"],
+            dmgRes: this.creatureForm.value["dmgRes"],
+            dmgImmunities: this.creatureForm.value["dmgImmunities"],
+            languages: this.creatureForm.value["languages"],
+            senses: this.creatureForm.value["senses"],
+            challengeRating: this.creatureForm.value["challengeRating"],
+
+            spellSave: this.creatureForm.value["spellSave"],
+            spellcastingAbility: this.creatureForm.value["spellcastingAbility"],
+            spellClass: this.creatureForm.value["spellClass"],
+            spellLevel: this.creatureForm.value["spellLevel"],
+            cantrip: this.creatureForm.value["cantrip"],
+
+            traits: this.creatureForm.value["traits"],
+            actions: this.creatureForm.value["actions"],
+          };
+          this.afs
+            .collection(`campaigns/${campId}/creatures`)
+            .doc(creatureId.uid)
+            .set(creature);
+          return this.creatureForm.reset();
+        });
     });
   }
 }
