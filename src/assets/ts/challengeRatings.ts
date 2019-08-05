@@ -1,5 +1,5 @@
 export const ChallengeRatings = [
-  { value: "0", viewValue: "0 (0-10 XP)" },
+  { value: "0", viewValue: "0 (0 - 10 XP)" },
   { value: "1/8", viewValue: "1/8 (25 XP)" },
   { value: "1/4", viewValue: "1/4 (50 XP)" },
   { value: "1/2", viewValue: "1/2 (100 XP)" },
@@ -27,5 +27,5 @@ export const ChallengeRatings = [
   { value: "22", viewValue: "22 (41000 XP)" },
   { value: "23", viewValue: "23 (50000 XP)" },
   { value: "24", viewValue: "24 (62000 XP)" },
-  { value: "25", viewValue: "25 (155000 XP)" }
+  { value: "25", viewValue: "25 (155000 XP)" },
 ];
