@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild, Input } from "@angular/core";
 import {
   FormGroup,
   FormArray,
@@ -13,7 +13,7 @@ import {
 } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
+import { map, startWith, finalize } from "rxjs/operators";
 import * as faker from "faker";
 
 import { AuthService } from "src/app/core/auth.service";
@@ -57,6 +57,10 @@ import {
 import { Upload } from "src/app/core/upload";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import {
+  AngularFireUploadTask,
+  AngularFireStorage,
+} from "@angular/fire/storage";
 
 declare var require: any;
 declare const $: any;
@@ -66,6 +70,7 @@ declare const $: any;
   templateUrl: "./create-monster.component.html",
 })
 export class CreateMonsterComponent implements OnInit {
+  @Input() file: File;
   public creatureRacesSelect = CreatureRaces[0].viewValue;
   public creatureSizeSelect = CreatureSizes[2].viewValue;
   public alignmentsSelect = Alignments[4].viewValue;
@@ -109,6 +114,7 @@ export class CreateMonsterComponent implements OnInit {
   actionList: FormArray;
   legendaryList: FormArray;
 
+  task: AngularFireUploadTask;
   user;
   campaign: any;
   campaignId: any;
@@ -236,6 +242,7 @@ export class CreateMonsterComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private afs: AngularFirestore,
+    private storage: AngularFireStorage,
   ) {
     this.filteredCantrips = this.cantripCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
@@ -366,6 +373,10 @@ export class CreateMonsterComponent implements OnInit {
     console.log("Cantrip ctrl: ", this.cantripCtrl);
     console.log("Filtered cantrips: ", this.filteredCantrips);
     console.log("Test: ", this.cantripInput);
+  }
+
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
   }
 
   /* Everything related to the spellchips */
@@ -861,7 +872,94 @@ export class CreateMonsterComponent implements OnInit {
 
             traits: this.creatureForm.value["traits"],
             actions: this.creatureForm.value["actions"],
+
+            photoURL: null,
           };
+
+          if (this.selectedFiles) {
+            const file = this.selectedFiles.item(0);
+            this.currentUpload = new Upload(file);
+
+            // The storage path
+            const path = `campaigns/${campId}/${creatureId}`;
+
+            // Reference to storage bucket
+            const ref = this.storage.ref(path);
+
+            // The main task
+            this.task = this.storage.upload(path, file);
+            console.log("You got this far!");
+
+            this.task
+              .snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  ref.getDownloadURL().subscribe(url => {
+                    console.log("URL: ", url); // <-- do what ever you want with the url..
+                    const creaturePhoto = {
+                      uid: creatureId.uid,
+                      creatureName: this.creatureForm.value["creatureName"],
+                      creatureSize: this.creatureForm.value["creatureSize"],
+                      creatureRace: this.creatureForm.value["creatureRace"],
+                      creatureAlignment: this.creatureForm.value[
+                        "creatureAlignment"
+                      ],
+
+                      strength: this.creatureForm.value["str"],
+                      dexterity: this.creatureForm.value["dex"],
+                      constitution: this.creatureForm.value["con"],
+                      intelligence: this.creatureForm.value["int"],
+                      wisdom: this.creatureForm.value["wis"],
+                      charisma: this.creatureForm.value["cha"],
+
+                      armorClass: this.creatureForm.value["armorClass"],
+                      hitPoints: this.creatureForm.value["hitPoints"],
+                      hitDie: this.creatureForm.value["hitDie"],
+                      hitModifier: this.creatureForm.value["hitModifier"],
+                      speed: this.creatureForm.value["speed"],
+
+                      savingThrows: this.creatureForm.value["savingThrows"],
+                      skills: this.creatureForm.value["skills"],
+                      dmgRes: this.creatureForm.value["dmgRes"],
+                      dmgImmunities: this.creatureForm.value["dmgImmunities"],
+                      languages: this.creatureForm.value["languages"],
+                      senses: this.creatureForm.value["senses"],
+                      challengeRating: this.creatureForm.value[
+                        "challengeRating"
+                      ],
+
+                      spellSave: this.creatureForm.value["spellSave"],
+                      spellcastingAbility: this.creatureForm.value[
+                        "spellcastingAbility"
+                      ],
+                      spellClass: this.creatureForm.value["spellClass"],
+                      spellLevel: this.creatureForm.value["spellLevel"],
+                      spellCantrip: this.creatureForm.value["cantrip"],
+                      spellFirst: this.creatureForm.value["first"],
+                      spellSecond: this.creatureForm.value["second"],
+                      spellThird: this.creatureForm.value["third"],
+                      spellFourth: this.creatureForm.value["fourth"],
+                      spellFifth: this.creatureForm.value["fifth"],
+                      spellSixth: this.creatureForm.value["sixth"],
+                      spellSeventh: this.creatureForm.value["seventh"],
+                      spellEight: this.creatureForm.value["eight"],
+                      spellNineth: this.creatureForm.value["nineth"],
+
+                      traits: this.creatureForm.value["traits"],
+                      actions: this.creatureForm.value["actions"],
+
+                      photoURL: url,
+                    };
+                    this.afs
+                      .collection(`campaigns/${campId}/creatures`)
+                      .doc(creature.uid)
+                      .set(creaturePhoto);
+                    return this.creatureForm.reset();
+                  });
+                }),
+              )
+              .subscribe();
+          }
 
           this.afs
             .collection(`campaigns/${campId}/creatures`)
