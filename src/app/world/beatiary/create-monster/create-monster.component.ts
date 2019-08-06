@@ -59,6 +59,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
 declare var require: any;
+declare const $: any;
 
 @Component({
   selector: "app-create-monster",
@@ -98,7 +99,7 @@ export class CreateMonsterComponent implements OnInit {
   public sixths = [Sixth[0]];
   public allSeventh = Seventh;
   public sevenths = [Seventh[0]];
-  public allEigth = Eigth;
+  public allEight = Eigth;
   public eigths = [Eigth[0]];
   public allNineth = Nineth;
   public nineths = [Nineth[0]];
@@ -296,7 +297,7 @@ export class CreateMonsterComponent implements OnInit {
       // tslint:disable-next-line: deprecation
       startWith(null),
       map((eigth: string | null) =>
-        eigth ? this._eigthFilter(eigth) : this.allEigth.slice(),
+        eigth ? this._eigthFilter(eigth) : this.allEight.slice(),
       ),
     );
     this.filteredNineths = this.seventhCtrl.valueChanges.pipe(
@@ -342,16 +343,16 @@ export class CreateMonsterComponent implements OnInit {
       spellAttMod: "",
       spellSave: "",
 
-      cantrips: this.cantripCtrl,
-      // selectedFirst: "",
-      // selectedSecond: "",
-      // selectedThird: "",
-      // selectedFourth: "",
-      // selectedFifth: "",
-      // selectedSixth: "",
-      // selectedSeventh: "",
-      // selectedEigth: "",
-      // selectedNineth: "",
+      cantrip: "",
+      first: "",
+      second: "",
+      third: "",
+      fourth: "",
+      fifth: "",
+      sixth: "",
+      seventh: "",
+      eight: "",
+      nineth: "",
 
       traits: this.fb.array([this.createTrait()]),
       actions: this.fb.array([this.createAction()]),
@@ -362,6 +363,9 @@ export class CreateMonsterComponent implements OnInit {
     this.legendaryList = this.creatureForm.get("legendary") as FormArray;
 
     this.getWizard();
+    console.log("Cantrip ctrl: ", this.cantripCtrl);
+    console.log("Filtered cantrips: ", this.filteredCantrips);
+    console.log("Test: ", this.cantripInput);
   }
 
   /* Everything related to the spellchips */
@@ -406,7 +410,7 @@ export class CreateMonsterComponent implements OnInit {
     );
   }
   private _eigthFilter(name: string) {
-    return this.allEigth.filter(
+    return this.allEight.filter(
       spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
     );
   }
@@ -844,17 +848,43 @@ export class CreateMonsterComponent implements OnInit {
             spellcastingAbility: this.creatureForm.value["spellcastingAbility"],
             spellClass: this.creatureForm.value["spellClass"],
             spellLevel: this.creatureForm.value["spellLevel"],
-            cantrip: this.creatureForm.value["cantrip"],
+            spellCantrip: this.creatureForm.value["cantrip"],
+            spellFirst: this.creatureForm.value["first"],
+            spellSecond: this.creatureForm.value["second"],
+            spellThird: this.creatureForm.value["third"],
+            spellFourth: this.creatureForm.value["fourth"],
+            spellFifth: this.creatureForm.value["fifth"],
+            spellSixth: this.creatureForm.value["sixth"],
+            spellSeventh: this.creatureForm.value["seventh"],
+            spellEight: this.creatureForm.value["eight"],
+            spellNineth: this.creatureForm.value["nineth"],
 
             traits: this.creatureForm.value["traits"],
             actions: this.creatureForm.value["actions"],
           };
+
           this.afs
             .collection(`campaigns/${campId}/creatures`)
             .doc(creatureId.uid)
             .set(creature);
           return this.creatureForm.reset();
         });
+    });
+
+    // Prepare the preview for profile picture
+    $("#creature-picture").change(function() {
+      const input = $(this);
+
+      if (input[0].files && input[0].files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e: any) {
+          $("#creaturePicturePreview")
+            .attr("src", e.target.result)
+            .fadeIn("slow");
+        };
+        reader.readAsDataURL(input[0].files[0]);
+      }
     });
   }
 }
