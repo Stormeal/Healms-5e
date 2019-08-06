@@ -1,12 +1,97 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
+      <mat-tab-group>
+        <mat-tab label="My Religions"> My Religions </mat-tab>
+        <mat-tab label="Manage Religions">
+          <div class="row">
+            <!-- NEW RELIGION CARD START-->
+            <div class="card col-md-6" style="position: fixed;">
+              <div class="card-header card-header-icon card-header-success">
+                <div class="card-icon">
+                  <i class="fas fa-campground fa-lg"></i>
+                </div>
+                <h4 class="card-title">
+                  New City -
+                  <small class="category"
+                    >Add a new city to your campaign</small
+                  >
+                </h4>
+              </div>
+              <div class="card-body">
+                <form class="form" method="" action="">
+                  <div class="row">
+                    <div class="col-md-7">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
+                      >
+                        <input matInput type="text" autocomplete="off" />
+                        <mat-label>City Name</mat-label>
+                      </mat-form-field>
+                    </div>
 
-      <p>
-        religions works!
-      </p>
+                    <div class="col-md-5">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
+                      >
+                        <input matInput type="text" autocomplete="off" />
+                        <mat-label>Country</mat-label>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
+                      >
+                        <input matInput type="text" autocomplete="off" />
+                        <mat-label>Population</mat-label>
+                      </mat-form-field>
+                    </div>
 
+                    <div class="col-md-5">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
+                      >
+                        <input matInput type="text" autocomplete="off" />
+                        <mat-label>Lord / Jarl / King / President</mat-label>
+                      </mat-form-field>
+                    </div>
+                  </div>
 
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="bmd-label-floating"
+                          >City Description</label
+                        >
+                        <textarea class="form-control" rows="3"> </textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <br />
+                  <hr />
+                  <button
+                    mat-raised-button
+                    (click)="newCity()"
+                    class="btn btn-success pull-right"
+                  >
+                    Create City
+                  </button>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+            </div>
+            <!-- NEW RELIGION CARD END-->
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <!-- <h4 class="display-3" style="font-size: 1.4em">My Religions</h4> -->
     </div>
   </div>
 </div>
