@@ -1,37 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-players',
-  templateUrl: './players.component.html',
-  styleUrls: ['./players.component.scss']
+  selector: "app-players",
+  templateUrl: "./players.component.html",
+  styleUrls: ["./players.component.scss"],
 })
 export class PlayersComponent implements OnInit {
   races = [
-    { value: 'Hill Dwarf', viewValue: 'Hill Dwarf' },
-    { value: 'Mountain Dwarf', viewValue: 'Mountain Dwarf' },
-    { value: 'Dragonbord', viewValue: 'Dragonborn' },
-    { value: 'High Elf', viewValue: 'High Elf' },
-    { value: 'Wood Elf', viewValue: 'Wood Elf' },
-    { value: 'Rock Gnome', viewValue: 'Rock Gnome' },
-    { value: 'Lightfoot Halfling', viewValue: 'Lightfoot Halfling' },
-    { value: 'Stout Halfling', viewValue: 'Stout Halfling' },
-    { value: 'Half-Elf', viewValue: 'Half-Elf' },
-    { value: 'Half-Orc', viewValue: 'Half-Orc' },
-    { value: 'Human', viewValue: 'Human' },
-    { value: 'Tiefling', viewValue: 'Tiefling' }
+    { value: "Hill Dwarf", viewValue: "Hill Dwarf" },
+    { value: "Mountain Dwarf", viewValue: "Mountain Dwarf" },
+    { value: "Dragonbord", viewValue: "Dragonborn" },
+    { value: "High Elf", viewValue: "High Elf" },
+    { value: "Wood Elf", viewValue: "Wood Elf" },
+    { value: "Rock Gnome", viewValue: "Rock Gnome" },
+    { value: "Lightfoot Halfling", viewValue: "Lightfoot Halfling" },
+    { value: "Stout Halfling", viewValue: "Stout Halfling" },
+    { value: "Half-Elf", viewValue: "Half-Elf" },
+    { value: "Half-Orc", viewValue: "Half-Orc" },
+    { value: "Human", viewValue: "Human" },
+    { value: "Tiefling", viewValue: "Tiefling" },
   ];
   classes = [
-    { value: 'barb', viewValue: 'Barbarian' },
-    { value: 'bard', viewValue: 'Bard' },
-    { value: 'cleric', viewValue: 'Cleric' },
-    { value: 'fighter', viewValue: 'Fighter' },
-    { value: 'monk', viewValue: 'Monk' },
-    { value: 'paladin', viewValue: 'Paladin' },
-    { value: 'ranger', viewValue: 'Ranger' },
-    { value: 'runemaster', viewValue: 'Runemaster' },
-    { value: 'sorcere', viewValue: 'Sorcerer' },
-    { value: 'warlock', viewValue: 'Warlock' },
-    { value: 'wizard', viewValue: 'Wizard' },
+    { value: "barb", viewValue: "Barbarian" },
+    { value: "bard", viewValue: "Bard" },
+    { value: "cleric", viewValue: "Cleric" },
+    { value: "fighter", viewValue: "Fighter" },
+    { value: "monk", viewValue: "Monk" },
+    { value: "paladin", viewValue: "Paladin" },
+    { value: "ranger", viewValue: "Ranger" },
+    { value: "runemaster", viewValue: "Runemaster" },
+    { value: "sorcere", viewValue: "Sorcerer" },
+    { value: "warlock", viewValue: "Warlock" },
+    { value: "wizard", viewValue: "Wizard" },
   ];
   level = [
     { value: 1, viewValue: 1 },
@@ -119,9 +119,7 @@ export class PlayersComponent implements OnInit {
     { value: 25, viewValue: 25 },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

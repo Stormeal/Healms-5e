@@ -7,31 +7,74 @@
             <div class="card-icon">
               <i class="material-icons">perm_identity</i>
             </div>
-            <h4 class="card-title">Character Creation -
-              <small class="category">Create a new player for your campaign</small>
+            <h4 class="card-title">
+              Character Creation -
+              <small class="category"
+                >Create a new player for your campaign</small
+              >
             </h4>
           </div>
           <div class="card-body">
             <form>
               <div class="row">
+                <div class="col-sm-5 mr-auto ml-auto">
+                  <mat-form-field
+                    class="example-full-width"
+                    floatLabel="always"
+                  >
+                    <mat-label>CHARACTER NAME</mat-label>
+                    <mat-hint align="start"
+                      ><strong>Specify Character Name</strong>
+                    </mat-hint>
+                    <input
+                      matInput
+                      type="text"
+                      autocomplete="off"
+                      formControlName="characterName"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <br />
+              <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
                     <mat-form-field floatLabel="always">
-                      <mat-select placeholder="Select Class" name="class" required>
-                        <mat-option *ngFor="let class of classes" [value]="class.value">
+                      <mat-select
+                        placeholder="Select Class"
+                        name="class"
+                        required
+                      >
+                        <mat-option
+                          *ngFor="let class of classes"
+                          [value]="class.value"
+                        >
                           {{ class.viewValue }}
                         </mat-option>
                       </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Select a class</strong>
+                      </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
                     <mat-form-field floatLabel="always">
-                      <mat-select placeholder="Select Race" name="race" required>
-                        <mat-option *ngFor="let race of races" [value]="race.value">
+                      <mat-select
+                        placeholder="Select Race"
+                        name="race"
+                        required
+                      >
+                        <mat-option
+                          *ngFor="let race of races"
+                          [value]="race.value"
+                        >
                           {{ race.viewValue }}
                         </mat-option>
+                        <mat-hint align="start"
+                          ><strong>Select a race</strong>
+                        </mat-hint>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -39,33 +82,57 @@
                 <div class="col-md-2">
                   <div class="form-group">
                     <mat-form-field floatLabel="always">
-                      <mat-select placeholder="Choose Level" name="class" required>
-                        <mat-option *ngFor="let level of level" [value]="level.value">
+                      <mat-select
+                        placeholder="Choose Level"
+                        name="class"
+                        required
+                      >
+                        <mat-option
+                          *ngFor="let level of level"
+                          [value]="level.value"
+                        >
                           {{ level.viewValue }}
                         </mat-option>
                       </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Choose level</strong>
+                      </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="form-group">
                     <mat-form-field floatLabel="always">
-                      <mat-select placeholder="Armor Rating" name="class" required>
+                      <mat-select
+                        placeholder="Armor Rating"
+                        name="class"
+                        required
+                      >
                         <mat-option *ngFor="let ac of ac" [value]="ac.value">
                           {{ ac.viewValue }}
                         </mat-option>
                       </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Choose AC</strong>
+                      </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="form-group">
                     <mat-form-field floatLabel="always">
-                      <mat-select placeholder="Passive Wisdom" name="class" required>
+                      <mat-select
+                        placeholder="Passive Wisdom"
+                        name="class"
+                        required
+                      >
                         <mat-option *ngFor="let wis of wis" [value]="wis.value">
                           {{ wis.viewValue }}
                         </mat-option>
                       </mat-select>
+                      <mat-hint align="start"
+                        ><strong>Select pas. wisdom</strong>
+                      </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -80,11 +147,16 @@
               </div>
               <div class="row">
                 <div class="col-md-3 ml-auto mr-auto">
-                  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                  <div
+                    class="fileinput fileinput-new text-center"
+                    data-provides="fileinput"
+                  >
                     <div class="fileinput-new thumbnail img-circle card-avatar">
-                      <img src="./assets/img/placeholder.jpg" alt="...">
+                      <img src="./assets/img/placeholder.jpg" alt="..." />
                     </div>
-                    <div class="fileinput-preview fileinput-exists thumbnail card-avatar"></div>
+                    <div
+                      class="fileinput-preview fileinput-exists thumbnail card-avatar"
+                    ></div>
                     <div>
                       <span class="btn btn-round btn-success btn-file">
                         <span class="fileinput-new">Add Photo</span>
@@ -92,26 +164,33 @@
                         <input type="file" name="..." />
                       </span>
                       <br />
-                      <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i
-                          class="fa fa-times"></i> Remove</a>
+                      <a
+                        href="#pablo"
+                        class="btn btn-danger btn-round fileinput-exists"
+                        data-dismiss="fileinput"
+                        ><i class="fa fa-times"></i> Remove</a
+                      >
                     </div>
                   </div>
                 </div>
               </div>
 
-              <br>
-              <hr>
-              <button mat-raised-button type="submit" class="btn btn-success pull-right">Create Player
-                Character</button>
+              <br />
+              <hr />
+              <button
+                mat-raised-button
+                type="submit"
+                class="btn btn-success pull-right"
+              >
+                Create Player Character
+              </button>
               <div class="clearfix"></div>
             </form>
           </div>
         </div>
       </div>
       <div class="col-md-6 fixedSheet">
-
         <app-character-sheet></app-character-sheet>
-
       </div>
     </div>
   </div>
