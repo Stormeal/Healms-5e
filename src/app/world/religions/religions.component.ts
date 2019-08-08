@@ -15,6 +15,7 @@ export class ReligionsComponent implements OnInit {
   user: any;
   campaignId: any;
   campaign: any;
+  religions: any;
 
   get deityFormGroup() {
     return this.religionForm.get("deities") as FormArray;
@@ -27,6 +28,7 @@ export class ReligionsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loader();
     this.religionForm = this.fb.group({
       religionName: "",
       mythology: "",
@@ -89,6 +91,31 @@ export class ReligionsComponent implements OnInit {
             .doc(religionId.uid)
             .set(religion);
           return this.religionForm.reset();
+        });
+    });
+  }
+
+  loader() {
+    this.auth.getUser();
+
+    this.auth.getUser().subscribe(user => {
+      this.user = user;
+      this.campaignId = this.user.campaigns.campaignId;
+
+      this.afs
+        .doc(`campaigns/${this.campaignId}`)
+        .valueChanges()
+        .subscribe(campaign => {
+          this.campaign = campaign;
+          const campId = this.campaign.uid;
+
+          this.afs
+            .collection(`campaigns/${this.campaignId}/religions`)
+            .valueChanges()
+            .subscribe(religions => {
+              this.religions = religions;
+              console.log("Religions: ", this.religions);
+            });
         });
     });
   }
