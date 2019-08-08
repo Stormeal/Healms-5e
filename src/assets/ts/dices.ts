@@ -4,7 +4,7 @@ export const Dices = [
   { value: "d8", viewValue: "d8" },
   { value: "d10", viewValue: "d10" },
   { value: "d12", viewValue: "d12" },
-  { value: "d20", viewValue: "d20" }
+  { value: "d20", viewValue: "d20" },
 ];
 
 export const dmgDices = [
@@ -13,15 +13,5 @@ export const dmgDices = [
   { value: "d8", viewValue: "d8" },
   { value: "d10", viewValue: "d10" },
   { value: "d12", viewValue: "d12" },
-  { value: "d20", viewValue: "d20" }
-
-
-
-  
-  {
-    deityName: "test",
-    deityAlignment: "test",
-    deityDomain: "test",
-    deitySymbol: "test",
-  },
+  { value: "d20", viewValue: "d20" },
 ];
