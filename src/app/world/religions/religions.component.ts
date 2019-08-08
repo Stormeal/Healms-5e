@@ -70,10 +70,7 @@ export class ReligionsComponent implements OnInit {
           this.campaign = campaign;
           const campId = this.campaign.uid;
           const religionId = {
-            uid:
-              this.religionForm.value["religionName"] +
-              "_" +
-              faker.random.alphaNumeric(4),
+            uid: faker.random.alphaNumeric(4),
           };
           const religion = {
             uid: religionId,

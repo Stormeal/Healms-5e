@@ -1,310 +1,323 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <mat-tab-group>
-        <mat-tab label="My Religions">
-          <!-- NEW RELIGION CARD START-->
-          <div class="card col-xs-10" style="position: relative;">
-            <div class="card-header card-header-icon card-header-success">
-              <div class="card-icon">
-                <i class="fas fa-campground fa-lg"></i>
-              </div>
-              <h4 class="card-title">
-                Religion -
-                <small class="category"
-                  >Add a new religion to your campaign</small
-                >
-              </h4>
-            </div>
-            <div class="card-body">
-              <form class="form" method="" action="" [formGroup]="religionForm">
-                <div class="row">
-                  <div class="col-sm-5 mr-auto ml-auto">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <mat-label>RELIGION NAME</mat-label>
-                      <mat-hint align="start"
-                        ><strong>Specify Religion Name</strong>
-                      </mat-hint>
-                      <input
-                        matInput
-                        type="text"
-                        autocomplete="off"
-                        formControlName="religionName"
-                      />
-                    </mat-form-field>
-                  </div>
+      <mat-tab-group style="width: 100%;">
+        <mat-tab label="My Religions"> </mat-tab>
+        <mat-tab label="Manage Religions">
+          <div col-sm-12>
+            <!-- NEW RELIGION CARD START-->
+            <div
+              class="card col-sm-10 mr-auto ml-auto"
+              style="position: relative;"
+            >
+              <div class="card-header card-header-icon card-header-success">
+                <div class="card-icon">
+                  <i class="fas fa-campground fa-lg"></i>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <textarea
-                        matInput
-                        autocomplete="off"
-                        formControlName="mythology"
-                      ></textarea>
-                      <mat-label>MYTHOLOGY</mat-label>
-                      <mat-hint
-                        ><strong
-                          >What is the basis for the religion, any forgotten
-                          history that describes how this religion is being
-                          taught.</strong
-                        ></mat-hint
-                      >
-                    </mat-form-field>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-1">
-                    <button
-                      mat-raised-button
-                      mat-min-fab
-                      (click)="addDeity()"
-                      class="btn btn-success btn-round btn-fab"
-                    >
-                      <i class="material-icons">add</i>
-                    </button>
-                  </div>
-                </div>
-                <br />
-
-                <div formArrayName="deities">
-                  <div
-                    *ngFor="let deity of deityFormGroup.controls; let i = index"
+                <h4 class="card-title">
+                  Religion -
+                  <small class="category"
+                    >Add a new religion to your campaign</small
                   >
+                </h4>
+              </div>
+              <div class="card-body">
+                <form
+                  class="form"
+                  method=""
+                  action=""
+                  [formGroup]="religionForm"
+                >
+                  <div class="row">
+                    <div class="col-sm-5 mr-auto ml-auto">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
+                      >
+                        <mat-label>RELIGION NAME</mat-label>
+                        <mat-hint align="start"
+                          ><strong>Specify Religion Name</strong>
+                        </mat-hint>
+                        <input
+                          matInput
+                          type="text"
+                          autocomplete="off"
+                          formControlName="religionName"
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
+                      >
+                        <textarea
+                          matInput
+                          autocomplete="off"
+                          formControlName="mythology"
+                          rows="5"
+                        ></textarea>
+                        <mat-label>MYTHOLOGY</mat-label>
+                        <mat-hint
+                          ><strong
+                            >What is the basis for the religion, any forgotten
+                            history that describes how this religion is being
+                            taught.</strong
+                          ></mat-hint
+                        >
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-1">
+                      <button
+                        mat-raised-button
+                        mat-min-fab
+                        (click)="addDeity()"
+                        class="btn btn-success btn-round btn-fab"
+                      >
+                        <i class="material-icons">add</i>
+                      </button>
+                    </div>
+                  </div>
+                  <br />
+
+                  <div formArrayName="deities">
                     <div
-                      class="row"
-                      [formGroupName]="i"
-                      style="padding-bottom: 10px"
+                      *ngFor="
+                        let deity of deityFormGroup.controls;
+                        let i = index
+                      "
                     >
-                      <div class="col-md-2">
-                        <mat-form-field
-                          class="example-full-width"
-                          floatLabel="always"
-                        >
-                          <input
-                            matInput
-                            type="text"
-                            autocomplete="off"
-                            formControlName="deityName"
-                          />
-                          <mat-label>DEITY NAME</mat-label>
-                          <mat-hint
-                            ><strong>Odin, Zeus, Talos</strong></mat-hint
+                      <div
+                        class="row"
+                        [formGroupName]="i"
+                        style="padding-bottom: 10px"
+                      >
+                        <div class="col-md-2">
+                          <mat-form-field
+                            class="example-full-width"
+                            floatLabel="always"
                           >
-                        </mat-form-field>
-                      </div>
+                            <input
+                              matInput
+                              type="text"
+                              autocomplete="off"
+                              formControlName="deityName"
+                            />
+                            <mat-label>DEITY NAME</mat-label>
+                            <mat-hint
+                              ><strong>Odin, Zeus, Talos</strong></mat-hint
+                            >
+                          </mat-form-field>
+                        </div>
 
-                      <div class="col-md-2">
-                        <mat-form-field
-                          class="example-full-width"
-                          floatLabel="always"
-                        >
-                          <input
-                            matInput
-                            type="text"
-                            autocomplete="off"
-                            formControlName="deityAlignment"
-                          />
-                          <mat-label>DEITY ALIGNMENT</mat-label>
-                          <mat-hint><strong>NE, LN, LE</strong></mat-hint>
-                        </mat-form-field>
-                      </div>
-
-                      <div class="col-md-3">
-                        <mat-form-field
-                          class="example-full-width"
-                          floatLabel="always"
-                        >
-                          <input
-                            matInput
-                            type="text"
-                            autocomplete="off"
-                            formControlName="deityDomain"
-                          />
-                          <mat-label>DEITY DOMAIN</mat-label>
-                          <mat-hint
-                            ><strong>Knowledge, war, light</strong></mat-hint
+                        <div class="col-md-2">
+                          <mat-form-field
+                            class="example-full-width"
+                            floatLabel="always"
                           >
-                        </mat-form-field>
-                      </div>
+                            <input
+                              matInput
+                              type="text"
+                              autocomplete="off"
+                              formControlName="deityAlignment"
+                            />
+                            <mat-label>DEITY ALIGNMENT</mat-label>
+                            <mat-hint><strong>NE, LN, LE</strong></mat-hint>
+                          </mat-form-field>
+                        </div>
 
-                      <div class="col-md-3">
-                        <mat-form-field
-                          class="example-full-width"
-                          floatLabel="always"
-                        >
-                          <input
-                            matInput
-                            type="text"
-                            autocomplete="off"
-                            formControlName="deitySymbol"
-                          />
-                          <mat-label>DEITY SYMBOL</mat-label>
-                          <mat-hint
-                            ><strong
-                              >Watching blue eye, Ice-blude greatsword</strong
-                            ></mat-hint
+                        <div class="col-md-3">
+                          <mat-form-field
+                            class="example-full-width"
+                            floatLabel="always"
                           >
-                        </mat-form-field>
-                      </div>
+                            <input
+                              matInput
+                              type="text"
+                              autocomplete="off"
+                              formControlName="deityDomain"
+                            />
+                            <mat-label>DEITY DOMAIN</mat-label>
+                            <mat-hint
+                              ><strong>Knowledge, war, light</strong></mat-hint
+                            >
+                          </mat-form-field>
+                        </div>
 
-                      <div class="col-sm-1" style="padding: 2px">
-                        <button
-                          mat-raised-button
-                          class="btn btn-danger btn-sm"
-                          (click)="removeDeity(i)"
-                        >
-                          <i class="material-icons">clear</i> Clear
-                        </button>
+                        <div class="col-md-3">
+                          <mat-form-field
+                            class="example-full-width"
+                            floatLabel="always"
+                          >
+                            <input
+                              matInput
+                              type="text"
+                              autocomplete="off"
+                              formControlName="deitySymbol"
+                            />
+                            <mat-label>DEITY SYMBOL</mat-label>
+                            <mat-hint
+                              ><strong
+                                >Watching blue eye, Ice-blude greatsword</strong
+                              ></mat-hint
+                            >
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-1" style="padding: 2px">
+                          <button
+                            mat-raised-button
+                            class="btn btn-danger btn-sm"
+                            (click)="removeDeity(i)"
+                          >
+                            <i class="material-icons">clear</i> Clear
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <br />
-                <div class="row">
-                  <div class="col-md-6">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <textarea
-                        matInput
-                        autocomplete="off"
-                        formControlName="origins"
-                      ></textarea>
-                      <mat-label>ORIGINS</mat-label>
-                      <mat-hint
-                        ><strong
-                          >Where did the religion come from?</strong
-                        ></mat-hint
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
                       >
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-6">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <textarea matInput autocomplete="off"></textarea>
-                      <mat-label>ETHICS</mat-label>
-                      <mat-hint
-                        ><strong
-                          >What are the rules and laws of this religion?</strong
-                        ></mat-hint
+                        <textarea
+                          matInput
+                          autocomplete="off"
+                          formControlName="origins"
+                        ></textarea>
+                        <mat-label>ORIGINS</mat-label>
+                        <mat-hint
+                          ><strong
+                            >Where did the religion come from?</strong
+                          ></mat-hint
+                        >
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
                       >
-                    </mat-form-field>
+                        <textarea matInput autocomplete="off"></textarea>
+                        <mat-label>ETHICS</mat-label>
+                        <mat-hint
+                          ><strong
+                            >What are the rules and laws of this
+                            religion?</strong
+                          ></mat-hint
+                        >
+                      </mat-form-field>
+                    </div>
                   </div>
-                </div>
-                <br />
-                <div class="row">
-                  <div class="col-md-6">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <textarea
-                        matInput
-                        autocomplete="off"
-                        formControlName="divinePowers"
-                      ></textarea>
-                      <mat-label>DIVINE POWERS</mat-label>
-                      <mat-hint
-                        ><strong
-                          >What are some of the divine powers granted to
-                          faithfull followeres?</strong
-                        ></mat-hint
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
                       >
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-6">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <textarea
-                        matInput
-                        autocomplete="off"
-                        formControlName="influence"
-                      ></textarea>
-                      <mat-label>INFLUENCE</mat-label>
-                      <mat-hint
-                        ><strong
-                          >Does this religion influence politics or
-                          organizations?</strong
-                        ></mat-hint
+                        <textarea
+                          matInput
+                          autocomplete="off"
+                          formControlName="divinePowers"
+                        ></textarea>
+                        <mat-label>DIVINE POWERS</mat-label>
+                        <mat-hint
+                          ><strong
+                            >What are some of the divine powers granted to
+                            faithfull followeres?</strong
+                          ></mat-hint
+                        >
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
                       >
-                    </mat-form-field>
+                        <textarea
+                          matInput
+                          autocomplete="off"
+                          formControlName="influence"
+                        ></textarea>
+                        <mat-label>INFLUENCE</mat-label>
+                        <mat-hint
+                          ><strong
+                            >Does this religion influence politics or
+                            organizations?</strong
+                          ></mat-hint
+                        >
+                      </mat-form-field>
+                    </div>
                   </div>
-                </div>
 
-                <br />
-                <div class="row">
-                  <div class="col-md-6">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <textarea
-                        matInput
-                        autocomplete="off"
-                        formControlName="cosmology"
-                      ></textarea>
-                      <mat-label>COSMOLOGY</mat-label>
-                      <mat-hint
-                        ><strong
-                          >What is the understanding of the world and its
-                          creation?</strong
-                        ></mat-hint
+                  <br />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
                       >
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-6">
-                    <mat-form-field
-                      class="example-full-width"
-                      floatLabel="always"
-                    >
-                      <textarea
-                        matInput
-                        autocomplete="off"
-                        formControlName="tenetsOfFaith"
-                      ></textarea>
-                      <mat-label>TENETS OF FAITH</mat-label>
-                      <mat-hint
-                        ><strong
-                          >What are the basic rules / laws which guides the
-                          followers of this religion?</strong
-                        ></mat-hint
+                        <textarea
+                          matInput
+                          autocomplete="off"
+                          formControlName="cosmology"
+                        ></textarea>
+                        <mat-label>COSMOLOGY</mat-label>
+                        <mat-hint
+                          ><strong
+                            >What is the understanding of the world and its
+                            creation?</strong
+                          ></mat-hint
+                        >
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field
+                        class="example-full-width"
+                        floatLabel="always"
                       >
-                    </mat-form-field>
+                        <textarea
+                          matInput
+                          autocomplete="off"
+                          formControlName="tenetsOfFaith"
+                        ></textarea>
+                        <mat-label>TENETS OF FAITH</mat-label>
+                        <mat-hint
+                          ><strong
+                            >What are the basic rules / laws which guides the
+                            followers of this religion?</strong
+                          ></mat-hint
+                        >
+                      </mat-form-field>
+                    </div>
                   </div>
-                </div>
-                <br />
-                <hr />
-                <div class="pull-right">
-                  <button
-                    mat-raised-button
-                    (click)="newReligion()"
-                    class="btn btn-success pull-right"
-                  >
-                    Create Religion
-                  </button>
-                </div>
-                <div class="clearfix"></div>
-              </form>
+                  <br />
+                  <hr />
+                  <div class="pull-right">
+                    <button
+                      mat-raised-button
+                      (click)="newReligion()"
+                      class="btn btn-success pull-right"
+                    >
+                      Create Religion
+                    </button>
+                  </div>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
             </div>
+            <!-- NEW RELIGION CARD END-->
           </div>
-          <!-- NEW RELIGION CARD END-->
-        </mat-tab>
-        <mat-tab label="Manage Religions">
-          <div class="row"></div>
         </mat-tab>
       </mat-tab-group>
       <!-- <h4 class="display-3" style="font-size: 1.4em">My Religions</h4> -->
