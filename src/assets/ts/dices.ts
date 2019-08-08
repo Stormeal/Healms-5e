@@ -14,4 +14,14 @@ export const dmgDices = [
   { value: "d10", viewValue: "d10" },
   { value: "d12", viewValue: "d12" },
   { value: "d20", viewValue: "d20" }
+
+
+
+  
+  {
+    deityName: "test",
+    deityAlignment: "test",
+    deityDomain: "test",
+    deitySymbol: "test",
+  },
 ];
