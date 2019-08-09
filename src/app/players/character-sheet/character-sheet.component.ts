@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/core/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
+import PerfectScrollbar from "perfect-scrollbar";
 
 @Component({
   selector: "app-character-sheet",
@@ -42,6 +43,24 @@ export class CharacterSheetComponent implements OnInit {
               this.characters = characters;
               console.log("characters: ", this.characters);
             });
+        });
+    });
+  }
+
+  deleteCharacter(uid: string) {
+    console.log("uid:", uid);
+    this.auth.getUser().subscribe(user => {
+      this.user = user;
+      this.campaignId = this.user.campaigns.campaignId;
+      this.afs
+        .doc(`campaigns/${this.campaignId}`)
+        .valueChanges()
+        .subscribe(campaign => {
+          this.campaign = campaign;
+          console.log("CAMPAIGN: ", campaign);
+
+          const campId = this.campaign.uid;
+          return this.afs.doc<any>(`campaigns/${campId}/characters/${uid}`).delete();
         });
     });
   }

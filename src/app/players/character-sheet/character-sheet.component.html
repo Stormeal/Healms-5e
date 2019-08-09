@@ -33,10 +33,48 @@
                 >
               </div>
             </div>
-            <p class="card-description">
-              {{ c.characterBackstory }}
-            </p>
-            <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a>
+            <div style="max-height: 70px; min-height: 70px;">
+              <ng-container *ngIf="c.characterBackstory.length > 81; else fine">
+                <small>{{ c.characterBackstory | slice: 0:81 }} ...</small>
+              </ng-container>
+
+              <ng-template #fine>
+                <small>
+                  {{ c.characterBackstory }}
+                </small>
+              </ng-template>
+            </div>
+            <div class="btn-group">
+              <button
+                mat-raised-button
+                type="button"
+                class="btn btn-success"
+                matTooltip="Add to Campaign"
+                [matTooltipPosition]="'above'"
+              >
+                <i class="material-icons">add</i>
+              </button>
+              <button
+                mat-raised-button
+                type="button"
+                class="btn btn-danger"
+                matTooltip="Delete Character"
+                [matTooltipPosition]="'above'"
+                (click)="deleteCharacter(c?.uid)"
+              >
+                <i class="material-icons">delete</i>
+              </button>
+              <button
+                mat-raised-button
+                type="button"
+                class="btn btn-warning"
+                matTooltip="Edit Character"
+                [matTooltipPosition]="'above'"
+              >
+                <i class="material-icons">edit</i>
+              </button>
+            </div>
+            <!-- <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a> -->
           </div>
         </div>
       </div>

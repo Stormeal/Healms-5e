@@ -6,12 +6,16 @@
           <div class="card-profile">
             <div class="card-avatar">
               <div class="picture-container">
-                <div class="picture">
+                <div
+                  class="picture"
+                  matTooltip="Click here to upload a picture"
+                  [matTooltipPosition]="'above'"
+                >
                   <!-- <img
                     class="picture-src"
                     src="./assets/img/dm-default-avatar.png"
-                    matTooltip="Click here to upload a picture"
                     [matTooltipPosition]="'above'"
+                    matTooltip="Click here to upload a picture"
                     id="creaturePicturePreview"
                     title=""
                   />
@@ -21,8 +25,6 @@
                     <img
                       class="picture-src"
                       src="./assets/img/dm-default-avatar.png"
-                      matTooltip="Click here to upload a picture"
-                      [matTooltipPosition]="'above'"
                       id="creaturePicturePreview"
                       title=""
                     />
@@ -46,25 +48,13 @@
           </div>
 
           <div class="card-body ">
-            <form
-              method="get"
-              action="/"
-              class="form-horizontal"
-              [formGroup]="creatureForm"
-            >
+            <form method="get" action="/" class="form-horizontal" [formGroup]="creatureForm">
               <div class="row">
                 <label class="col-sm-4 col-form-label">Creature Name: </label>
                 <div class="col-sm-5">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Specify Creature Name</strong>
-                    </mat-hint>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="creatureName"
-                    />
+                    <mat-hint align="start"><strong>Specify Creature Name</strong> </mat-hint>
+                    <input matInput type="text" autocomplete="off" formControlName="creatureName" />
                   </mat-form-field>
                 </div>
               </div>
@@ -78,10 +68,7 @@
                       [(value)]="creatureSizeSelect"
                       formControlName="creatureSize"
                     >
-                      <mat-option
-                        *ngFor="let size of creatureSizes"
-                        [value]="size.value"
-                      >
+                      <mat-option *ngFor="let size of creatureSizes" [value]="size.value">
                         {{ size.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -95,10 +82,7 @@
                       [(value)]="creatureRacesSelect"
                       formControlName="creatureRace"
                     >
-                      <mat-option
-                        *ngFor="let races of creatureRaces"
-                        [value]="races.value"
-                      >
+                      <mat-option *ngFor="let races of creatureRaces" [value]="races.value">
                         {{ races.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -112,10 +96,7 @@
                       [(value)]="alignmentsSelect"
                       formControlName="creatureAlignment"
                     >
-                      <mat-option
-                        *ngFor="let alignment of alignments"
-                        [value]="alignment.value"
-                      >
+                      <mat-option *ngFor="let alignment of alignments" [value]="alignment.value">
                         {{ alignment.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -129,102 +110,60 @@
               <!-- SKILL POINTS -->
               <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-form-label"></div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>STR</h6>
                   <mat-form-field class="example-full-width">
-                    <mat-select
-                      name="strength"
-                      [(value)]="strSelect"
-                      formControlName="str"
-                    >
+                    <mat-select name="strength" [(value)]="strSelect" formControlName="str">
                       <mat-option *ngFor="let str of str" [value]="str.value">
                         {{ str.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>DEX</h6>
                   <mat-form-field class="example-full-width">
-                    <mat-select
-                      name="dexterity"
-                      [(value)]="dexSelect"
-                      formControlName="dex"
-                    >
+                    <mat-select name="dexterity" [(value)]="dexSelect" formControlName="dex">
                       <mat-option *ngFor="let dex of dex" [value]="dex.value">
                         {{ dex.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>CON</h6>
                   <mat-form-field class="example-full-width">
-                    <mat-select
-                      name="constitution"
-                      [(value)]="conSelect"
-                      formControlName="con"
-                    >
+                    <mat-select name="constitution" [(value)]="conSelect" formControlName="con">
                       <mat-option *ngFor="let con of con" [value]="con.value">
                         {{ con.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>INT</h6>
                   <mat-form-field class="example-full-width">
-                    <mat-select
-                      name="intelligence"
-                      [(value)]="intSelect"
-                      formControlName="int"
-                    >
+                    <mat-select name="intelligence" [(value)]="intSelect" formControlName="int">
                       <mat-option *ngFor="let int of int" [value]="int.value">
                         {{ int.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>WIS</h6>
                   <mat-form-field class="example-full-width">
-                    <mat-select
-                      name="wisdom"
-                      [(value)]="wisSelect"
-                      formControlName="wis"
-                    >
+                    <mat-select name="wisdom" [(value)]="wisSelect" formControlName="wis">
                       <mat-option *ngFor="let wis of wis" [value]="wis.value">
                         {{ wis.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div
-                  class="col-lg-1 col-md-1 col-sm-1 col-form-label"
-                  style="text-align: center"
-                >
+                <div class="col-lg-1 col-md-1 col-sm-1 col-form-label" style="text-align: center">
                   <h6>CHA</h6>
                   <mat-form-field class="example-full-width">
-                    <mat-select
-                      name="charisma"
-                      [(value)]="chaSelect"
-                      formControlName="cha"
-                    >
+                    <mat-select name="charisma" [(value)]="chaSelect" formControlName="cha">
                       <mat-option *ngFor="let cha of cha" [value]="cha.value">
                         {{ cha.viewValue }}
                       </mat-option>
@@ -242,14 +181,8 @@
                 <label class="col-sm-2 col-form-label">Armor Class: </label>
                 <div class="col-sm-2">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>16 (natural armor)</strong> </mat-hint
-                    ><input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="armorClass"
-                    />
+                    <mat-hint align="start"><strong>16 (natural armor)</strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" formControlName="armorClass" />
                   </mat-form-field>
                 </div>
                 <label class="col-sm-1 col-form-label">Hit Points: </label>
@@ -268,18 +201,9 @@
                 </div>
                 <div class="col-sm-1">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Dice Select</strong>
-                    </mat-hint>
-                    <mat-select
-                      name="dices"
-                      [(value)]="dicesSelect"
-                      formControlName="hitDie"
-                    >
-                      <mat-option
-                        *ngFor="let dice of dices"
-                        [value]="dice.value"
-                      >
+                    <mat-hint align="start"><strong>Dice Select</strong> </mat-hint>
+                    <mat-select name="dices" [(value)]="dicesSelect" formControlName="hitDie">
+                      <mat-option *ngFor="let dice of dices" [value]="dice.value">
                         {{ dice.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -287,16 +211,9 @@
                 </div>
                 <div class="col-sm-1">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>HP Modifier</strong>
-                    </mat-hint>
+                    <mat-hint align="start"><strong>HP Modifier</strong> </mat-hint>
                     <span matPrefix>+ &nbsp;</span>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="hitModifier"
-                    />
+                    <input matInput type="text" autocomplete="off" formControlName="hitModifier" />
                   </mat-form-field>
                 </div>
                 <label class="col-sm-1 col-form-label">Speed: </label>
@@ -304,12 +221,7 @@
                   <mat-form-field class="example-full-width">
                     <span matSuffix>ft &nbsp;</span>
                     <mat-hint align="start"><strong>30 ft</strong> </mat-hint>
-                    <input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="speed"
-                    />
+                    <input matInput type="text" autocomplete="off" formControlName="speed" />
                   </mat-form-field>
                 </div>
               </div>
@@ -322,8 +234,7 @@
                 <label class="col-sm-2 col-form-label">Saving Throws: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Str +7, Con +4</strong> </mat-hint
+                    <mat-hint align="start"><strong>Str +7, Con +4</strong> </mat-hint
                     ><input
                       matInput
                       type="text"
@@ -335,44 +246,26 @@
                 <label class="col-sm-2 col-form-label">Skills: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
-                    <mat-hint align="start"
-                      ><strong>Perception +4, Insight +3</strong> </mat-hint
-                    ><input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="skills"
-                    />
+                    <mat-hint align="start"><strong>Perception +4, Insight +3</strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" formControlName="skills" />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                <label class="col-sm-2 col-form-label"
-                  >Damage Resistances:
-                </label>
+                <label class="col-sm-2 col-form-label">Damage Resistances: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
                     <mat-hint align="start"
-                      ><strong
-                        >Bludgeoning, Piercing & Slashing
-                      </strong> </mat-hint
-                    ><input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="dmgRes"
-                    />
+                      ><strong>Bludgeoning, Piercing & Slashing </strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" formControlName="dmgRes" />
                   </mat-form-field>
                 </div>
-                <label class="col-sm-2 col-form-label"
-                  >Damage Immunities:
-                </label>
+                <label class="col-sm-2 col-form-label">Damage Immunities: </label>
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
                     <mat-hint align="start"
                       ><strong
-                        >Bludgeoning, Piercing & Slashing from non-magical
-                        weapons
+                        >Bludgeoning, Piercing & Slashing from non-magical weapons
                       </strong> </mat-hint
                     ><input
                       matInput
@@ -388,15 +281,8 @@
                 <div class="col-sm-4">
                   <mat-form-field class="example-full-width">
                     <mat-hint align="start"
-                      ><strong
-                        >any one language (usually Common)
-                      </strong> </mat-hint
-                    ><input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="languages"
-                    />
+                      ><strong>any one language (usually Common) </strong> </mat-hint
+                    ><input matInput type="text" autocomplete="off" formControlName="languages" />
                   </mat-form-field>
                 </div>
                 <label class="col-sm-2 col-form-label">Senses: </label>
@@ -406,19 +292,12 @@
                       ><strong>
                         Dark Vision 60ft, passive Perception 14
                       </strong> </mat-hint
-                    ><input
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="senses"
-                    />
+                    ><input matInput type="text" autocomplete="off" formControlName="senses" />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                <label class="col-sm-2 col-form-label"
-                  >Challenge Rating:
-                </label>
+                <label class="col-sm-2 col-form-label">Challenge Rating: </label>
                 <div class="col-sm-2">
                   <mat-form-field class="example-full-width">
                     <mat-select
@@ -426,10 +305,7 @@
                       [(value)]="challengeRatingSelect"
                       formControlName="challengeRating"
                     >
-                      <mat-option
-                        *ngFor="let cr of challengeRatings"
-                        [value]="cr.value"
-                      >
+                      <mat-option *ngFor="let cr of challengeRatings" [value]="cr.value">
                         {{ cr.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -443,11 +319,7 @@
               <!-- TRAITS -->
               <div class="row">
                 <div class="col-sm-2">
-                  <button
-                    mat-raised-button
-                    class="btn btn-success btn-sm"
-                    (click)="addTrait()"
-                  >
+                  <button mat-raised-button class="btn btn-success btn-sm" (click)="addTrait()">
                     <i class="material-icons">add</i> New Trait
                   </button>
                 </div>
@@ -490,16 +362,12 @@
               </div>
 
               <div formArrayName="traits">
-                <div
-                  *ngFor="let trait of traitFormGroup.controls; let i = index"
-                >
+                <div *ngFor="let trait of traitFormGroup.controls; let i = index">
                   <div class="row" [formGroupName]="i">
                     <label class="col-sm-2 col-form-label">Trait: </label>
                     <div class="col-sm-2">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Trait Name</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Trait Name</strong> </mat-hint>
                         <input
                           matInput
                           type="text"
@@ -510,9 +378,7 @@
                     </div>
                     <div class="col-sm-7">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Trait Description</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Trait Description</strong> </mat-hint>
                         <input
                           matInput
                           type="text"
@@ -543,18 +409,14 @@
                     <mat-form-field class="example-full-width">
                       <span matPrefix>DC &nbsp;</span>
                       <input matInput type="number" autocomplete="off" />
-                      <mat-hint align="start"
-                        ><strong>Spell Save</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Spell Save</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-1">
                     <mat-form-field class="example-full-width">
                       <span matPrefix>+ &nbsp;</span>
                       <input matInput type="number" autocomplete="off" />
-                      <mat-hint align="start"
-                        ><strong>Spell Att. Mod</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Spell Att. Mod</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-2">
@@ -564,16 +426,11 @@
                         [(value)]="spellcastingAbilitySelect"
                         formControlName="spellcastingAbility"
                       >
-                        <mat-option
-                          *ngFor="let sa of spellCastingAbility"
-                          [value]="sa.value"
-                        >
+                        <mat-option *ngFor="let sa of spellCastingAbility" [value]="sa.value">
                           {{ sa.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Spellcasting Ability</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Spellcasting Ability</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-1">
@@ -583,16 +440,11 @@
                         [(value)]="spellClassSelect"
                         formControlName="spellClass"
                       >
-                        <mat-option
-                          *ngFor="let class of spellClass"
-                          [value]="class.value"
-                        >
+                        <mat-option *ngFor="let class of spellClass" [value]="class.value">
                           {{ class.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Spell Class</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Spell Class</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                   <div class="col-sm-1">
@@ -602,16 +454,11 @@
                         [(value)]="wizardLevelSelect"
                         formControlName="spellLevel"
                       >
-                        <mat-option
-                          *ngFor="let lvl of spellLevels"
-                          [value]="lvl.value"
-                        >
+                        <mat-option *ngFor="let lvl of spellLevels" [value]="lvl.value">
                           {{ lvl.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Class Level</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Class Level</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -627,16 +474,11 @@
                         name="Dancing Lights"
                         ariaLabel="cantrips[3]"
                       >
-                        <mat-option
-                          *ngFor="let cantrip of allCantrips"
-                          [value]="cantrip"
-                        >
+                        <mat-option *ngFor="let cantrip of allCantrips" [value]="cantrip">
                           {{ cantrip }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Cantrips </strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Cantrips </strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -672,16 +514,11 @@
                         name="first"
                         ariaLabel="first[3]"
                       >
-                        <mat-option
-                          *ngFor="let first of allFirst"
-                          [value]="first"
-                        >
+                        <mat-option *ngFor="let first of allFirst" [value]="first">
                           {{ first }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>1st Level Spells</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>1st Level Spells</strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -700,16 +537,11 @@
                         name="second"
                         ariaLabel="second[3]"
                       >
-                        <mat-option
-                          *ngFor="let second of allSecond"
-                          [value]="second"
-                        >
+                        <mat-option *ngFor="let second of allSecond" [value]="second">
                           {{ second }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>2nd Level Spells</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>2nd Level Spells</strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -726,16 +558,11 @@
                         name="third"
                         ariaLabel="third[3]"
                       >
-                        <mat-option
-                          *ngFor="let third of allThird"
-                          [value]="third"
-                        >
+                        <mat-option *ngFor="let third of allThird" [value]="third">
                           {{ third }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>3rd Level Spells</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>3rd Level Spells</strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -754,16 +581,11 @@
                         name="fourth"
                         ariaLabel="fourth[3]"
                       >
-                        <mat-option
-                          *ngFor="let fourth of allFourth"
-                          [value]="fourth"
-                        >
+                        <mat-option *ngFor="let fourth of allFourth" [value]="fourth">
                           {{ fourth }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>4th Level Spells</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>4th Level Spells</strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -780,16 +602,11 @@
                         name="fifth"
                         ariaLabel="fifth[3]"
                       >
-                        <mat-option
-                          *ngFor="let fifth of allFifth"
-                          [value]="fifth"
-                        >
+                        <mat-option *ngFor="let fifth of allFifth" [value]="fifth">
                           {{ fifth }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>5th Level Spells</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>5th Level Spells</strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -808,16 +625,11 @@
                         name="sixth"
                         ariaLabel="sixth[3]"
                       >
-                        <mat-option
-                          *ngFor="let sixth of allSixth"
-                          [value]="sixth"
-                        >
+                        <mat-option *ngFor="let sixth of allSixth" [value]="sixth">
                           {{ sixth }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>6th Level Spells </strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>6th Level Spells </strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -835,16 +647,11 @@
                         name="seventh"
                         ariaLabel="seventh[3]"
                       >
-                        <mat-option
-                          *ngFor="let seventh of allSeventh"
-                          [value]="seventh"
-                        >
+                        <mat-option *ngFor="let seventh of allSeventh" [value]="seventh">
                           {{ seventh }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>7th Level Spells</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>7th Level Spells</strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -864,16 +671,11 @@
                         name="eight"
                         ariaLabel="eight[3]"
                       >
-                        <mat-option
-                          *ngFor="let eight of allEight"
-                          [value]="eight"
-                        >
+                        <mat-option *ngFor="let eight of allEight" [value]="eight">
                           {{ eight }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>8th Level Spells </strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>8th Level Spells </strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -890,16 +692,11 @@
                         name="nineth"
                         ariaLabel="nineth[3]"
                       >
-                        <mat-option
-                          *ngFor="let nineth of allNineth"
-                          [value]="nineth"
-                        >
+                        <mat-option *ngFor="let nineth of allNineth" [value]="nineth">
                           {{ nineth }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>9th Level Spells</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>9th Level Spells</strong> </mat-hint>
                       <mat-hint align="end"
                         ><strong>*Leave blank if not applicable</strong>
                       </mat-hint>
@@ -918,27 +715,19 @@
               <!-- ACTIONS -->
               <div class="row">
                 <div class="col-sm-1">
-                  <button
-                    mat-raised-button
-                    class="btn btn-success btn-sm"
-                    (click)="addAction()"
-                  >
+                  <button mat-raised-button class="btn btn-success btn-sm" (click)="addAction()">
                     <i class="material-icons">add</i> New Action
                   </button>
                 </div>
               </div>
 
               <div formArrayName="actions">
-                <div
-                  *ngFor="let action of actionFormGroup.controls; let i = index"
-                >
+                <div *ngFor="let action of actionFormGroup.controls; let i = index">
                   <div class="row" [formGroupName]="i">
                     <label class="col-sm-1 col-form-label">Action: </label>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Action Name</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Action Name</strong> </mat-hint>
                         <input
                           matInput
                           type="text"
@@ -949,9 +738,7 @@
                     </div>
                     <div class="col-sm-4">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Action Description</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Action Description</strong> </mat-hint>
                         <input
                           matInput
                           type="text"
@@ -962,9 +749,7 @@
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Hit Modifier</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Hit Modifier</strong> </mat-hint>
                         <input
                           matInput
                           type="text"
@@ -975,9 +760,7 @@
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Reach</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Reach</strong> </mat-hint>
                         <span matSuffix>ft &nbsp;</span>
                         <input
                           matInput
@@ -989,9 +772,7 @@
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Action Damage</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Action Damage</strong> </mat-hint>
                         <input
                           matInput
                           type="text"
@@ -1002,18 +783,13 @@
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Dice Select</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Dice Select</strong> </mat-hint>
                         <mat-select
                           name="dmgDice"
                           [(value)]="dmgDicesSelect"
                           formControlName="actionDice"
                         >
-                          <mat-option
-                            *ngFor="let dmg of dmgDices"
-                            [value]="dmg.value"
-                          >
+                          <mat-option *ngFor="let dmg of dmgDices" [value]="dmg.value">
                             {{ dmg.viewValue }}
                           </mat-option>
                         </mat-select>
@@ -1021,9 +797,7 @@
                     </div>
                     <div class="col-sm-1">
                       <mat-form-field class="example-full-width">
-                        <mat-hint align="start"
-                          ><strong>Damage Modifier</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Damage Modifier</strong> </mat-hint>
                         <input
                           matInput
                           type="number"
@@ -1063,19 +837,12 @@
                 </div>
 
                 <div formArrayName="legendary">
-                  <div
-                    *ngFor="
-                      let leg of legendaryFormGroup.controls;
-                      let i = index
-                    "
-                  >
+                  <div *ngFor="let leg of legendaryFormGroup.controls; let i = index">
                     <div class="row" [formGroupName]="i">
                       <label class="col-sm-1 col-form-label">Action: </label>
                       <div class="col-sm-1">
                         <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Legendary Name</strong>
-                          </mat-hint>
+                          <mat-hint align="start"><strong>Legendary Name</strong> </mat-hint>
                           <input
                             matInput
                             type="text"
@@ -1086,9 +853,7 @@
                       </div>
                       <div class="col-sm-4">
                         <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Legendary Description</strong>
-                          </mat-hint>
+                          <mat-hint align="start"><strong>Legendary Description</strong> </mat-hint>
                           <input
                             matInput
                             type="text"
@@ -1099,9 +864,7 @@
                       </div>
                       <div class="col-sm-1">
                         <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Hit Modifier</strong>
-                          </mat-hint>
+                          <mat-hint align="start"><strong>Hit Modifier</strong> </mat-hint>
                           <input
                             matInput
                             type="text"
@@ -1112,9 +875,7 @@
                       </div>
                       <div class="col-sm-1">
                         <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Reach</strong>
-                          </mat-hint>
+                          <mat-hint align="start"><strong>Reach</strong> </mat-hint>
                           <span matSuffix>ft &nbsp;</span>
                           <input
                             matInput
@@ -1126,9 +887,7 @@
                       </div>
                       <div class="col-sm-1">
                         <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Action Damage</strong>
-                          </mat-hint>
+                          <mat-hint align="start"><strong>Action Damage</strong> </mat-hint>
                           <input
                             matInput
                             type="text"
@@ -1139,18 +898,13 @@
                       </div>
                       <div class="col-sm-1">
                         <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Dice Select</strong>
-                          </mat-hint>
+                          <mat-hint align="start"><strong>Dice Select</strong> </mat-hint>
                           <mat-select
                             name="dmgDice"
                             [(value)]="dmgDicesSelect"
                             formControlName="legendaryDice"
                           >
-                            <mat-option
-                              *ngFor="let dmg of dmgDices"
-                              [value]="dmg.value"
-                            >
+                            <mat-option *ngFor="let dmg of dmgDices" [value]="dmg.value">
                               {{ dmg.viewValue }}
                             </mat-option>
                           </mat-select>
@@ -1158,9 +912,7 @@
                       </div>
                       <div class="col-sm-1">
                         <mat-form-field class="example-full-width">
-                          <mat-hint align="start"
-                            ><strong>Damage Modifier</strong>
-                          </mat-hint>
+                          <mat-hint align="start"><strong>Damage Modifier</strong> </mat-hint>
                           <input
                             matInput
                             type="number"
@@ -1186,11 +938,7 @@
               <!-- ACTIONS END -->
 
               <hr />
-              <button
-                mat-raised-button
-                class="btn btn-success btn-sm"
-                (click)="newMonster()"
-              >
+              <button mat-raised-button class="btn btn-success btn-sm" (click)="newMonster()">
                 Save
               </button>
             </form>
