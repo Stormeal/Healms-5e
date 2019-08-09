@@ -1,4 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AngularFireStorage, AngularFireUploadTask } from "@angular/fire/storage";
+import { AuthService } from "../core/auth.service";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { Upload } from "../core/upload";
+import * as faker from "faker";
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: "app-players",
@@ -6,6 +13,15 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./players.component.scss"],
 })
 export class PlayersComponent implements OnInit {
+  characterForm: FormGroup;
+  characters: any;
+  user;
+  campaign: any;
+  campaignId: any;
+  selectedFiles: FileList;
+  currentUpload: Upload;
+  task: AngularFireUploadTask;
+
   races = [
     { value: "Hill Dwarf", viewValue: "Hill Dwarf" },
     { value: "Mountain Dwarf", viewValue: "Mountain Dwarf" },
@@ -119,7 +135,101 @@ export class PlayersComponent implements OnInit {
     { value: 25, viewValue: 25 },
   ];
 
-  constructor() {}
+  constructor(
+    private afs: AngularFirestore,
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private storage: AngularFireStorage,
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.characterForm = this.fb.group({
+      characterName: ["", Validators.required],
+      characterRace: ["", Validators.required],
+      characterClass: ["", Validators.required],
+      characterPassiveWisdom: ["", Validators.required],
+      characterAC: ["", Validators.required],
+      characterBackstory: ["", Validators.required],
+      characterLevel: ["", Validators.required],
+    });
+  }
+
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  newCharacter() {
+    this.auth.getUser().subscribe(user => {
+      this.user = user;
+      this.campaignId = this.user.campaigns.campaignId;
+      this.afs
+        .doc(`campaigns/${this.campaignId}`)
+        .valueChanges()
+        .subscribe(campaign => {
+          this.campaign = campaign;
+          const campId = this.campaign.uid;
+
+          const characterId = {
+            uid: faker.random.alphaNumeric(4),
+          };
+
+          const character = {
+            uid: characterId,
+            characterName: this.characterForm.value["characterName"],
+            characterRace: this.characterForm.value["characterRace"],
+            characterClass: this.characterForm.value["characterClass"],
+            characterLevel: this.characterForm.value["characterLevel"],
+            characterPassiveWisdom: this.characterForm.value["characterPassiveWisdom"],
+            characterAC: this.characterForm.value["characterAC"],
+            characterBackstory: this.characterForm.value["characterBackstory"],
+            photoURL: null,
+          };
+
+          if (this.selectedFiles) {
+            const file = this.selectedFiles.item(0);
+            this.currentUpload = new Upload(file);
+
+            // The storage path
+            const path = `campaigns/${campId}/${character.uid}`;
+
+            // Reference to storage bucket
+            const ref = this.storage.ref(path);
+
+            // The main task
+            this.task = this.storage.upload(path, file);
+            this.task
+              .snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  ref.getDownloadURL().subscribe(url => {
+                    console.log("URL: ", url); // <-- do what ever you want with the url..
+                    const characterPhoto = {
+                      uid: character.uid,
+                      characterName: this.characterForm.value["characterName"],
+                      characterRace: this.characterForm.value["characterRace"],
+                      characterClass: this.characterForm.value["characterClass"],
+                      characterLevel: this.characterForm.value["characterLevel"],
+                      characterPassiveWisdom: this.characterForm.value["characterPassiveWisdom"],
+                      characterAC: this.characterForm.value["characterAC"],
+                      characterBackstory: this.characterForm.value["characterBackstory"],
+                      photoURL: url,
+                    };
+                    this.afs
+                      .collection(`campaigns/${campId}/characters`)
+                      .doc(characterId.uid)
+                      .set(characterPhoto);
+                    return this.characterForm.reset();
+                  });
+                }),
+              )
+              .subscribe();
+          } else {
+            return this.afs
+              .collection(`campaigns/${campId}/characters`)
+              .doc(characterId.uid)
+              .set(character);
+          }
+        });
+    });
+  }
 }
