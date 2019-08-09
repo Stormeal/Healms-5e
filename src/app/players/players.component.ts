@@ -190,7 +190,7 @@ export class PlayersComponent implements OnInit {
             this.currentUpload = new Upload(file);
 
             // The storage path
-            const path = `campaigns/${campId}/${character.uid}`;
+            const path = `campaigns/${campId}/characters/${file.name} + ${Date.now()}`;
 
             // Reference to storage bucket
             const ref = this.storage.ref(path);
