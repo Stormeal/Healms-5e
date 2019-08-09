@@ -9,23 +9,16 @@
             </div>
             <h4 class="card-title">
               Character Creation -
-              <small class="category"
-                >Create a new player for your campaign</small
-              >
+              <small class="category">Create a new player for your campaign</small>
             </h4>
           </div>
           <div class="card-body">
-            <form>
+            <form [formGroup]="characterForm">
               <div class="row">
                 <div class="col-sm-5 mr-auto ml-auto">
-                  <mat-form-field
-                    class="example-full-width"
-                    floatLabel="always"
-                  >
+                  <mat-form-field class="example-full-width" floatLabel="always">
                     <mat-label>CHARACTER NAME</mat-label>
-                    <mat-hint align="start"
-                      ><strong>Specify Character Name</strong>
-                    </mat-hint>
+                    <mat-hint align="start"><strong>Specify Character Name</strong> </mat-hint>
                     <input
                       matInput
                       type="text"
@@ -44,17 +37,13 @@
                         placeholder="Select Class"
                         name="class"
                         required
+                        formControlName="characterClass"
                       >
-                        <mat-option
-                          *ngFor="let class of classes"
-                          [value]="class.value"
-                        >
+                        <mat-option *ngFor="let class of classes" [value]="class.value">
                           {{ class.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Select a class</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Select a class</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -65,16 +54,12 @@
                         placeholder="Select Race"
                         name="race"
                         required
+                        formControlName="characterRace"
                       >
-                        <mat-option
-                          *ngFor="let race of races"
-                          [value]="race.value"
-                        >
+                        <mat-option *ngFor="let race of races" [value]="race.value">
                           {{ race.viewValue }}
                         </mat-option>
-                        <mat-hint align="start"
-                          ><strong>Select a race</strong>
-                        </mat-hint>
+                        <mat-hint align="start"><strong>Select a race</strong> </mat-hint>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -86,17 +71,13 @@
                         placeholder="Choose Level"
                         name="class"
                         required
+                        formControlName="characterLevel"
                       >
-                        <mat-option
-                          *ngFor="let level of level"
-                          [value]="level.value"
-                        >
+                        <mat-option *ngFor="let level of level" [value]="level.value">
                           {{ level.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Choose level</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Choose level</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -107,14 +88,13 @@
                         placeholder="Armor Rating"
                         name="class"
                         required
+                        formControlName="characterAC"
                       >
                         <mat-option *ngFor="let ac of ac" [value]="ac.value">
                           {{ ac.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Choose AC</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Choose AC</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -125,14 +105,13 @@
                         placeholder="Passive Wisdom"
                         name="class"
                         required
+                        formControlName="characterPassiveWisdom"
                       >
                         <mat-option *ngFor="let wis of wis" [value]="wis.value">
                           {{ wis.viewValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-hint align="start"
-                        ><strong>Select pas. wisdom</strong>
-                      </mat-hint>
+                      <mat-hint align="start"><strong>Select pas. wisdom</strong> </mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -141,27 +120,26 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="bmd-label-floating"> Backstory</label>
-                    <textarea class="form-control" rows="5"></textarea>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      formControlName="characterBackstory"
+                    ></textarea>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-3 ml-auto mr-auto">
-                  <div
-                    class="fileinput fileinput-new text-center"
-                    data-provides="fileinput"
-                  >
+                <div class="col-md-4 ml-auto mr-auto">
+                  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                     <div class="fileinput-new thumbnail img-circle card-avatar">
                       <img src="./assets/img/placeholder.jpg" alt="..." />
                     </div>
-                    <div
-                      class="fileinput-preview fileinput-exists thumbnail card-avatar"
-                    ></div>
+                    <div class="fileinput-preview fileinput-exists thumbnail card-avatar"></div>
                     <div>
                       <span class="btn btn-round btn-success btn-file">
                         <span class="fileinput-new">Add Photo</span>
                         <span class="fileinput-exists">Change</span>
-                        <input type="file" name="..." />
+                        <input type="file" name="..." (change)="detectFiles($event)" />
                       </span>
                       <br />
                       <a
@@ -177,11 +155,7 @@
 
               <br />
               <hr />
-              <button
-                mat-raised-button
-                type="submit"
-                class="btn btn-success pull-right"
-              >
+              <button mat-raised-button (click)="newCharacter()" class="btn btn-success pull-right">
                 Create Player Character
               </button>
               <div class="clearfix"></div>
