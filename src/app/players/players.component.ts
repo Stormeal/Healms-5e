@@ -37,17 +37,21 @@ export class PlayersComponent implements OnInit {
     { value: "Tiefling", viewValue: "Tiefling" },
   ];
   classes = [
-    { value: "barb", viewValue: "Barbarian" },
-    { value: "bard", viewValue: "Bard" },
-    { value: "cleric", viewValue: "Cleric" },
-    { value: "fighter", viewValue: "Fighter" },
-    { value: "monk", viewValue: "Monk" },
-    { value: "paladin", viewValue: "Paladin" },
-    { value: "ranger", viewValue: "Ranger" },
-    { value: "runemaster", viewValue: "Runemaster" },
-    { value: "sorcere", viewValue: "Sorcerer" },
-    { value: "warlock", viewValue: "Warlock" },
-    { value: "wizard", viewValue: "Wizard" },
+    { value: "Artificer", viewValue: "Artificer" },
+    { value: "Barbarian", viewValue: "Barbarian" },
+    { value: "Bard", viewValue: "Bard" },
+    { value: "Blood Hunter", viewValue: "Blood Hunter" },
+    { value: "Druid", viewValue: "Druid" },
+    { value: "Cleric", viewValue: "Cleric" },
+    { value: "Fighter", viewValue: "Fighter" },
+    { value: "Monk", viewValue: "Monk" },
+    { value: "Paladin", viewValue: "Paladin" },
+    { value: "Ranger", viewValue: "Ranger" },
+    { value: "Rouge", viewValue: "Rouge" },
+    { value: "Runemaster", viewValue: "Runemaster" },
+    { value: "Sorcerer", viewValue: "Sorcerer" },
+    { value: "Warlock", viewValue: "Warlock" },
+    { value: "Wizard", viewValue: "Wizard" },
   ];
   level = [
     { value: 1, viewValue: 1 },
@@ -169,12 +173,8 @@ export class PlayersComponent implements OnInit {
           this.campaign = campaign;
           const campId = this.campaign.uid;
 
-          const characterId = {
-            uid: faker.random.alphaNumeric(4),
-          };
-
           const character = {
-            uid: characterId,
+            uid: faker.random.alphaNumeric(4),
             characterName: this.characterForm.value["characterName"],
             characterRace: this.characterForm.value["characterRace"],
             characterClass: this.characterForm.value["characterClass"],
@@ -216,7 +216,7 @@ export class PlayersComponent implements OnInit {
                     };
                     this.afs
                       .collection(`campaigns/${campId}/characters`)
-                      .doc(characterId.uid)
+                      .doc(character.uid)
                       .set(characterPhoto);
                     return this.characterForm.reset();
                   });
@@ -226,7 +226,7 @@ export class PlayersComponent implements OnInit {
           } else {
             return this.afs
               .collection(`campaigns/${campId}/characters`)
-              .doc(characterId.uid)
+              .doc(character.uid)
               .set(character);
           }
         });
