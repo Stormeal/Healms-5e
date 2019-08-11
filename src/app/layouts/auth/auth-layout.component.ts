@@ -25,7 +25,7 @@ export class AuthLayoutComponent implements OnInit {
       this.sidebarClose();
     });
 
-    this.load();
+    // this.load();
   }
   sidebarOpen() {
     const toggleButton = this.toggleButton;
@@ -71,12 +71,12 @@ export class AuthLayoutComponent implements OnInit {
     }
   }
 
-  /// Handler
-  load() {
-    this.auth.getUser().subscribe(user => {
-      this.user = user;
-    });
-  }
+  // /// Handler
+  // load() {
+  //   this.auth.getUser().subscribe(user => {
+  //     this.user = user;
+  //   });
+  // }
 
   dashboardNav() {
     this.router.navigate(['dashboard']);

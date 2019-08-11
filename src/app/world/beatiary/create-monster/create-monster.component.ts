@@ -328,6 +328,7 @@ export class CreateMonsterComponent implements OnInit {
       creatureSize: "",
       creatureRace: "",
       creatureAlignment: "",
+      creatureDescription: "",
 
       str: STR[2],
       dex: "",
@@ -862,6 +863,7 @@ export class CreateMonsterComponent implements OnInit {
             creatureSize: this.creatureForm.value["creatureSize"],
             creatureRace: this.creatureForm.value["creatureRace"],
             creatureAlignment: this.creatureForm.value["creatureAlignment"],
+            creatureDescription: this.creatureForm.value["creatureDescription"],
 
             strength: this.creatureForm.value["str"],
             dexterity: this.creatureForm.value["dex"],
@@ -916,7 +918,7 @@ export class CreateMonsterComponent implements OnInit {
             this.currentUpload = new Upload(file);
 
             // The storage path
-            const path = `campaigns/${campId}/${creatureId}`;
+            const path = `campaigns/${campId}/creatures/${file.name} + ${Date.now()}`;
 
             // Reference to storage bucket
             const ref = this.storage.ref(path);
@@ -939,6 +941,7 @@ export class CreateMonsterComponent implements OnInit {
                       creatureAlignment: this.creatureForm.value[
                         "creatureAlignment"
                       ],
+                      creatureDescription: this.creatureForm.value["creatureDescription"],
 
                       strength: this.creatureForm.value["str"],
                       dexterity: this.creatureForm.value["dex"],
@@ -1000,13 +1003,15 @@ export class CreateMonsterComponent implements OnInit {
                 }),
               )
               .subscribe();
+          } else {
+            this.afs
+              .collection(`campaigns/${campId}/creatures`)
+              .doc(creatureId.uid)
+              .set(creature);
+            return this.creatureForm.reset();
+
           }
 
-          this.afs
-            .collection(`campaigns/${campId}/creatures`)
-            .doc(creatureId.uid)
-            .set(creature);
-          return this.creatureForm.reset();
         });
     });
 

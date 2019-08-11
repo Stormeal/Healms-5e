@@ -80,6 +80,15 @@
                 </div>
               </div>
               <!-- SIZE / RACE / ALIGNMENT END -->
+              <div class="row">
+                <label class="col-sm-4 col-form-label">Creature Description: </label>
+                <div class="col-sm-5">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput type="text" rows="2"
+                      formControlName="creatureDescription"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
 
               <hr />
 
@@ -260,7 +269,7 @@
                   <mat-form-field class="example-full-width">
                     <mat-select name="challengeRating" [(value)]="challengeRatingSelect"
                       formControlName="challengeRating">
-                      <mat-option *ngFor="let cr of challengeRatings" [value]="cr.value">
+                      <mat-option *ngFor="let cr of challengeRatings" [value]="cr.viewValue">
                         {{ cr.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -311,7 +320,7 @@
               <div formArrayName="traits">
                 <div *ngFor="let trait of traitFormGroup.controls; let i = index">
                   <div class="row" [formGroupName]="i">
-                    <label class="col-sm-2 col-form-label">Trait: </label>
+                    <label class="col-sm-1 col-form-label">Trait: </label>
                     <div class="col-sm-2">
                       <mat-form-field class="example-full-width">
                         <mat-hint align="start"><strong>Trait Name</strong> </mat-hint>
@@ -326,6 +335,7 @@
                           formControlName="traitDescription" />
                       </mat-form-field>
                     </div>
+                    <div class="col-sm-1"></div>
                     <div class="col-sm-1" style="padding: 2px">
                       <button mat-raised-button class="btn btn-danger btn-sm"
                         (click)="removeTrait(i)">

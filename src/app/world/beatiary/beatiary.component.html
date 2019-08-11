@@ -16,24 +16,31 @@
       <a mat-raised-button class="btn btn-success" [routerLink]="['/world/beastiary/create']">
         Create a new monster
       </a>
-      <ng-container *ngFor="let c of creatures">
-        <div class="card card-profile">
-          <div class="card-avatar">
-            <a>
-              <img class="img" [src]="c.photoURL" />
-            </a>
-          </div>
-          <div class="card-body">
-            <h6 class="card-category text-gray">{{ c.tyoe }}</h6>
-            <h4 class="card-title">{{ c.name }}</h4>
-            <h6 class="card-category text-gray">
-              <i class="fas fa-khanda"> : </i>{{ c.Challenge }}
-            </h6>
+      <hr />
+      <br />
+      <div class="row">
+        <ng-container *ngFor="let c of creatures">
+          <div class="col-sm-3">
+            <div class="card card-profile">
+              <div class="card-avatar">
+                <a>
+                  <img class="img" [src]="c.photoURL" />
+                </a>
+              </div>
+              <div class="card-body">
+                <h6 class="card-category text-gray">
+                  {{ c.creatureSize + " " + c.creatureRace + " | " + c.creatureAlignment }}</h6>
+                <h4 class="card-title">{{ c.creatureName }}</h4>
+                <h6 class="card-category text-gray">
+                  <i class="fas fa-khanda"> : </i>{{ c.challengeRating }}
+                </h6>
 
-            <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a>
+                <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
 
     </ng-container>
 

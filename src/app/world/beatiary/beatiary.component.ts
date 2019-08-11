@@ -6,7 +6,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogConfig
 } from "@angular/material";
-import { AuthService } from "src/app/core/auth.service.js";
+import { AuthService } from "src/app/core/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 
 declare var require: any;
@@ -27,7 +27,7 @@ export class BeatiaryComponent implements OnInit {
   constructor(public dialog: MatDialog, private auth: AuthService, private afs: AngularFirestore) { }
 
   ngOnInit() {
-    this.load();
+    this.loader();
   }
 
   onSelect(monster: any) {
@@ -48,28 +48,27 @@ export class BeatiaryComponent implements OnInit {
     dialogRef.componentInstance.dialogConfig = dialogConfig;
   }
 
-  load() {
-    this.auth.getUser();
+  loader() {
+    console.log("You got this far");
+
 
     this.auth.getUser().subscribe(user => {
       this.user = user;
       this.campaignId = this.user.campaigns.campaignId;
-      // console.log('CampaignId', this.campaignId);
+
 
       this.afs
         .doc(`campaigns/${this.campaignId}`)
         .valueChanges()
         .subscribe(campaign => {
           this.campaign = campaign;
-          const campId = this.campaign.uid;
 
-          console.log("Campaign: ", campId, this.campaign);
           this.afs
             .collection(`campaigns/${this.campaignId}/creatures`)
             .valueChanges()
             .subscribe(creatures => {
               this.creatures = creatures;
-              console.log("Cities: ", this.creatures);
+              console.log("Creatures: ", this.creatures);
             });
         });
     });
