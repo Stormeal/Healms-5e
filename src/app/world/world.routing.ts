@@ -6,6 +6,7 @@ import { CitiesComponent } from "./cities/cities.component";
 import { BeatiaryComponent } from "./beatiary/beatiary.component";
 import { SpellcastingComponent } from "./spellcasting/spellcasting.component";
 import { CreateMonsterComponent } from "./beatiary/create-monster/create-monster.component";
+import { NpcComponent } from "./npc/npc.component";
 
 export const WorldRoutes: Routes = [
   {
@@ -59,6 +60,15 @@ export const WorldRoutes: Routes = [
       {
         path: "beastiary/create",
         component: CreateMonsterComponent
+      }
+    ]
+  },
+  {
+    path: "",
+    children: [
+      {
+        path: "npc",
+        component: NpcComponent
       }
     ]
   }
