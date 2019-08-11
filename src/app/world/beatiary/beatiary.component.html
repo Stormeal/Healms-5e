@@ -34,8 +34,20 @@
                 <h6 class="card-category text-gray">
                   <i class="fas fa-khanda"> : </i>{{ c.challengeRating }}
                 </h6>
+                <ng-container *ngIf="c.creatureDescription.length > 255 else fine">
+                  <div style="height: 120px;">
+                    <small>{{c.creatureDescription | slice: 0:255}} ...</small>
+                  </div>
+                </ng-container>
 
-                <a mat-raised-button class="btn btn-success btn-round">Add to Campaign</a>
+                <ng-template #fine>
+                  <div style="height: 120px;">
+                    <small>{{c.creatureDescription}}</small>
+                  </div>
+                </ng-template>
+
+
+                <a mat-raised-button class="btn btn-success">Add to Encounter</a>
               </div>
             </div>
           </div>
