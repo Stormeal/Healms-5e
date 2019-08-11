@@ -56,10 +56,11 @@ export const ROUTES: RouteInfo[] = [
     icontype: "public",
     collapse: "world",
     children: [
+      { path: "beastiary", title: "Beastiary", ab: "B" },
+      { path: "cities", title: "Cities", ab: "C" },
+      { path: "npc", title: "NPC", ab: "N" },
       { path: "overview", title: "Overview", ab: "O" },
       { path: "religions", title: "Religions", ab: "R" },
-      { path: "cities", title: "Cities", ab: "C" },
-      { path: "beastiary", title: "Beastiary", ab: "B" },
       { path: "spellcasting", title: "Spellcasting", ab: "S" }
     ]
   },
@@ -171,7 +172,7 @@ export class SidebarComponent implements OnInit {
   campaignId: any;
   photoURL: string;
 
-  constructor(private auth: AuthService, private afs: AngularFirestore) {}
+  constructor(private auth: AuthService, private afs: AngularFirestore) { }
 
   isMobileMenu() {
     if ($(window).width() > 991) {

@@ -112,6 +112,7 @@ export class CreateMonsterComponent implements OnInit {
   creatureForm: FormGroup;
   traitList: FormArray;
   actionList: FormArray;
+  reactionList: FormArray;
   legendaryList: FormArray;
 
   task: AngularFireUploadTask;
@@ -134,6 +135,7 @@ export class CreateMonsterComponent implements OnInit {
 
   selectedWizard: Classes;
   isTrue = false; // Set this to false when live. True is for testing purposes.
+  reactionTrue = false; // Set this to false when live. True is for testing purposes.
   legendaryTrue = false; // Set this to false when live. Thre is for testing purposes.
 
   creatureRaces = CreatureRaces;
@@ -230,6 +232,10 @@ export class CreateMonsterComponent implements OnInit {
 
   get actionFormGroup() {
     return this.creatureForm.get("actions") as FormArray;
+  }
+
+  get reactionFormGroup() {
+    return this.creatureForm.get("reactions") as FormArray;
   }
 
   get legendaryFormGroup() {
@@ -363,10 +369,12 @@ export class CreateMonsterComponent implements OnInit {
 
       traits: this.fb.array([this.createTrait()]),
       actions: this.fb.array([this.createAction()]),
+      reactions: this.fb.array([this.createReaction()]),
       legendary: this.fb.array([this.createLegendary()]),
     });
     this.traitList = this.creatureForm.get("traits") as FormArray;
     this.actionList = this.creatureForm.get("actions") as FormArray;
+    this.reactionList = this.creatureForm.get("reactions") as FormArray;
     this.legendaryList = this.creatureForm.get("legendary") as FormArray;
 
     this.getWizard();
@@ -762,6 +770,22 @@ export class CreateMonsterComponent implements OnInit {
     this.actionList.removeAt(index);
   }
 
+  createReaction(): FormGroup {
+    return this.fb.group({
+      reactionName: ["", Validators.compose([Validators.required])],
+      reactionDescription: ["", Validators.compose([Validators.required])],
+    });
+  }
+
+  addReaction() {
+    this.reactionReturnTrue();
+    this.reactionList.push(this.createReaction());
+  }
+
+  removeReaction(index) {
+    this.reactionList.removeAt(index);
+  }
+
   createLegendary(): FormGroup {
     return this.fb.group({
       legendaryName: ["", Validators.compose([Validators.required])],
@@ -801,6 +825,11 @@ export class CreateMonsterComponent implements OnInit {
   returnsTrue(): boolean {
     console.log("Returns true");
     return (this.isTrue = true);
+  }
+
+  reactionReturnTrue(): boolean {
+    console.log("Returns true");
+    return (this.reactionTrue = true);
   }
 
   legendaryReturnsTrue(): boolean {
@@ -872,6 +901,12 @@ export class CreateMonsterComponent implements OnInit {
 
             traits: this.creatureForm.value["traits"],
             actions: this.creatureForm.value["actions"],
+            reactions: this.creatureForm.value["reactions"],
+            legendaryAction: this.creatureForm.value["legendary"],
+
+            legendaryTrue: this.legendaryTrue,
+            reactionTrue: this.reactionTrue,
+            spellCaster: this.isTrue,
 
             photoURL: null,
           };
@@ -947,6 +982,12 @@ export class CreateMonsterComponent implements OnInit {
 
                       traits: this.creatureForm.value["traits"],
                       actions: this.creatureForm.value["actions"],
+                      reactions: this.creatureForm.value["reactions"],
+                      legendaryAction: this.creatureForm.value["legendary"],
+
+                      legendaryTrue: this.legendaryTrue,
+                      reactionTrue: this.reactionTrue,
+                      spellCaster: this.isTrue,
 
                       photoURL: url,
                     };
@@ -970,13 +1011,13 @@ export class CreateMonsterComponent implements OnInit {
     });
 
     // Prepare the preview for profile picture
-    $("#creature-picture").change(function() {
+    $("#creature-picture").change(function () {
       const input = $(this);
 
       if (input[0].files && input[0].files[0]) {
         const reader = new FileReader();
 
-        reader.onload = function(e: any) {
+        reader.onload = function (e: any) {
           $("#creaturePicturePreview")
             .attr("src", e.target.result)
             .fadeIn("slow");
