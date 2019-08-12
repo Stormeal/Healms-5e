@@ -47,6 +47,8 @@ export class CharacterSheetComponent implements OnInit {
     });
   }
 
+  editCharacter(data) {}
+
   deleteCharacter(uid: string) {
     console.log("uid:", uid);
     this.auth.getUser().subscribe(user => {

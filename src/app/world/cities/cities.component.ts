@@ -106,7 +106,7 @@ export class CitiesComponent implements OnInit {
             this.currentUpload = new Upload(file);
 
             // The storage path
-            const path = `campaigns/${campId}/${city.cityName}`;
+            const path = `campaigns/${campId}/cities/${city.cityName}`;
 
             // Reference to storage bucket
             const ref = this.storage.ref(path);
