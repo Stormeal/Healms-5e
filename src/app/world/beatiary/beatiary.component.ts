@@ -1,11 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import * as data from "../../../assets/srd/monsters.json";
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatDialogConfig
-} from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from "@angular/material";
 import { AuthService } from "src/app/core/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 
@@ -14,7 +9,7 @@ declare var require: any;
 @Component({
   selector: "app-beatiary",
   templateUrl: "./beatiary.component.html",
-  styleUrls: ["./beatiary.component.scss"]
+  styleUrls: ["./beatiary.component.scss"],
 })
 export class BeatiaryComponent implements OnInit {
   data = require("../../../assets/srd/monsters.json");
@@ -24,7 +19,7 @@ export class BeatiaryComponent implements OnInit {
   campaign: any;
   monsters = <any>data;
 
-  constructor(public dialog: MatDialog, private auth: AuthService, private afs: AngularFirestore) { }
+  constructor(public dialog: MatDialog, private auth: AuthService, private afs: AngularFirestore) {}
 
   ngOnInit() {
     this.loader();
@@ -38,24 +33,17 @@ export class BeatiaryComponent implements OnInit {
   openDialog(monster: any, dialogConfig: MatDialogConfig): void {
     const dialogRef = this.dialog.open(SheetDialogComponent, {
       width: "1450px",
-      data: monster
+      data: monster,
     });
-    dialogRef.componentInstance.dialogConfig = dialogConfig;
-  }
-
-  openNewMonsterDialog(dialogConfig: MatDialogConfig): void {
-    const dialogRef = this.dialog.open(NewMonsterDialog, {});
     dialogRef.componentInstance.dialogConfig = dialogConfig;
   }
 
   loader() {
     console.log("You got this far");
 
-
     this.auth.getUser().subscribe(user => {
       this.user = user;
       this.campaignId = this.user.campaigns.campaignId;
-
 
       this.afs
         .doc(`campaigns/${this.campaignId}`)
@@ -73,35 +61,18 @@ export class BeatiaryComponent implements OnInit {
         });
     });
   }
-
 }
 
 @Component({
   selector: "app-sheet",
-  templateUrl: "sheet-dialog.html"
+  templateUrl: "sheet-dialog.html",
 })
 export class SheetDialogComponent {
   dialogConfig: MatDialogConfig;
   constructor(
     public dialogRef: MatDialogRef<SheetDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public monster: any
-  ) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
-
-@Component({
-  selector: "app-new-monster",
-  templateUrl: "newMonster.html"
-})
-export class NewMonsterDialog {
-  dialogConfig: MatDialogConfig;
-  constructor(
-    public dialogRef: MatDialogRef<NewMonsterDialog>,
-    @Inject(MAT_DIALOG_DATA) public monster: any
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public monster: any,
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
