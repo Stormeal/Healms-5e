@@ -35,8 +35,8 @@ export const ROUTES: RouteInfo[] = [
     collapse: "home",
     children: [
       { path: "dashboard", title: "Dashboard", ab: "DB" },
-      { path: "screen", title: "DM Screen", ab: "DM" }
-    ]
+      { path: "screen", title: "DM Screen", ab: "DM" },
+    ],
   },
   {
     path: "/adventures",
@@ -46,8 +46,8 @@ export const ROUTES: RouteInfo[] = [
     collapse: "adventures",
     children: [
       { path: "overview", title: "Adventure Overview", ab: "AO" },
-      { path: "encounters", title: "Encounters", ab: "E" }
-    ]
+      { path: "encounters", title: "Encounters", ab: "E" },
+    ],
   },
   {
     path: "/world",
@@ -61,14 +61,14 @@ export const ROUTES: RouteInfo[] = [
       { path: "npc", title: "NPC", ab: "N" },
       { path: "overview", title: "Overview", ab: "O" },
       { path: "religions", title: "Religions", ab: "R" },
-      { path: "spellcasting", title: "Spellcasting", ab: "S" }
-    ]
+      { path: "spellcasting", title: "Spellcasting", ab: "S" },
+    ],
   },
   {
     path: "/players",
     title: "Players",
     type: "link",
-    icontype: "person"
+    icontype: "person",
   },
   {
     path: "/rules",
@@ -80,14 +80,14 @@ export const ROUTES: RouteInfo[] = [
       { path: "character-creation", title: "Character Creation", ab: "CC" },
       { path: "game", title: "Playing the Game", ab: "PG" },
       { path: "magic-rules", title: "The Rules of Magic", ab: "RM" },
-      { path: "dmtools", title: "Dungeon Master's Tools ", ab: "DT" }
-    ]
+      { path: "dmtools", title: "Dungeon Master's Tools ", ab: "DT" },
+    ],
   },
   {
     path: "/dashboard",
     title: "Dashboard",
     type: "link",
-    icontype: "dashboard"
+    icontype: "dashboard",
   },
   {
     path: "/components",
@@ -102,8 +102,9 @@ export const ROUTES: RouteInfo[] = [
       { path: "sweet-alert", title: "Sweet Alert", ab: "SA" },
       { path: "notifications", title: "Notifications", ab: "N" },
       { path: "icons", title: "Icons", ab: "I" },
-      { path: "typography", title: "Typography", ab: "T" }
-    ]
+      { path: "typography", title: "Typography", ab: "T" },
+      { path: "characterCard", title: "Character Card", ab: "CC" },
+    ],
   },
   {
     path: "/forms",
@@ -115,8 +116,8 @@ export const ROUTES: RouteInfo[] = [
       { path: "regular", title: "Regular Forms", ab: "RF" },
       { path: "extended", title: "Extended Forms", ab: "EF" },
       { path: "validation", title: "Validation Forms", ab: "VF" },
-      { path: "wizard", title: "Wizard", ab: "W" }
-    ]
+      { path: "wizard", title: "Wizard", ab: "W" },
+    ],
   },
   {
     path: "/tables",
@@ -127,26 +128,26 @@ export const ROUTES: RouteInfo[] = [
     children: [
       { path: "regular", title: "Regular Tables", ab: "RT" },
       { path: "extended", title: "Extended Tables", ab: "ET" },
-      { path: "datatables.net", title: "Datatables.net", ab: "DT" }
-    ]
+      { path: "datatables.net", title: "Datatables.net", ab: "DT" },
+    ],
   },
   {
     path: "/widgets",
     title: "Widgets",
     type: "link",
-    icontype: "widgets"
+    icontype: "widgets",
   },
   {
     path: "/charts",
     title: "Charts",
     type: "link",
-    icontype: "timeline"
+    icontype: "timeline",
   },
   {
     path: "/calendar",
     title: "Calendar",
     type: "link",
-    icontype: "date_range"
+    icontype: "date_range",
   },
   {
     path: "/pages",
@@ -157,13 +158,13 @@ export const ROUTES: RouteInfo[] = [
     children: [
       { path: "pricing", title: "Pricing", ab: "P" },
       { path: "lock", title: "Lock Screen Page", ab: "LSP" },
-      { path: "user", title: "User Page", ab: "UP" }
-    ]
-  }
+      { path: "user", title: "User Page", ab: "UP" },
+    ],
+  },
 ];
 @Component({
   selector: "app-sidebar-cmp",
-  templateUrl: "sidebar.component.html"
+  templateUrl: "sidebar.component.html",
 })
 export class SidebarComponent implements OnInit {
   public menuItems: any[];
@@ -172,7 +173,7 @@ export class SidebarComponent implements OnInit {
   campaignId: any;
   photoURL: string;
 
-  constructor(private auth: AuthService, private afs: AngularFirestore) { }
+  constructor(private auth: AuthService, private afs: AngularFirestore) {}
 
   isMobileMenu() {
     if ($(window).width() > 991) {
@@ -187,12 +188,10 @@ export class SidebarComponent implements OnInit {
   }
   updatePS(): void {
     if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
-      const elemSidebar = <HTMLElement>(
-        document.querySelector(".sidebar .sidebar-wrapper")
-      );
+      const elemSidebar = <HTMLElement>document.querySelector(".sidebar .sidebar-wrapper");
       const ps = new PerfectScrollbar(elemSidebar, {
         wheelSpeed: 2,
-        suppressScrollX: true
+        suppressScrollX: true,
       });
     }
   }
