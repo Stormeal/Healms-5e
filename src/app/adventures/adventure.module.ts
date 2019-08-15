@@ -1,24 +1,24 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../app.module';
+import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MaterialModule } from "../app.module";
 
-import { AdventureRoutes } from './adventure.routing';
-import { OverviewComponent } from './overview/overview.component';
-import { EncountersComponent } from './encounters/encounters.component';
+import { AngularEditorModule } from "@kolkov/angular-editor";
 
-
-
+import { AdventureRoutes } from "./adventure.routing";
+import { OverviewComponent } from "./overview/overview.component";
+import { EncountersComponent } from "./encounters/encounters.component";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdventureRoutes),
     FormsModule,
-    MaterialModule
+    ReactiveFormsModule,
+    MaterialModule,
+    AngularEditorModule,
   ],
   declarations: [OverviewComponent, EncountersComponent],
-
 })
-export class AdventureModule { }
+export class AdventureModule {}
