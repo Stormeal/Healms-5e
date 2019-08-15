@@ -1,11 +1,52 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
+      <mat-tab-group mat-align-tabs="center" [color]="primary" style="width: 100%;">
+        <mat-tab label="Overview"> </mat-tab>
+        <mat-tab label="Generic">
+          <div class="card col-md-10">
+            <div class="card-header card-header-icon card-header-success">
+              <div class="card-icon">
+                <i class="fas fa-scroll fa-lg"></i>
+              </div>
+              <h4 class="card-title">
+                New Adventure -
+                <small class="category">Generic</small>
+              </h4>
+            </div>
+            <div class="card-body">
+              <form class="form" method="" action="" [formGroup]="advGenericForm">
+                <!-- <form class="form" method="" action=""> -->
+                <div class="row">
+                  <div class="col-md-7">
+                    <mat-form-field class="example-full-width" floatLabel="always">
+                      <input
+                        class="ml-auto mr-auto"
+                        matInput
+                        type="text"
+                        autocomplete="off"
+                        formControlName="genTitle"
+                      />
+                      <mat-label>Adventure Title</mat-label>
+                    </mat-form-field>
+                  </div>
+                </div>
 
-      <p>Adventure Overview</p>
-
-
-
+                <br />
+                <hr />
+                <button mat-raised-button (click)="newCity()" class="btn btn-success pull-right">
+                  Create Adventure
+                </button>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Structure"> </mat-tab>
+        <mat-tab label="Components"> </mat-tab>
+        <mat-tab label="Relations"> </mat-tab>
+        <mat-tab label="Backdrops"> </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
