@@ -4,7 +4,7 @@
       <mat-tab-group mat-align-tabs="center" [color]="primary" style="width: 100%;">
         <mat-tab label="Overview"> </mat-tab>
         <mat-tab label="Generic">
-          <div class="card col-md-10">
+          <div class="card col-md-11">
             <div class="card-header card-header-icon card-header-success">
               <div class="card-icon">
                 <i class="fas fa-scroll fa-lg"></i>
@@ -29,6 +29,64 @@
                       />
                       <mat-label>Adventure Title</mat-label>
                     </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">OBJECTIVE</h1>
+                    <angular-editor id="" formControlName="genObjective"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >This is the main objective during the adventure, what do you want the
+                        players to learn or find? Should the players protect an endangered NPC?</b
+                      ></mat-hint
+                    >
+                  </div>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">THEME</h1>
+                    <angular-editor id="" formControlName="genTheme"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >What is the theme of this adventure? Make sure to carry out the theme
+                        during the plot.</b
+                      ></mat-hint
+                    >
+                  </div>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      EXPECTATIONS
+                    </h1>
+                    <angular-editor
+                      id=""
+                      [config]="config"
+                      formControlName="genExpectations"
+                    ></angular-editor>
+                    <mat-hint
+                      ><strong
+                        >You could make a list of things you expect to happen during this
+                        adventure.</strong
+                      ></mat-hint
+                    >
+                  </div>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">OPENING</h1>
+                    <angular-editor id="" formControlName="genOpening"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >What starts off this adventure? Stakeout gone wrong? Town full of people
+                        who only speaks as ducks?</b
+                      ></mat-hint
+                    >
                   </div>
                 </div>
 

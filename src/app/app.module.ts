@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
-import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 import { APP_BASE_HREF } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -103,7 +104,8 @@ export class MaterialModule {}
       useHash: true,
     }),
     ToastrModule.forRoot(), // ToastrModule added
-    HttpModule,
+    BrowserModule,
+    HttpClientModule,
     MaterialModule,
     MatNativeDateModule,
     SidebarModule,
