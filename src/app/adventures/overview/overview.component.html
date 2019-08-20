@@ -184,22 +184,120 @@
                   </div>
                 </div>
                 <br />
+
+                <div class="col-md-12 text-center">
+                  <h3 class="display-3" style="font-size: 1.3em; font-weight: bold">
+                    ACT II
+                  </h3>
+                  <hr />
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      SET-UP JOURNEY
+                    </h1>
+                    <angular-editor id="" formControlName="act2Journey"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >As this is the bulk of your adventure, fill it with encounters, NPCs, and
+                        other curious events and moments.
+                      </b></mat-hint
+                    >
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      FIRST ATTEMPT
+                    </h1>
+                    <angular-editor id="" formControlName="act2FirstAttempt"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >The PCs must have a crack at resolving the situation, and should fail. That
+                        way they can learn how to really win and try again!
+                      </b></mat-hint
+                    >
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="col-md-12 text-center">
+                  <h3 class="display-3" style="font-size: 1.3em; font-weight: bold">
+                    ACT III
+                  </h3>
+                  <hr />
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      FALSE ENDING
+                    </h1>
+                    <angular-editor id="" formControlName="act3FalseEnding"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >Make it appear as if the PCs have won, and then reveal there is more to it!
+                        A surprise.
+                      </b></mat-hint
+                    >
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      FINAL SHOWDOWN
+                    </h1>
+                    <angular-editor id="" formControlName="act3FinalShowdown"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >Make sure to conclude your adventure with the enemy defeated and the heroes
+                        victorious.
+                      </b></mat-hint
+                    >
+                  </div>
+                </div>
+                <br />
                 <br />
 
                 <br />
                 <hr />
-                <button mat-raised-button (click)="newCity()" class="btn btn-success pull-right">
-                  Create Adventure
-                </button>
+                <div class="ml-auto mr-auto">
+                  <button mat-raised-button (click)="newCity()" class="btn btn-success">
+                    Create Adventure
+                  </button>
+                </div>
                 <div class="clearfix"></div>
               </form>
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="Structure"> </mat-tab>
-        <mat-tab label="Components"> </mat-tab>
-        <mat-tab label="Relations"> </mat-tab>
-        <mat-tab label="Backdrops"> </mat-tab>
+        <mat-tab disabled label="Structure"> </mat-tab>
+        <mat-tab disabled label="Components"> </mat-tab>
+        <mat-tab label="Relations">
+          <div class="card col-md-11">
+            <div class="card-header card-header-icon card-header-success">
+              <div class="card-icon">
+                <i class="fas fa-scroll fa-lg"></i>
+              </div>
+              <h4 class="card-title">
+                New Adventure -
+                <small class="category">Relations</small>
+              </h4>
+            </div>
+            <div class="card-body">
+              <form class="form" method="" action="" [formGroup]="advRelationsForm"></form>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab disabled label="Backdrops"> </mat-tab>
       </mat-tab-group>
     </div>
   </div>
