@@ -14,7 +14,9 @@ declare var require: any;
 export class OverviewComponent implements OnInit {
   data = require("../../../assets/srd/monsters.json");
   monsters = <any>data;
+
   advGenericForm: FormGroup;
+  advRelationsForm: FormGroup;
 
   config: AngularEditorConfig = {
     editable: true,
@@ -70,15 +72,19 @@ export class OverviewComponent implements OnInit {
       genTheme: "",
       genExpectations: "",
       genOpening: "",
-
       genType: "",
       genFocus: "",
       genAdversary: "",
-
       act1Goal: "",
       act1Enemy: "",
       act1Situation: "",
+      act2Journey: "",
+      act2FirstAttempt: "",
+      act3FalseEnding: "",
+      act3FinalShowdown: "",
     });
+
+    this.advRelationsForm = this.fb.group({});
   }
 
   loader() {}
