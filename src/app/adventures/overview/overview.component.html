@@ -89,6 +89,102 @@
                     >
                   </div>
                 </div>
+                <br />
+                <div class="row">
+                  <div class="col-md-4 text-center">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">TYPE</h1>
+                    <mat-form-field>
+                      <mat-select placeholder="Select Type" formControlName="genType">
+                        <mat-option *ngFor="let type of types" [(value)]="type.value">
+                          {{ type.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">FOCUS</h1>
+                    <mat-form-field>
+                      <mat-select placeholder="Select Focus" formControlName="genFocus">
+                        <mat-option *ngFor="let focus of focuses" [(value)]="focus.value">
+                          {{ focus.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      MAIN ADVERSARY TYPE
+                    </h1>
+                    <mat-form-field>
+                      <mat-select placeholder="Select Adversary" formControlName="genAdversary">
+                        <mat-option
+                          *ngFor="let adversary of adversaries"
+                          [(value)]="adversary.value"
+                        >
+                          {{ adversary.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <br />
+                <div class="col-md-12 text-center">
+                  <h3 class="display-3" style="font-size: 1.3em; font-weight: bold">
+                    ACT I
+                  </h3>
+                  <hr />
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      INTRO GOAL
+                    </h1>
+                    <angular-editor id="" formControlName="act1Goal"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >Tell your players what their goal is quickly and clearly - Save the prince,
+                        rescue the fireman, or arrest the police officer.
+                      </b></mat-hint
+                    >
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      INTRO ENEMY
+                    </h1>
+                    <angular-editor id="" formControlName="act1Enemy"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >Give your players someone or something to hate early on in the adventure so
+                        they can track them down.
+                      </b></mat-hint
+                    >
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1 class="display-3" style="font-size: 1.1em; font-weight: bold">
+                      INTRO SITUATION
+                    </h1>
+                    <angular-editor id="" formControlName="act1Situation"></angular-editor>
+                    <mat-hint
+                      ><b
+                        >Do not delay to establish the situation the PCs find themselves in. A
+                        battle, a robbery, a cooking competition.
+                      </b></mat-hint
+                    >
+                  </div>
+                </div>
+                <br />
+                <br />
 
                 <br />
                 <hr />
