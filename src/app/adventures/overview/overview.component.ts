@@ -42,6 +42,25 @@ export class OverviewComponent implements OnInit {
     ],
   };
 
+  types = [
+    { value: "Thwarting", viewValue: "Thwarting" },
+    { value: "Discovering", viewValue: "Discovering" },
+    { value: "Delivering", viewValue: "Delivering" },
+    { value: "Collecting", viewValue: "Collecting" },
+  ];
+
+  focuses = [
+    { value: "Master Plot", viewValue: "Master Plot" },
+    { value: "Character Plot", viewValue: "Character Plot" },
+    { value: "Other", viewValue: "Other" },
+  ];
+
+  adversaries = [
+    { value: "Villain", viewValue: "Villain" },
+    { value: "Nemesis", viewValue: "Nemesis" },
+    { value: "Henchmen", viewValue: "Henchmen" },
+  ];
+
   constructor(private fb: FormBuilder, private auth: AuthService, private afs: AngularFirestore) {}
 
   ngOnInit() {
@@ -51,6 +70,14 @@ export class OverviewComponent implements OnInit {
       genTheme: "",
       genExpectations: "",
       genOpening: "",
+
+      genType: "",
+      genFocus: "",
+      genAdversary: "",
+
+      act1Goal: "",
+      act1Enemy: "",
+      act1Situation: "",
     });
   }
 
