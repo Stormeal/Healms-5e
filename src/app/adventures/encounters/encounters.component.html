@@ -1,27 +1,44 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-9" style="padding-right: 65px;">
+      <div class="col-md-9" style="padding-right: 25px;">
         <div class="card">
           <form class="form" method="" action="" [formGroup]="encounterForm">
             <div class="cover-container" style="height: 350px">
               <div class="cover-img" style="height: 100%; width: 100%;">
                 <img src="../../../assets/img/monsters/cover.jpg" />
               </div>
-              <div class="col-md-5 top-left">
-                <mat-form-field class="example-full-width ">
-                  <mat-hint class="white" align="start"
-                    ><strong>Give your encounter a name</strong>
-                  </mat-hint>
-                  <input
-                    class="white"
-                    matInput
-                    type="text"
-                    autocomplete="off"
-                    formControlName="encounterTitle"
-                  />
-                </mat-form-field>
+              <div class="col-md-12 top-left">
+                <div class="col-md-5">
+                  <mat-form-field class="example-full-width ">
+                    <mat-hint class="white" align="start"><strong>Give your encounter a
+                        name</strong>
+                    </mat-hint>
+                    <input class="white" matInput type="text" autocomplete="off"
+                      formControlName="encounterTitle" />
+                  </mat-form-field>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="col-md-4">
+                    <p class="white" style="font-weight: bold"># OF CHARACTERS: <i
+                        class="fa fa-user-ninja" style="color: #5bc0de"></i>&nbsp;
+                      5 &nbsp;&nbsp;|&nbsp;&nbsp; AVERAGE PARTY LEVEL: 5</p>
+                  </div>
+                  <div class="col-md-3" style="top: -10px;">
+                    <mat-form-field>
+                      <mat-select style="color: white" name="managePlayers"
+                        formControlName="characterSelect">
+                        <mat-option *ngFor="let character of characters" [value]="character">
+                          {{ character.characterName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
               </div>
+
+
             </div>
           </form>
         </div>
@@ -35,13 +52,8 @@
               <!--        Here you can write extra buttons/actions for the toolbar              -->
             </div>
             <div class="material-datatables">
-              <table
-                id="datatables"
-                class="table table-striped table-no-bordered table-hover"
-                cellspacing="0"
-                width="100%"
-                style="width:100%"
-              >
+              <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                cellspacing="0" width="100%" style="width:100%">
                 <thead>
                   <tr>
                     <th class="disabled-sorting">{{ dataTable.headerRow[0] }}</th>
@@ -63,28 +75,42 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr *ngFor="let m of monsters">
+                  <tr *ngFor="let m of creatures" (click)="onSelect(m)">
+                    <td>{{ m.creatureName }}</td>
+                    <td>{{ m.creatureSize }}</td>
+                    <td>{{ m.creatureRace }}</td>
+                    <td>{{ m.challengeRating }}</td>
+                    <td>{{ m.creatureName }}</td>
+                    <td class="text-right">
+                      <a href="javascript:void(0)"
+                        class="btn btn-link btn-info btn-just-icon like"><i
+                          class="fa fa-plus"></i></a>
+                      <a href="javascript:void(0"
+                        class="btn btn-link btn-warning btn-just-icon edit"><i
+                          class="fa fa-edit"></i></a>
+                      <a href="javascript:void(0s"
+                        class="btn btn-link btn-danger btn-just-icon remove"><i
+                          class="fa fa-minus"></i></a>
+                    </td>
+                  </tr>
+                  <!-- <tr *ngFor="let m of monsters">
                     <td>{{ m.name }}</td>
                     <td>{{ m.size }}</td>
                     <td>{{ m.type }}</td>
                     <td>{{ m.challenge_rating }}</td>
                     <td>{{ m.name }}</td>
                     <td class="text-right">
-                      <a href="javascript:void(0)" class="btn btn-link btn-info btn-just-icon like"
-                        ><i class="fa fa-plus"></i
-                      ></a>
-                      <a
-                        href="javascript:void(0"
-                        class="btn btn-link btn-warning btn-just-icon edit"
-                        ><i class="fa fa-edit"></i
-                      ></a>
-                      <a
-                        href="javascript:void(0s"
-                        class="btn btn-link btn-danger btn-just-icon remove"
-                        ><i class="fa fa-minus"></i
-                      ></a>
+                      <a href="javascript:void(0)"
+                        class="btn btn-link btn-info btn-just-icon like"><i
+                          class="fa fa-plus"></i></a>
+                      <a href="javascript:void(0"
+                        class="btn btn-link btn-warning btn-just-icon edit"><i
+                          class="fa fa-edit"></i></a>
+                      <a href="javascript:void(0s"
+                        class="btn btn-link btn-danger btn-just-icon remove"><i
+                          class="fa fa-minus"></i></a>
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -94,10 +120,8 @@
       </div>
 
       <!-- ENCOUNTER SUMMARY -->
-      <div
-        class="card col-md-3"
-        style="position: fixed; right: 5px; top: -25px; z-index: 99999 !important;"
-      >
+      <div class="card col-md-3"
+        style="position: fixed; right: 5px; top: -20px; z-index: 99999 !important;">
         <div class="card-header">
           <h1 class="display-3" style="font-weight: bold; font-size: 1.2em">
             ENCOUNTER SUMMARY
@@ -138,14 +162,8 @@
           </div>
           <br />
           <div class="progress progress-line-danger">
-            <div
-              class="progress-bar progress-bar-danger"
-              role="progressbar"
-              aria-valuenow="80"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width: 80%;"
-            >
+            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+              aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
               <span class="sr-only">80% Complete</span>
             </div>
           </div>
@@ -183,10 +201,8 @@
 
                     <div class="col-md-4">
                       <div class="row">
-                        <h1
-                          class="display-3"
-                          style="font-weight: bold; font-size: 0.7em; color: grey"
-                        >
+                        <h1 class="display-3"
+                          style="font-weight: bold; font-size: 0.7em; color: grey">
                           CR: &nbsp;
                         </h1>
                         <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">
@@ -198,19 +214,15 @@
 
                   <div class="row">
                     <div class="col-md-8" style="padding-right: 5px">
-                      <h1
-                        class="display-3"
-                        style="font-weight: bold; font-size: 0.7em; color: grey"
-                      >
+                      <h1 class="display-3"
+                        style="font-weight: bold; font-size: 0.7em; color: grey">
                         Medium Humanoid
                       </h1>
                     </div>
                     <div class="col-md-4">
                       <div class="row">
-                        <h1
-                          class="display-3"
-                          style="font-weight: bold; font-size: 0.7em; color: grey"
-                        >
+                        <h1 class="display-3"
+                          style="font-weight: bold; font-size: 0.7em; color: grey">
                           XP: &nbsp;
                         </h1>
                         <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">

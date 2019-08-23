@@ -39,6 +39,16 @@
     overflow: hidden;
     max-height: 250px;
 
+    .bottom-left {
+      position: absolute;
+      top: 200px;
+      left: 40px;
+
+      .white {
+        color: white !important;
+      }
+    }
+
     .top-left {
       position: absolute;
       top: 125px;
