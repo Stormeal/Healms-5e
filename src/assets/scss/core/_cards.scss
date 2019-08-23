@@ -22,6 +22,37 @@
       line-height: 0;
     }
   }
+  .card-encounter {
+    position: relative;
+    height: 85px;
+    @include box-shadow($bmd-shadow-4dp);
+    border-radius: 5px;
+    overflow: hidden;
+
+    img {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  .cover-container {
+    overflow: hidden;
+    max-height: 250px;
+
+    .top-left {
+      position: absolute;
+      top: 125px;
+      left: 40px;
+
+      .white {
+        color: white !important;
+      }
+    }
+
+    .cover-img {
+      margin-top: -35%;
+    }
+  }
 
   .form-check {
     margin-top: 15px;
