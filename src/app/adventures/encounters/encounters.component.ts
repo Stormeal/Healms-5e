@@ -31,10 +31,15 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   campaignId: any;
   creatures: any;
   characters: any;
+  averageCharacter: number;
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private afs: AngularFirestore) { }
+  selectedCharacters: any[];
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private afs: AngularFirestore) {}
 
   ngOnInit() {
+    const noCharacter = 0;
+
     this.minimizeSidebar();
     this.encounterForm = this.fb.group({
       encounterTitle: "",
@@ -46,7 +51,6 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     this.dataTable = {
       headerRow: ["Name", "Size", "Race", "CR", "XP", "Actions"],
       footerRow: ["Name", "Size", "Race", "CR", "XP", "Actions"],
-
     };
   }
 
@@ -61,11 +65,10 @@ export class EncountersComponent implements OnInit, AfterViewInit {
       },
     });
 
-
     const table = $("#datatables").DataTable();
 
     // Edit record
-    table.on("click", ".edit", function (e) {
+    table.on("click", ".edit", function(e) {
       let $tr = $(this).closest("tr");
       if ($($tr).hasClass("child")) {
         $tr = $tr.prev(".parent");
@@ -77,7 +80,7 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     });
 
     // Delete a record
-    table.on("click", ".remove", function (e) {
+    table.on("click", ".remove", function(e) {
       const $tr = $(this).closest("tr");
       table
         .row($tr)
@@ -87,12 +90,19 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     });
 
     // Like record
-    table.on("click", ".like", function (e) {
+    table.on("click", ".like", function(e) {
       alert("You clicked on Like button");
       e.preventDefault();
     });
 
     $(".card .material-datatables label").addClass("form-group");
+  }
+
+  clickedOption() {
+    console.log(this.selectedCharacters);
+    console.log("# of Characters: ", this.selectedCharacters.length);
+    const noCharacter = this.selectedCharacters.length;
+
   }
 
   loader() {
@@ -144,38 +154,32 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   }
 
   onSelect(data: any) {
-    console.log('Selected Item id: ', data);
+    console.log("Selected Item id: ", data);
     console.log(data.uid);
-
-
   }
 
   minimizeSidebar() {
-    const body = document.getElementsByTagName('body')[0];
+    const body = document.getElementsByTagName("body")[0];
 
     if (misc.sidebar_mini_active === true) {
-      body.classList.remove('sidebar-mini');
+      body.classList.remove("sidebar-mini");
       misc.sidebar_mini_active = false;
-
     } else {
-      setTimeout(function () {
-        body.classList.add('sidebar-mini');
+      setTimeout(function() {
+        body.classList.add("sidebar-mini");
 
         misc.sidebar_mini_active = true;
       }, 300);
     }
 
     // we simulate the window Resize so the charts will get updated in realtime.
-    const simulateWindowResize = setInterval(function () {
-      window.dispatchEvent(new Event('resize'));
+    const simulateWindowResize = setInterval(function() {
+      window.dispatchEvent(new Event("resize"));
     }, 180);
 
     // we stop the simulation of Window Resize after the animations are completed
-    setTimeout(function () {
+    setTimeout(function() {
       clearInterval(simulateWindowResize);
     }, 1000);
   }
-
-
-
 }
