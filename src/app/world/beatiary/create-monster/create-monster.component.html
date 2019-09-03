@@ -269,7 +269,7 @@
                   <mat-form-field class="example-full-width">
                     <mat-select name="challengeRating" [(value)]="challengeRatingSelect"
                       formControlName="challengeRating">
-                      <mat-option *ngFor="let cr of challengeRatings" [value]="cr.viewValue">
+                      <mat-option *ngFor="let cr of challengeRatings" [value]="cr.value">
                         {{ cr.viewValue }}
                       </mat-option>
                     </mat-select>

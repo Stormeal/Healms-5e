@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { AuthService } from "src/app/core/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
+import { Monster } from "src/app/core/interface/monster";
 
 declare interface DataTable {
   headerRow: string[];
@@ -31,10 +32,17 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   campaignId: any;
   creatures: any;
   characters: any;
+  averageCharacter: number;
+  sumCharacter: number;
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private afs: AngularFirestore) { }
+  selectedCharacters: any[];
+  creatureList: any[];
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private afs: AngularFirestore) {}
 
   ngOnInit() {
+    const noCharacter = 0;
+
     this.minimizeSidebar();
     this.encounterForm = this.fb.group({
       encounterTitle: "",
@@ -46,7 +54,6 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     this.dataTable = {
       headerRow: ["Name", "Size", "Race", "CR", "XP", "Actions"],
       footerRow: ["Name", "Size", "Race", "CR", "XP", "Actions"],
-
     };
   }
 
@@ -61,11 +68,10 @@ export class EncountersComponent implements OnInit, AfterViewInit {
       },
     });
 
-
     const table = $("#datatables").DataTable();
 
     // Edit record
-    table.on("click", ".edit", function (e) {
+    table.on("click", ".edit", function(e) {
       let $tr = $(this).closest("tr");
       if ($($tr).hasClass("child")) {
         $tr = $tr.prev(".parent");
@@ -77,7 +83,7 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     });
 
     // Delete a record
-    table.on("click", ".remove", function (e) {
+    table.on("click", ".remove", function(e) {
       const $tr = $(this).closest("tr");
       table
         .row($tr)
@@ -87,18 +93,36 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     });
 
     // Like record
-    table.on("click", ".like", function (e) {
-      alert("You clicked on Like button");
-      e.preventDefault();
-    });
+    // table.on("click", ".like", function(e) {
+    //   alert("You clicked on Like button");
+    //   e.preventDefault();
+    // });
 
-    $(".card .material-datatables label").addClass("form-group");
+    // $(".card .material-datatables label").addClass("form-group");
+  }
+
+  clickedOption() {
+    if (this.selectedCharacters.length > 1) {
+      const values = this.selectedCharacters.map(a => a.characterLevel);
+      const sum = values.reduce((previous, current) => (current += previous));
+      const avg = Math.floor(sum / this.selectedCharacters.length);
+      this.averageCharacter = avg;
+      this.sumCharacter = this.selectedCharacters.length;
+
+      console.log("AVERAGE: ", this.averageCharacter);
+      console.log("COUNT: ", this.sumCharacter);
+    } else {
+      console.log("1 or lower");
+    }
   }
 
   loader() {
+    this.creatureList = new Array();
     this.encounterForm.patchValue({
       encounterTitle: "Untitled Encounter",
     });
+
+    console.log("Average Character Level: ", this.averageCharacter);
 
     this.auth.getUser().subscribe(user => {
       this.user = user;
@@ -144,38 +168,38 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   }
 
   onSelect(data: any) {
-    console.log('Selected Item id: ', data);
+    console.log("Selected Item id: ", data);
     console.log(data.uid);
+  }
 
+  addCreature(data: any) {
+    this.creatureList.push(data);
 
+    console.log("CreatureList: ", this.creatureList);
   }
 
   minimizeSidebar() {
-    const body = document.getElementsByTagName('body')[0];
+    const body = document.getElementsByTagName("body")[0];
 
     if (misc.sidebar_mini_active === true) {
-      body.classList.remove('sidebar-mini');
+      body.classList.remove("sidebar-mini");
       misc.sidebar_mini_active = false;
-
     } else {
-      setTimeout(function () {
-        body.classList.add('sidebar-mini');
+      setTimeout(function() {
+        body.classList.add("sidebar-mini");
 
         misc.sidebar_mini_active = true;
       }, 300);
     }
 
     // we simulate the window Resize so the charts will get updated in realtime.
-    const simulateWindowResize = setInterval(function () {
-      window.dispatchEvent(new Event('resize'));
+    const simulateWindowResize = setInterval(function() {
+      window.dispatchEvent(new Event("resize"));
     }, 180);
 
     // we stop the simulation of Window Resize after the animations are completed
-    setTimeout(function () {
+    setTimeout(function() {
       clearInterval(simulateWindowResize);
     }, 1000);
   }
-
-
-
 }

@@ -171,7 +171,7 @@ export class SidebarComponent implements OnInit {
   user: UserModel;
   campaign: any;
   campaignId: any;
-  photoURL: string;
+  photoURL: any;
 
   constructor(private auth: AuthService, private afs: AngularFirestore) {}
 
@@ -209,7 +209,11 @@ export class SidebarComponent implements OnInit {
   load() {
     this.auth.getUser().subscribe(user => {
       this.user = user;
-      this.photoURL = this.user.photoURL;
+      if (this.user.photoURL) {
+        this.photoURL = this.user.photoURL;
+      } else {
+        this.photoURL = null;
+      }
       // this.campaignId = this.user.campaigns.campaignId;
       // // console.log('CampaignId', this.campaignId);
 
