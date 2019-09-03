@@ -30,8 +30,12 @@
     overflow: hidden;
 
     img {
+      transform: scale(2);
+      border-radius: 50%;
       height: 80px;
       width: 80px;
+      transform-origin: top center;
+      margin-top: 5px;
     }
   }
 
