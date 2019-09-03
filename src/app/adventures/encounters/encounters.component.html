@@ -28,7 +28,8 @@
                   <div class="col-md-4">
                     <p class="white" style="font-weight: bold">
                       # OF CHARACTERS: <i class="fa fa-user-ninja" style="color: #5bc0de"></i>&nbsp;
-                      {{noCharacter}} &nbsp;&nbsp;|&nbsp;&nbsp; AVERAGE PARTY LEVEL: 5
+                      {{ this.sumCharacter || 0 }} &nbsp;&nbsp;|&nbsp;&nbsp; AVERAGE PARTY LEVEL:
+                      {{ this.averageCharacter || 0 }}
                     </p>
                   </div>
                   <div class="col-md-3" style="top: -10px;">
@@ -96,10 +97,10 @@
                     <td>{{ m.creatureName }}</td>
                     <td>{{ m.creatureSize }}</td>
                     <td>{{ m.creatureRace }}</td>
-                    <td>{{ m.challengeRating }}</td>
-                    <td>{{ m.creatureName }}</td>
+                    <td>{{ m.challengeRating.CR }}</td>
+                    <td>{{ m.challengeRating.XP }}</td>
                     <td class="text-right">
-                      <a href="javascript:void(0)" class="btn btn-link btn-info btn-just-icon like"
+                      <a class="btn btn-link btn-info btn-just-icon like" (click)="addCreature(m)"
                         ><i class="fa fa-plus"></i
                       ></a>
                       <a
@@ -207,13 +208,71 @@
               </button>
             </div>
             <div class="col-md-5 ml-auto">
-              <button mat-raised-button class="btn btn-success btn-sm">
+              <button mat-raised-button class="btn btn-success btn-sm" (click)="test()">
                 Generate
               </button>
             </div>
           </div>
 
           <div>
+            <ng-container *ngFor="let c of this.creatureList">
+              <div class="card card-encounter">
+                <div class="row">
+                  <div class="col-md-3">
+                    <img class="img" [src]="c.photoURL" />
+                  </div>
+
+                  <div class="col-md-7" style="padding: 5px; padding-top: 23px;">
+                    <div class="row">
+                      <div class="col-md-8" style="padding-right: 5px">
+                        <h1 class="display-3" style="font-weight: bold; font-size: 1em;">
+                          {{ c.creatureName }}
+                        </h1>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="row">
+                          <h1
+                            class="display-3"
+                            style="font-weight: bold; font-size: 0.7em; color: grey"
+                          >
+                            CR: &nbsp;
+                          </h1>
+                          <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">
+                            {{ c.challengeRating.CR }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-8" style="padding-right: 5px">
+                        <h1
+                          class="display-3"
+                          style="font-weight: bold; font-size: 0.7em; color: grey"
+                        >
+                          {{ c.creatureSize }}&nbsp;{{ c.creatureRace }}
+                        </h1>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="row">
+                          <h1
+                            class="display-3"
+                            style="font-weight: bold; font-size: 0.7em; color: grey"
+                          >
+                            XP: &nbsp;
+                          </h1>
+                          <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">
+                            {{ c.challengeRating.XP }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
             <div class="card card-encounter">
               <div class="row">
                 <div class="col-md-3">

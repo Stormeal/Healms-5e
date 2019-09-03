@@ -9,17 +9,15 @@
   </a>
 </div>
 
-
 <div class="sidebar-wrapper">
-
   <div class="user">
     <div class="photo">
-      <img [src]="[(user.photoURL)]" />
+      <img [src]="[user.photoURL] || null" />
     </div>
     <div class="user-info">
       <a data-toggle="collapse" href="#collapseExample" class="collapsed">
         <span>
-          {{user.displayName}}
+          {{ user.displayName }}
           <b class="caret"></b>
         </span>
       </a>
@@ -49,7 +47,6 @@
               <span class="sidebar-normal">Settings</span>
             </a>
           </li>
-
         </ul>
       </div>
     </div>
@@ -58,7 +55,7 @@
     <form class="navbar-form">
       <span class="bmd-form-group">
         <div class="input-group no-border">
-          <input type="text" value="" class="form-control" placeholder="Search...">
+          <input type="text" value="" class="form-control" placeholder="Search..." />
           <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
             <i class="material-icons">search</i>
             <div class="ripple-container"></div>
@@ -76,8 +73,14 @@
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+        <a
+          class="nav-link"
+          href="#pablo"
+          id="navbarDropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <i class="material-icons">notifications</i>
           <span class="notification">5</span>
           <p>
@@ -106,29 +109,37 @@
     <li routerLinkActive="active" *ngFor="let menuitem of menuItems" class="nav-item">
       <!--If is a single link-->
       <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'" class="nav-link">
-        <i class="material-icons">{{menuitem.icontype}}</i>
-        <p>{{menuitem.title}}</p>
+        <i class="material-icons">{{ menuitem.icontype }}</i>
+        <p>{{ menuitem.title }}</p>
       </a>
       <!--If it have a submenu-->
-      <a data-toggle="collapse" href="#{{menuitem.collapse}}" *ngIf="menuitem.type === 'sub'" (click)="updatePS()"
-        class="nav-link">
-        <i class="material-icons">{{menuitem.icontype}}</i>
+      <a
+        data-toggle="collapse"
+        href="#{{ menuitem.collapse }}"
+        *ngIf="menuitem.type === 'sub'"
+        (click)="updatePS()"
+        class="nav-link"
+      >
+        <i class="material-icons">{{ menuitem.icontype }}</i>
         <!-- <fa-icon [icon]="['fas', 'coffee']"></fa-icon> -->
-        <p>{{menuitem.title}}<b class="caret"></b></p>
+        <p>{{ menuitem.title }}<b class="caret"></b></p>
       </a>
 
       <!--Display the submenu items-->
-      <div id="{{menuitem.collapse}}" class="collapse" *ngIf="menuitem.type === 'sub'">
+      <div id="{{ menuitem.collapse }}" class="collapse" *ngIf="menuitem.type === 'sub'">
         <ul class="nav">
-          <li routerLinkActive="active" *ngFor="let childitem of menuitem.children" class="nav-item">
+          <li
+            routerLinkActive="active"
+            *ngFor="let childitem of menuitem.children"
+            class="nav-item"
+          >
             <a [routerLink]="[menuitem.path, childitem.path]" class="nav-link">
-              <span class="sidebar-mini">{{childitem.ab}}</span>
-              <span class="sidebar-normal">{{childitem.title}}</span>
+              <span class="sidebar-mini">{{ childitem.ab }}</span>
+              <span class="sidebar-normal">{{ childitem.title }}</span>
             </a>
           </li>
         </ul>
       </div>
     </li>
   </ul>
-
 </div>

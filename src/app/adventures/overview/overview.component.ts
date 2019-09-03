@@ -3,7 +3,7 @@ import * as data from "../../../assets/srd/monsters.json";
 import * as faker from "faker";
 
 import { AngularFirestore } from "@angular/fire/firestore";
-import { AuthService } from "src/app/core/auth.service.js";
+import { AuthService } from "src/app/core/auth.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 
@@ -19,7 +19,7 @@ export class OverviewComponent implements OnInit {
 
   advGenericForm: FormGroup;
   advRelationsForm: FormGroup;
-  user: any;
+  user;
   campaign: any;
   campaignId: any;
   adventures: any;
@@ -95,8 +95,6 @@ export class OverviewComponent implements OnInit {
   }
 
   loader() {
-    this.auth.getUser();
-
     this.auth.getUser().subscribe(user => {
       this.user = user;
       this.campaignId = this.user.campaigns.campaignId;
@@ -106,13 +104,12 @@ export class OverviewComponent implements OnInit {
         .valueChanges()
         .subscribe(campaign => {
           this.campaign = campaign;
-          const campId = this.campaign.uid;
 
           this.afs
             .collection(`campaigns/${this.campaignId}/adventures`)
             .valueChanges()
-            .subscribe(adventures => {
-              this.adventures = adventures;
+            .subscribe(creatures => {
+              this.adventures = creatures;
               console.log("adventures: ", this.adventures);
             });
         });

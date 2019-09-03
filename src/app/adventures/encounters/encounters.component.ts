@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { AuthService } from "src/app/core/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
+import { Monster } from "src/app/core/interface/monster";
 
 declare interface DataTable {
   headerRow: string[];
@@ -32,8 +33,10 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   creatures: any;
   characters: any;
   averageCharacter: number;
+  sumCharacter: number;
 
   selectedCharacters: any[];
+  creatureList: any[];
 
   constructor(private fb: FormBuilder, private auth: AuthService, private afs: AngularFirestore) {}
 
@@ -90,25 +93,36 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     });
 
     // Like record
-    table.on("click", ".like", function(e) {
-      alert("You clicked on Like button");
-      e.preventDefault();
-    });
+    // table.on("click", ".like", function(e) {
+    //   alert("You clicked on Like button");
+    //   e.preventDefault();
+    // });
 
-    $(".card .material-datatables label").addClass("form-group");
+    // $(".card .material-datatables label").addClass("form-group");
   }
 
   clickedOption() {
-    console.log(this.selectedCharacters);
-    console.log("# of Characters: ", this.selectedCharacters.length);
-    const noCharacter = this.selectedCharacters.length;
+    if (this.selectedCharacters.length > 1) {
+      const values = this.selectedCharacters.map(a => a.characterLevel);
+      const sum = values.reduce((previous, current) => (current += previous));
+      const avg = Math.floor(sum / this.selectedCharacters.length);
+      this.averageCharacter = avg;
+      this.sumCharacter = this.selectedCharacters.length;
 
+      console.log("AVERAGE: ", this.averageCharacter);
+      console.log("COUNT: ", this.sumCharacter);
+    } else {
+      console.log("1 or lower");
+    }
   }
 
   loader() {
+    this.creatureList = new Array();
     this.encounterForm.patchValue({
       encounterTitle: "Untitled Encounter",
     });
+
+    console.log("Average Character Level: ", this.averageCharacter);
 
     this.auth.getUser().subscribe(user => {
       this.user = user;
@@ -156,6 +170,12 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   onSelect(data: any) {
     console.log("Selected Item id: ", data);
     console.log(data.uid);
+  }
+
+  addCreature(data: any) {
+    this.creatureList.push(data);
+
+    console.log("CreatureList: ", this.creatureList);
   }
 
   minimizeSidebar() {

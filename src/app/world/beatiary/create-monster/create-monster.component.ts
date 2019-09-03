@@ -1,16 +1,7 @@
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { Component, OnInit, ElementRef, ViewChild, Input } from "@angular/core";
-import {
-  FormGroup,
-  FormArray,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from "@angular/forms";
-import {
-  MatAutocompleteSelectedEvent,
-  MatAutocomplete,
-} from "@angular/material/autocomplete";
+import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Observable } from "rxjs";
 import { map, startWith, finalize } from "rxjs/operators";
@@ -37,11 +28,7 @@ import { Alignments } from "src/assets/ts/alignments";
 import { ChallengeRatings } from "src/assets/ts/challengeRatings";
 import { dmgDices, Dices } from "src/assets/ts/dices";
 import { STR, DEX, CON, INT, WIS, CHA } from "src/assets/ts/skillPoints";
-import {
-  SpellCastingAbility,
-  SpellLevel,
-  SpellSlots,
-} from "src/assets/ts/spellcasting";
+import { SpellCastingAbility, SpellLevel, SpellSlots } from "src/assets/ts/spellcasting";
 import {
   Cantrips,
   First,
@@ -57,10 +44,7 @@ import {
 import { Upload } from "src/app/core/upload";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
-import {
-  AngularFireUploadTask,
-  AngularFireStorage,
-} from "@angular/fire/storage";
+import { AngularFireUploadTask, AngularFireStorage } from "@angular/fire/storage";
 
 declare var require: any;
 declare const $: any;
@@ -182,36 +166,16 @@ export class CreateMonsterComponent implements OnInit {
   ninethCtrl = new FormControl();
   filteredNineths: Observable<string[]>; // 7th
 
-  @ViewChild("cantripInput", { static: false }) cantripInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("firstInput", { static: false }) firstInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("secondInput", { static: false }) secondInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("thirdInput", { static: false }) thirdInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("fourthInput", { static: false }) fourthInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("fifthInput", { static: false }) fifthInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("sixthInput", { static: false }) sixthInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("seventhInput", { static: false }) seventhInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("eigthInput", { static: false }) eigthInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild("ninethInput", { static: false }) ninethInput: ElementRef<
-    HTMLInputElement
-  >;
+  @ViewChild("cantripInput", { static: false }) cantripInput: ElementRef<HTMLInputElement>;
+  @ViewChild("firstInput", { static: false }) firstInput: ElementRef<HTMLInputElement>;
+  @ViewChild("secondInput", { static: false }) secondInput: ElementRef<HTMLInputElement>;
+  @ViewChild("thirdInput", { static: false }) thirdInput: ElementRef<HTMLInputElement>;
+  @ViewChild("fourthInput", { static: false }) fourthInput: ElementRef<HTMLInputElement>;
+  @ViewChild("fifthInput", { static: false }) fifthInput: ElementRef<HTMLInputElement>;
+  @ViewChild("sixthInput", { static: false }) sixthInput: ElementRef<HTMLInputElement>;
+  @ViewChild("seventhInput", { static: false }) seventhInput: ElementRef<HTMLInputElement>;
+  @ViewChild("eigthInput", { static: false }) eigthInput: ElementRef<HTMLInputElement>;
+  @ViewChild("ninethInput", { static: false }) ninethInput: ElementRef<HTMLInputElement>;
 
   public wizardLevelSelect = this.wizard[0].viewValue;
   public spellClass = [
@@ -253,16 +217,12 @@ export class CreateMonsterComponent implements OnInit {
     this.filteredCantrips = this.cantripCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
-      map((cantrip: string | null) =>
-        cantrip ? this._filter(cantrip) : this.allCantrips.slice(),
-      ),
+      map((cantrip: string | null) => (cantrip ? this._filter(cantrip) : this.allCantrips.slice())),
     );
     this.filteredFirsts = this.firstCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
-      map((first: string | null) =>
-        first ? this._firstFilter(first) : this.allFirst.slice(),
-      ),
+      map((first: string | null) => (first ? this._firstFilter(first) : this.allFirst.slice())),
     );
     this.filteredSeconds = this.secondCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
@@ -274,9 +234,7 @@ export class CreateMonsterComponent implements OnInit {
     this.filteredThirds = this.thirdCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
-      map((third: string | null) =>
-        third ? this._thirdFilter(third) : this.allThird.slice(),
-      ),
+      map((third: string | null) => (third ? this._thirdFilter(third) : this.allThird.slice())),
     );
     this.filteredFourths = this.fourthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
@@ -288,16 +246,12 @@ export class CreateMonsterComponent implements OnInit {
     this.filteredFifths = this.fifthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
-      map((fifth: string | null) =>
-        fifth ? this._fifthFilter(fifth) : this.allFifth.slice(),
-      ),
+      map((fifth: string | null) => (fifth ? this._fifthFilter(fifth) : this.allFifth.slice())),
     );
     this.filteredSixths = this.sixthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
-      map((sixth: string | null) =>
-        sixth ? this._sixthFilter(sixth) : this.allSixth.slice(),
-      ),
+      map((sixth: string | null) => (sixth ? this._sixthFilter(sixth) : this.allSixth.slice())),
     );
     this.filteredSevenths = this.seventhCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
@@ -309,9 +263,7 @@ export class CreateMonsterComponent implements OnInit {
     this.filteredEigths = this.sixthCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
-      map((eigth: string | null) =>
-        eigth ? this._eigthFilter(eigth) : this.allEight.slice(),
-      ),
+      map((eigth: string | null) => (eigth ? this._eigthFilter(eigth) : this.allEight.slice())),
     );
     this.filteredNineths = this.seventhCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
@@ -395,49 +347,31 @@ export class CreateMonsterComponent implements OnInit {
     );
   }
   private _firstFilter(name: string) {
-    return this.allFirst.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allFirst.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _secondFilter(name: string) {
-    return this.allSecond.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allSecond.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _thirdFilter(name: string) {
-    return this.allThird.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allThird.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _fourthFilter(name: string) {
-    return this.allFourth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allFourth.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _fifthFilter(name: string) {
-    return this.allFifth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allFifth.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _sixthFilter(name: string) {
-    return this.allSixth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allSixth.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _seventhFilter(name: string) {
-    return this.allSeventh.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allSeventh.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _eigthFilter(name: string) {
-    return this.allEight.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allEight.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   private _ninethFilter(name: string) {
-    return this.allNineth.filter(
-      spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0,
-    );
+    return this.allNineth.filter(spell => spell.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
   addCantrip(event: MatChipInputEvent): void {
@@ -851,10 +785,7 @@ export class CreateMonsterComponent implements OnInit {
           const campId = this.campaign.uid;
 
           const creatureId = {
-            uid:
-              this.creatureForm.value["creatureName"] +
-              "_" +
-              faker.random.alphaNumeric(4),
+            uid: this.creatureForm.value["creatureName"] + "_" + faker.random.alphaNumeric(4),
           };
 
           const creature = {
@@ -938,9 +869,7 @@ export class CreateMonsterComponent implements OnInit {
                       creatureName: this.creatureForm.value["creatureName"],
                       creatureSize: this.creatureForm.value["creatureSize"],
                       creatureRace: this.creatureForm.value["creatureRace"],
-                      creatureAlignment: this.creatureForm.value[
-                        "creatureAlignment"
-                      ],
+                      creatureAlignment: this.creatureForm.value["creatureAlignment"],
                       creatureDescription: this.creatureForm.value["creatureDescription"],
 
                       strength: this.creatureForm.value["str"],
@@ -962,14 +891,10 @@ export class CreateMonsterComponent implements OnInit {
                       dmgImmunities: this.creatureForm.value["dmgImmunities"],
                       languages: this.creatureForm.value["languages"],
                       senses: this.creatureForm.value["senses"],
-                      challengeRating: this.creatureForm.value[
-                        "challengeRating"
-                      ],
+                      challengeRating: this.creatureForm.value["challengeRating"],
 
                       spellSave: this.creatureForm.value["spellSave"],
-                      spellcastingAbility: this.creatureForm.value[
-                        "spellcastingAbility"
-                      ],
+                      spellcastingAbility: this.creatureForm.value["spellcastingAbility"],
                       spellClass: this.creatureForm.value["spellClass"],
                       spellLevel: this.creatureForm.value["spellLevel"],
                       spellCantrip: this.creatureForm.value["cantrip"],
@@ -1009,20 +934,18 @@ export class CreateMonsterComponent implements OnInit {
               .doc(creatureId.uid)
               .set(creature);
             return this.creatureForm.reset();
-
           }
-
         });
     });
 
     // Prepare the preview for profile picture
-    $("#creature-picture").change(function () {
+    $("#creature-picture").change(function() {
       const input = $(this);
 
       if (input[0].files && input[0].files[0]) {
         const reader = new FileReader();
 
-        reader.onload = function (e: any) {
+        reader.onload = function(e: any) {
           $("#creaturePicturePreview")
             .attr("src", e.target.result)
             .fadeIn("slow");
