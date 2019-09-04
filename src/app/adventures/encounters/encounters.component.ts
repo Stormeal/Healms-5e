@@ -4,6 +4,7 @@ import { AuthService } from "src/app/core/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { Monster } from "src/app/core/interface/monster";
+import { xpThreshold, multiplierTwo, multiplerFive, multiplerSeven } from "src/assets/ts/encounter";
 
 declare interface DataTable {
   headerRow: string[];
@@ -25,6 +26,11 @@ declare var require: any;
 })
 export class EncountersComponent implements OnInit, AfterViewInit {
   public dataTable: DataTable;
+  public xpThreshold = xpThreshold;
+  public partyMultiplierTwo = multiplierTwo;
+  public partyMultiplierFive = multiplerFive;
+  public partyMultiplierSeven = multiplerSeven;
+
   encounterForm: FormGroup;
   monsters = require("../../../assets/srd/creatures.json");
   user: any;
@@ -34,6 +40,16 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   characters: any;
   averageCharacter: number;
   sumCharacter: number;
+  totalXp: number;
+  totalAdjustedXp: number;
+  difficulty: string;
+  diffEasy: number;
+  diffMedium: number;
+  diffHard: number;
+  diffDeadly: number;
+  encounterFlavorText: string;
+  percentage: string;
+  percentageColor: string;
 
   selectedCharacters: any[];
   creatureList: any[];
@@ -102,18 +118,20 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   }
 
   clickedOption() {
-    if (this.selectedCharacters.length > 1) {
-      const values = this.selectedCharacters.map(a => a.characterLevel);
-      const sum = values.reduce((previous, current) => (current += previous));
-      const avg = Math.floor(sum / this.selectedCharacters.length);
-      this.averageCharacter = avg;
-      this.sumCharacter = this.selectedCharacters.length;
+    const values = this.selectedCharacters.map(a => a.characterLevel);
+    const sum = values.reduce((previous, current) => (current += previous));
+    const avg = Math.floor(sum / this.selectedCharacters.length);
+    const threshold = this.xpThreshold.find(x => x.level === avg);
+    this.averageCharacter = avg;
+    this.sumCharacter = this.selectedCharacters.length;
+    this.diffEasy = threshold.easy;
+    this.diffMedium = threshold.medium;
+    this.diffHard = threshold.hard;
+    this.diffDeadly = threshold.deadly;
 
-      console.log("AVERAGE: ", this.averageCharacter);
-      console.log("COUNT: ", this.sumCharacter);
-    } else {
-      console.log("1 or lower");
-    }
+    // console.log("Threshold: ", threshold);
+    // console.log("AVERAGE: ", this.averageCharacter);
+    // console.log("COUNT: ", this.sumCharacter);
   }
 
   loader() {
@@ -175,7 +193,67 @@ export class EncountersComponent implements OnInit, AfterViewInit {
   addCreature(data: any) {
     this.creatureList.push(data);
 
-    console.log("CreatureList: ", this.creatureList);
+    const values = this.creatureList.map(x => x.challengeRating.XP);
+    const sum = values.reduce((previous, current) => (current += previous));
+    if (this.selectedCharacters.length <= 2) {
+      const monsterCount = this.creatureList.length;
+      const multiplier = this.partyMultiplierTwo.find(x => x.monsters === monsterCount);
+      const totalAdjustedXp = sum * multiplier.multiplier;
+
+      this.totalXp = sum;
+      this.totalAdjustedXp = totalAdjustedXp;
+      this.calculateDifficulty();
+    }
+    if (this.selectedCharacters.length > 2 && this.selectedCharacters.length <= 5) {
+      const monsterCount = this.creatureList.length;
+      const multiplier = this.partyMultiplierFive.find(x => x.monsters === monsterCount);
+      const totalAdjustedXp = sum * multiplier.multiplier;
+
+      this.totalXp = sum;
+      this.totalAdjustedXp = totalAdjustedXp;
+      this.calculateDifficulty();
+    }
+    if (this.selectedCharacters.length >= 6) {
+      const monsterCount = this.creatureList.length;
+      const multiplier = this.partyMultiplierSeven.find(x => x.monsters === monsterCount);
+      const totalAdjustedXp = sum * multiplier.multiplier;
+
+      this.totalXp = sum;
+      this.totalAdjustedXp = totalAdjustedXp;
+      this.calculateDifficulty();
+    }
+  }
+
+  calculateDifficulty() {
+    const values = this.selectedCharacters.map(a => a.characterLevel);
+    const sum = values.reduce((previous, current) => (current += previous));
+    const avg = Math.floor(sum / this.selectedCharacters.length);
+    const threshold = this.xpThreshold.find(x => x.level === avg);
+
+    if (this.totalAdjustedXp >= threshold.easy || this.totalAdjustedXp <= threshold.easy) {
+      this.difficulty = "EASY";
+      this.encounterFlavorText = "Barely broke a sweat.";
+      this.percentage = "25";
+      this.percentageColor = "success";
+    }
+    if (this.totalAdjustedXp > threshold.medium && this.totalAdjustedXp < threshold.hard) {
+      this.difficulty = "MEDIUM";
+      this.encounterFlavorText = "Without too much of a hazzle";
+      this.percentage = "50";
+      this.percentageColor = "primary";
+    }
+    if (this.totalAdjustedXp > threshold.hard && this.totalAdjustedXp < threshold.deadly) {
+      this.difficulty = "HARD";
+      this.encounterFlavorText = "Good thing I practiced";
+      this.percentage = "75";
+      this.percentageColor = "warning";
+    }
+    if (this.totalAdjustedXp >= threshold.deadly) {
+      this.difficulty = "DEADLY";
+      this.encounterFlavorText = "This should be interesting";
+      this.percentage = "100";
+      this.percentageColor = "danger";
+    }
   }
 
   minimizeSidebar() {
