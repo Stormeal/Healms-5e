@@ -1,300 +1,364 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-9" style="padding-right: 25px;">
-        <div class="card">
-          <form class="form" method="" action="" [formGroup]="encounterForm">
-            <div class="cover-container" style="height: 350px">
-              <div class="cover-img" style="height: 100%; width: 100%;">
-                <img src="../../../assets/img/monsters/cover.jpg" />
-              </div>
-              <div class="col-md-12 top-left">
-                <div class="col-md-5">
-                  <mat-form-field class="example-full-width ">
-                    <mat-hint class="white" align="start"
-                      ><strong>Give your encounter a name</strong>
-                    </mat-hint>
-                    <input
-                      class="white"
-                      matInput
-                      type="text"
-                      autocomplete="off"
-                      formControlName="encounterTitle"
-                    />
-                  </mat-form-field>
+  <mat-tab-group mat-align-tabs="center" [color]="success" style="width: 100%; flex: 1 1 100%;">
+    <mat-tab label="My Encounters" style="width: 100%; height: 100%; ">
+      <ng-container *ngIf="!encounters">
+        <h1 class="display-3" style="font-size: 1.5em">
+          You currently don't have any encounters created
+        </h1>
+      </ng-container>
+
+      <div class="row">
+        <ng-container *ngIf="encounters">
+          <ng-container *ngFor="let e of encounters">
+            <div class="col-md-4">
+              <div class="card card-chart">
+                <div class="card-header" data-header-animation="true">
+                  <img
+                    class="img"
+                    src="../../../assets/img/encounter_header.jpg"
+                    style="width: 100%"
+                  />
                 </div>
-                <br />
-                <div class="row">
-                  <div class="col-md-4">
-                    <p class="white" style="font-weight: bold">
-                      # OF CHARACTERS: <i class="fa fa-user-ninja" style="color: #5bc0de"></i>&nbsp;
-                      {{ this.sumCharacter || 0 }} &nbsp;&nbsp;|&nbsp;&nbsp; AVERAGE PARTY LEVEL:
-                      {{ this.averageCharacter || 0 }}
-                    </p>
+                <div class="card-body">
+                  <div class="card-actions">
+                    <button
+                      mat-raised-button
+                      type="button"
+                      class="btn btn-danger btn-link fix-broken-card"
+                    >
+                      <i class="material-icons">build</i> Fix Header!
+                    </button>
+                    <button
+                      mat-raised-button
+                      type="button"
+                      class="btn btn-info btn-link"
+                      matTooltip="Run Encounter"
+                      [matTooltipPosition]="'below'"
+                    >
+                      <i class="fas fa-play"></i>
+                    </button>
+                    <button
+                      mat-raised-button
+                      type="button"
+                      class="btn btn-default btn-link"
+                      matTooltip="Change Date"
+                      [matTooltipPosition]="'below'"
+                    >
+                      <i class="material-icons">edit</i>
+                    </button>
                   </div>
-                  <div class="col-md-3" style="top: -10px;">
-                    <mat-form-field>
-                      <mat-select
-                        multiple
-                        [(ngModel)]="selectedCharacters"
-                        name="selectedCharacters"
-                        formControlName="characterSelect"
-                      >
-                        <mat-option
-                          *ngFor="let character of characters"
-                          [value]="character"
-                          (click)="clickedOption()"
-                        >
-                          {{ character.characterName }}
-                        </mat-option>
-                      </mat-select>
+                  <h4 class="card-title">{{ e.encounterTitle }}</h4>
+                  <p class="card-category">Last Campaign Performance</p>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </mat-tab>
+    <mat-tab label="New Encounter">
+      <div class="row">
+        <div class="col-md-9" style="padding-right: 25px;">
+          <div class="card">
+            <form class="form" method="" action="" [formGroup]="encounterForm">
+              <div class="cover-container" style="height: 350px">
+                <div class="cover-img" style="height: 100%; width: 100%;">
+                  <img src="../../../assets/img/monsters/cover.jpg" />
+                </div>
+                <div class="col-md-12 top-left">
+                  <div class="col-md-5">
+                    <mat-form-field class="example-full-width ">
+                      <mat-hint class="white" align="start"
+                        ><strong>Give your encounter a name</strong>
+                      </mat-hint>
+                      <input
+                        class="white"
+                        matInput
+                        type="text"
+                        autocomplete="off"
+                        formControlName="encounterTitle"
+                      />
                     </mat-form-field>
                   </div>
+                  <br />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <p class="white" style="font-weight: bold">
+                        # OF CHARACTERS:
+                        <i class="fa fa-user-ninja" style="color: #5bc0de"></i>&nbsp;
+                        {{ this.sumCharacter || 0 }} &nbsp;&nbsp;|&nbsp;&nbsp; AVERAGE PARTY LEVEL:
+                        {{ this.averageCharacter || 0 }}
+                      </p>
+                    </div>
+                    <div class="col-md-3" style="top: -10px;">
+                      <mat-form-field>
+                        <mat-select
+                          multiple
+                          [(ngModel)]="selectedCharacters"
+                          name="selectedCharacters"
+                          formControlName="characterSelect"
+                        >
+                          <mat-option
+                            *ngFor="let character of characters"
+                            [value]="character"
+                            (click)="clickedOption()"
+                          >
+                            {{ character.characterName }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </form>
+          </div>
+
+          <div class="card">
+            <div class="card-header card-header-primary card-header-icon">
+              <h4 class="card-title">Table of Beasts</h4>
             </div>
-          </form>
+            <div class="card-body">
+              <div class="toolbar">
+                <!--        Here you can write extra buttons/actions for the toolbar              -->
+              </div>
+              <div class="material-datatables">
+                <table
+                  id="datatables"
+                  class="table table-striped table-no-bordered table-hover"
+                  cellspacing="0"
+                  width="100%"
+                  style="width:100%"
+                >
+                  <thead>
+                    <tr>
+                      <th class="disabled-sorting">{{ dataTable.headerRow[0] }}</th>
+                      <th class="disabled-sorting">{{ dataTable.headerRow[1] }}</th>
+                      <th class="disabled-sorting">{{ dataTable.headerRow[2] }}</th>
+                      <th class="disabled-sorting">{{ dataTable.headerRow[3] }}</th>
+                      <th class="disabled-sorting">{{ dataTable.headerRow[4] }}</th>
+                      <th class="disabled-sorting text-right">{{ dataTable.headerRow[5] }}</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>{{ dataTable.footerRow[0] }}</th>
+                      <th>{{ dataTable.footerRow[1] }}</th>
+                      <th>{{ dataTable.footerRow[2] }}</th>
+                      <th>{{ dataTable.footerRow[3] }}</th>
+                      <th>{{ dataTable.footerRow[4] }}</th>
+                      <th class="text-right">{{ dataTable.footerRow[5] }}</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr *ngFor="let m of creatures" (click)="onSelect(m)">
+                      <td>{{ m.creatureName }}</td>
+                      <td>{{ m.creatureSize }}</td>
+                      <td>{{ m.creatureRace }}</td>
+                      <td>{{ m.challengeRating.CR }}</td>
+                      <td>{{ m.challengeRating.XP }}</td>
+                      <td class="text-right">
+                        <a class="btn btn-link btn-info btn-just-icon like" (click)="addCreature(m)"
+                          ><i class="fa fa-plus"></i
+                        ></a>
+                        <a
+                          href="javascript:void(0"
+                          class="btn btn-link btn-warning btn-just-icon edit"
+                          ><i class="fa fa-edit"></i
+                        ></a>
+                        <a
+                          href="javascript:void(0s"
+                          class="btn btn-link btn-danger btn-just-icon remove"
+                          ><i class="fa fa-minus"></i
+                        ></a>
+                      </td>
+                    </tr>
+                    <!-- <tr *ngFor="let m of monsters">
+                            <td>{{ m.name }}</td>
+                            <td>{{ m.size }}</td>
+                            <td>{{ m.type }}</td>
+                            <td>{{ m.challenge_rating }}</td>
+                            <td>{{ m.name }}</td>
+                            <td class="text-right">
+                              <a href="javascript:void(0)"
+                                class="btn btn-link btn-info btn-just-icon like"><i
+                                  class="fa fa-plus"></i></a>
+                              <a href="javascript:void(0"
+                                class="btn btn-link btn-warning btn-just-icon edit"><i
+                                  class="fa fa-edit"></i></a>
+                              <a href="javascript:void(0s"
+                                class="btn btn-link btn-danger btn-just-icon remove"><i
+                                  class="fa fa-minus"></i></a>
+                            </td>
+                          </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- end content-->
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-header card-header-primary card-header-icon">
-            <h4 class="card-title">Table of Beasts</h4>
+        <!-- ENCOUNTER SUMMARY -->
+        <div
+          class="card col-md-3"
+          style="position: fixed; right: 5px; top: -20px; z-index: 99999 !important;"
+        >
+          <div class="card-header">
+            <h1 class="display-3" style="font-weight: bold; font-size: 1.2em">
+              ENCOUNTER SUMMARY
+            </h1>
+            <hr />
           </div>
           <div class="card-body">
-            <div class="toolbar">
-              <!--        Here you can write extra buttons/actions for the toolbar              -->
+            <div class="row">
+              <div class="col-md-6">
+                <h1 class="display-3" style="font-weight: bold; font-size: 1em; color: grey">
+                  DIFFICULTY
+                </h1>
+                <h1 class="display-3" style="font-weight: bold; font-size: 1.2em; color: red">
+                  {{ this.difficulty }}
+                </h1>
+                <br />
+                <h1 class="display-3" style="font-weight: bold; font-size: 1em; color: grey">
+                  TOTAL XP
+                </h1>
+                <h1 class="display-3" style="font-weight: bold; font-size: 1.2em;">
+                  {{ this.totalXp }}
+                </h1>
+                <br />
+                <h1 class="display-3" style="font-weight: bold; font-size: 1em; color: grey">
+                  ADJUSTED XP
+                </h1>
+                <h1 class="display-3" style="font-weight: bold; font-size: 1.2em;">
+                  {{ this.totalAdjustedXp }}
+                </h1>
+              </div>
+              <div class="col-md-6" style="text-align: right">
+                <p>
+                  Easy: <b>{{ this.diffEasy }} XP</b>
+                </p>
+                <p>
+                  Medium: <b>{{ this.diffMedium }} XP</b>
+                </p>
+                <p>
+                  Hard: <b>{{ this.diffHard }} XP</b>
+                </p>
+                <p>
+                  Deadly: <b>{{ this.diffDeadly }} XP</b>
+                </p>
+                <p>Daily XP: <b>1200 XP</b></p>
+              </div>
             </div>
-            <div class="material-datatables">
-              <table
-                id="datatables"
-                class="table table-striped table-no-bordered table-hover"
-                cellspacing="0"
-                width="100%"
-                style="width:100%"
+            <br />
+            <mat-progress-bar
+              mode="determinate"
+              value="{{ this.percentage }}"
+              color="warn"
+            ></mat-progress-bar>
+            <!-- <div class="progress progress-line-danger">
+                    <div
+                      class="progress-bar progress-bar-danger"
+                      role="progressbar"
+                      aria-valuenow="20"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      style="width: this.percentage%;"
+                    >
+                      <span class="sr-only">{{ this.percentage }}% Complete</span>
+                    </div> 
+                  </div> -->
+            <div style="text-align: center">
+              <small style="font-weight:lighter"
+                ><i>{{ this.encounterFlavorText }}...</i></small
               >
-                <thead>
-                  <tr>
-                    <th class="disabled-sorting">{{ dataTable.headerRow[0] }}</th>
-                    <th class="disabled-sorting">{{ dataTable.headerRow[1] }}</th>
-                    <th class="disabled-sorting">{{ dataTable.headerRow[2] }}</th>
-                    <th class="disabled-sorting">{{ dataTable.headerRow[3] }}</th>
-                    <th class="disabled-sorting">{{ dataTable.headerRow[4] }}</th>
-                    <th class="disabled-sorting text-right">{{ dataTable.headerRow[5] }}</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>{{ dataTable.footerRow[0] }}</th>
-                    <th>{{ dataTable.footerRow[1] }}</th>
-                    <th>{{ dataTable.footerRow[2] }}</th>
-                    <th>{{ dataTable.footerRow[3] }}</th>
-                    <th>{{ dataTable.footerRow[4] }}</th>
-                    <th class="text-right">{{ dataTable.footerRow[5] }}</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr *ngFor="let m of creatures" (click)="onSelect(m)">
-                    <td>{{ m.creatureName }}</td>
-                    <td>{{ m.creatureSize }}</td>
-                    <td>{{ m.creatureRace }}</td>
-                    <td>{{ m.challengeRating.CR }}</td>
-                    <td>{{ m.challengeRating.XP }}</td>
-                    <td class="text-right">
-                      <a class="btn btn-link btn-info btn-just-icon like" (click)="addCreature(m)"
-                        ><i class="fa fa-plus"></i
-                      ></a>
-                      <a
-                        href="javascript:void(0"
-                        class="btn btn-link btn-warning btn-just-icon edit"
-                        ><i class="fa fa-edit"></i
-                      ></a>
-                      <a
-                        href="javascript:void(0s"
-                        class="btn btn-link btn-danger btn-just-icon remove"
-                        ><i class="fa fa-minus"></i
-                      ></a>
-                    </td>
-                  </tr>
-                  <!-- <tr *ngFor="let m of monsters">
-                    <td>{{ m.name }}</td>
-                    <td>{{ m.size }}</td>
-                    <td>{{ m.type }}</td>
-                    <td>{{ m.challenge_rating }}</td>
-                    <td>{{ m.name }}</td>
-                    <td class="text-right">
-                      <a href="javascript:void(0)"
-                        class="btn btn-link btn-info btn-just-icon like"><i
-                          class="fa fa-plus"></i></a>
-                      <a href="javascript:void(0"
-                        class="btn btn-link btn-warning btn-just-icon edit"><i
-                          class="fa fa-edit"></i></a>
-                      <a href="javascript:void(0s"
-                        class="btn btn-link btn-danger btn-just-icon remove"><i
-                          class="fa fa-minus"></i></a>
-                    </td>
-                  </tr> -->
-                </tbody>
-              </table>
             </div>
-          </div>
-          <!-- end content-->
-        </div>
-      </div>
+            <hr />
+            <div class="row">
+              <div class="col-md-7 mr-auto">
+                <button mat-raised-button class="btn btn-success btn-sm">
+                  <i class="fa fa-random" style="padding-right: 5px"></i>Random
+                </button>
+              </div>
+              <div class="col-md-5 ml-auto">
+                <button mat-raised-button class="btn btn-success btn-sm" (click)="saveEncounter()">
+                  Save
+                </button>
+              </div>
+            </div>
 
-      <!-- ENCOUNTER SUMMARY -->
-      <div
-        class="card col-md-3"
-        style="position: fixed; right: 5px; top: -20px; z-index: 99999 !important;"
-      >
-        <div class="card-header">
-          <h1 class="display-3" style="font-weight: bold; font-size: 1.2em">
-            ENCOUNTER SUMMARY
-          </h1>
-          <hr />
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <h1 class="display-3" style="font-weight: bold; font-size: 1em; color: grey">
-                DIFFICULTY
-              </h1>
-              <h1 class="display-3" style="font-weight: bold; font-size: 1.2em; color: red">
-                {{ this.difficulty }}
-              </h1>
-              <br />
-              <h1 class="display-3" style="font-weight: bold; font-size: 1em; color: grey">
-                TOTAL XP
-              </h1>
-              <h1 class="display-3" style="font-weight: bold; font-size: 1.2em;">
-                {{ this.totalXp }}
-              </h1>
-              <br />
-              <h1 class="display-3" style="font-weight: bold; font-size: 1em; color: grey">
-                ADJUSTED XP
-              </h1>
-              <h1 class="display-3" style="font-weight: bold; font-size: 1.2em;">
-                {{ this.totalAdjustedXp }}
-              </h1>
-            </div>
-            <div class="col-md-6" style="text-align: right">
-              <p>
-                Easy: <b>{{ this.diffEasy }} XP</b>
-              </p>
-              <p>
-                Medium: <b>{{ this.diffMedium }} XP</b>
-              </p>
-              <p>
-                Hard: <b>{{ this.diffHard }} XP</b>
-              </p>
-              <p>
-                Deadly: <b>{{ this.diffDeadly }} XP</b>
-              </p>
-              <p>Daily XP: <b>1200 XP</b></p>
-            </div>
-          </div>
-          <br />
-          <mat-progress-bar
-            mode="determinate"
-            value="{{ this.percentage }}"
-            color="warn"
-          ></mat-progress-bar>
-          <!-- <div class="progress progress-line-danger">
-            <div
-              class="progress-bar progress-bar-danger"
-              role="progressbar"
-              aria-valuenow="20"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width: this.percentage%;"
-            >
-              <span class="sr-only">{{ this.percentage }}% Complete</span>
-            </div> 
-          </div> -->
-          <div style="text-align: center">
-            <small style="font-weight:lighter"
-              ><i>{{ this.encounterFlavorText }}...</i></small
-            >
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-md-7 mr-auto">
-              <button mat-raised-button class="btn btn-success btn-sm">
-                <i class="fa fa-random" style="padding-right: 5px"></i>Random
-              </button>
-            </div>
-            <div class="col-md-5 ml-auto">
-              <button mat-raised-button class="btn btn-success btn-sm" (click)="test()">
-                Generate
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <ng-container *ngFor="let c of this.creatureList">
-              <div class="card card-encounter">
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="img-encounter">
-                      <img class="img " [src]="c.photoURL" />
-                    </div>
-                  </div>
-
-                  <div class="col-md-7" style="padding: 5px; padding-top: 23px;">
-                    <div class="row">
-                      <div class="col-md-8" style="padding-right: 5px">
-                        <h1 class="display-3" style="font-weight: bold; font-size: 1em;">
-                          {{ c.creatureName }}
-                        </h1>
+            <div>
+              <ng-container *ngFor="let c of this.creatureList">
+                <div class="card card-encounter">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="img-encounter">
+                        <img class="img " [src]="c.photoURL" />
                       </div>
+                    </div>
 
-                      <div class="col-md-4">
-                        <div class="row">
-                          <h1
-                            class="display-3"
-                            style="font-weight: bold; font-size: 0.7em; color: grey"
-                          >
-                            CR: &nbsp;
-                          </h1>
-                          <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">
-                            {{ c.challengeRating.CR }}
+                    <div class="col-md-7" style="padding: 5px; padding-top: 23px;">
+                      <div class="row">
+                        <div class="col-md-8" style="padding-right: 5px">
+                          <h1 class="display-3" style="font-weight: bold; font-size: 1em;">
+                            {{ c.creatureName }}
                           </h1>
                         </div>
-                      </div>
-                    </div>
 
-                    <div class="row">
-                      <div class="col-md-8" style="padding-right: 5px">
-                        <h1
-                          class="display-3"
-                          style="font-weight: bold; font-size: 0.7em; color: grey"
-                        >
-                          {{ c.creatureSize }}&nbsp;{{ c.creatureRace }}
-                        </h1>
+                        <div class="col-md-4">
+                          <div class="row">
+                            <h1
+                              class="display-3"
+                              style="font-weight: bold; font-size: 0.7em; color: grey"
+                            >
+                              CR: &nbsp;
+                            </h1>
+                            <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">
+                              {{ c.challengeRating.CR }}
+                            </h1>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="row">
+
+                      <div class="row">
+                        <div class="col-md-8" style="padding-right: 5px">
                           <h1
                             class="display-3"
                             style="font-weight: bold; font-size: 0.7em; color: grey"
                           >
-                            XP: &nbsp;
+                            {{ c.creatureSize }}&nbsp;{{ c.creatureRace }}
                           </h1>
-                          <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">
-                            {{ c.challengeRating.XP }}
-                          </h1>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="row">
+                            <h1
+                              class="display-3"
+                              style="font-weight: bold; font-size: 0.7em; color: grey"
+                            >
+                              XP: &nbsp;
+                            </h1>
+                            <h1 class="display-3" style="font-weight: bold; font-size: 0.7em;">
+                              {{ c.challengeRating.XP }}
+                            </h1>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </ng-container>
-            <!-- End of Encounter Card -->
+              </ng-container>
+              <!-- End of Encounter Card -->
+            </div>
           </div>
+          <!--End Body-->
         </div>
-        <!--End Body-->
+        <!--END OF COL-->
       </div>
-      <!--END OF COL-->
-    </div>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

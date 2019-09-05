@@ -465,6 +465,10 @@
         min-height: calc(100vh - 123px);
     }
 
+    .mat-tab-body-wrapper {
+        flex: 1 1 100%;
+      }
+
     .footer{
         border-top: 1px solid #e7e7e7;
     }
