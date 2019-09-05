@@ -1,4 +1,5 @@
 export const Cantrips = [
+  "None",
   "Acid Splash",
   "Chill Touch",
   "Dancing Lights",
@@ -16,10 +17,11 @@ export const Cantrips = [
   "Shillelagh",
   "Shocking Grasp",
   "Thaumaturgy",
-  "True Strike"
+  "True Strike",
 ];
 
 export const First = [
+  "None",
   "Alarm",
   "Bane",
   "Bless",
@@ -66,10 +68,11 @@ export const First = [
   "Sleep",
   "Speak with Animals",
   "Thunderwave",
-  "Unseen Servant"
+  "Unseen Servant",
 ];
 
 export const Second = [
+  "None",
   "Acid Arrow",
   "Aid",
   "Alter Self",
@@ -122,10 +125,11 @@ export const Second = [
   "Suggestion",
   "Warding Bond",
   "Web",
-  "Zone of Truth"
+  "Zone of Truth",
 ];
 
 export const Third = [
+  "None",
   "Animate Dead",
   "Beacon of Hope",
   "Bestow Curse",
@@ -166,10 +170,11 @@ export const Third = [
   "Vampiric Touch",
   "Water Breathing",
   "Water Walk",
-  "Wind Wall"
+  "Wind Wall",
 ];
 
 export const Fourth = [
+  "None",
   "Arcane Eye",
   "Banishment",
   "Black Tentacles",
@@ -199,10 +204,11 @@ export const Fourth = [
   "Sphere",
   "Stone Shape",
   "Stoneskin",
-  "Wall of Fire"
+  "Wall of Fire",
 ];
 
 export const Fifth = [
+  "None",
   "Animate Objects",
   "Antilife Shell",
   "Arcane Hand",
@@ -241,10 +247,11 @@ export const Fifth = [
   "Teleportation Circle",
   "Tree Stride",
   "Wall of Force",
-  "Wall of Stone"
+  "Wall of Stone",
 ];
 
 export const Sixth = [
+  "None",
   "Blade Barrier",
   "Chain Lightning",
   "Circle of Death",
@@ -275,10 +282,11 @@ export const Sixth = [
   "Wall of Ice",
   "Wall of Thorns",
   "Wind Walk",
-  "Word of Recall"
+  "Word of Recall",
 ];
 
 export const Seventh = [
+  "None",
   "Arcane Sword",
   "Conjure Celestial",
   "Delayed Blast",
@@ -299,10 +307,11 @@ export const Seventh = [
   "Sequester",
   "Simulacrum",
   "Symbol",
-  "Teleport"
+  "Teleport",
 ];
 
 export const Eigth = [
+  "None",
   "Antimagic Field",
   "Antipathy/Sympathy",
   "Clone",
@@ -319,10 +328,11 @@ export const Eigth = [
   "Power Word Stun",
   "Power Word",
   "Stun",
-  "Sunburst"
+  "Sunburst",
 ];
 
 export const Nineth = [
+  "None",
   "Astral Projection",
   "Foresight",
   "Gate",
@@ -336,5 +346,5 @@ export const Nineth = [
   "True Polymorph",
   "True Resurrection",
   "Weird",
-  "Wish"
+  "Wish",
 ];

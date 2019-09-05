@@ -5,6 +5,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { Monster } from "src/app/core/interface/monster";
 import { xpThreshold, multiplierTwo, multiplerFive, multiplerSeven } from "src/assets/ts/encounter";
+import * as faker from "faker";
 
 declare interface DataTable {
   headerRow: string[];
@@ -53,6 +54,7 @@ export class EncountersComponent implements OnInit, AfterViewInit {
 
   selectedCharacters: any[];
   creatureList: any[];
+  encounters: any;
 
   constructor(private fb: FormBuilder, private auth: AuthService, private afs: AngularFirestore) {}
 
@@ -66,6 +68,7 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     });
     this.loader();
     this.getPlayers();
+    this.getEncounters();
 
     this.dataTable = {
       headerRow: ["Name", "Size", "Race", "CR", "XP", "Actions"],
@@ -128,10 +131,6 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     this.diffMedium = threshold.medium;
     this.diffHard = threshold.hard;
     this.diffDeadly = threshold.deadly;
-
-    // console.log("Threshold: ", threshold);
-    // console.log("AVERAGE: ", this.averageCharacter);
-    // console.log("COUNT: ", this.sumCharacter);
   }
 
   loader() {
@@ -185,9 +184,60 @@ export class EncountersComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getEncounters() {
+    this.auth.getUser().subscribe(user => {
+      this.user = user;
+      this.campaignId = this.user.campaigns.campaignId;
+
+      this.afs
+        .doc(`campaigns/${this.campaignId}`)
+        .valueChanges()
+        .subscribe(campaign => {
+          this.campaign = campaign;
+
+          this.afs
+            .collection(`campaigns/${this.campaignId}/encounters`)
+            .valueChanges()
+            .subscribe(encounters => {
+              this.encounters = encounters;
+              console.log("Encounters: ", this.encounters);
+            });
+        });
+    });
+  }
+
   onSelect(data: any) {
     console.log("Selected Item id: ", data);
     console.log(data.uid);
+  }
+
+  saveEncounter() {
+    this.auth.getUser().subscribe(user => {
+      this.user = user;
+      this.campaignId = this.user.campaigns.campaignId;
+      this.afs
+        .doc(`campaigns/${this.campaignId}`)
+        .valueChanges()
+        .subscribe(campaign => {
+          this.campaign = campaign;
+          const campId = this.campaign.uid;
+          const encounterId = {
+            uid: faker.random.alphaNumeric(8),
+          };
+
+          const encounter = {
+            uid: encounterId.uid,
+            encounterTitle: this.encounterForm.value["encounterTitle"],
+            characters: this.encounterForm.value["characterSelect"],
+            enemies: this.creatureList,
+          };
+          this.afs
+            .collection(`campaigns/${campId}/encounters`)
+            .doc(encounterId.uid)
+            .set(encounter);
+          return this.encounterForm.reset();
+        });
+    });
   }
 
   addCreature(data: any) {
